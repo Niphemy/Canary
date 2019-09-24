@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TabViewController.swift
 //  Canary
 //
 //  Created by Nifemi Fatoye on 24/09/2019.
@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TabViewController: UITabBarController
+{
+    
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
-
-
+    
 }
-

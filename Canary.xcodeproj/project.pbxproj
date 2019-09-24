@@ -9,23 +9,21 @@
 /* Begin PBXBuildFile section */
 		CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */; };
 		CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */; };
-		CA8A8BC9233A955400FCA0E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC8233A955400FCA0E0 /* ViewController.swift */; };
-		CA8A8BCC233A955400FCA0E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA8A8BCA233A955400FCA0E0 /* Main.storyboard */; };
-		CA8A8BCF233A955400FCA0E0 /* Canary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BCD233A955400FCA0E0 /* Canary.xcdatamodeld */; };
+		CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */; };
 		CA8A8BD1233A955600FCA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */; };
 		CA8A8BD4233A955600FCA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA8A8BD2233A955600FCA0E0 /* LaunchScreen.storyboard */; };
+		CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CA8A8BC1233A955400FCA0E0 /* Canary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CA8A8BC8233A955400FCA0E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CA8A8BCB233A955400FCA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA8A8BCE233A955400FCA0E0 /* Canary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Canary.xcdatamodel; sourceTree = "<group>"; };
 		CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA8A8BD3233A955600FCA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA8A8BD5233A955600FCA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +58,37 @@
 			children = (
 				CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */,
 				CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */,
-				CA8A8BC8233A955400FCA0E0 /* ViewController.swift */,
-				CA8A8BCA233A955400FCA0E0 /* Main.storyboard */,
-				CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */,
-				CA8A8BD2233A955600FCA0E0 /* LaunchScreen.storyboard */,
 				CA8A8BD5233A955600FCA0E0 /* Info.plist */,
-				CA8A8BCD233A955400FCA0E0 /* Canary.xcdatamodeld */,
+				CA8A8BDD233A961B00FCA0E0 /* Model */,
+				CA8A8BDC233A961300FCA0E0 /* View */,
+				CA8A8BDB233A960A00FCA0E0 /* Controller */,
 			);
 			path = Canary;
+			sourceTree = "<group>";
+		};
+		CA8A8BDB233A960A00FCA0E0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CA8A8BDC233A961300FCA0E0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CA8A8BD2233A955600FCA0E0 /* LaunchScreen.storyboard */,
+				CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CA8A8BDD233A961B00FCA0E0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +151,6 @@
 			files = (
 				CA8A8BD4233A955600FCA0E0 /* LaunchScreen.storyboard in Resources */,
 				CA8A8BD1233A955600FCA0E0 /* Assets.xcassets in Resources */,
-				CA8A8BCC233A955400FCA0E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,8 +161,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA8A8BC9233A955400FCA0E0 /* ViewController.swift in Sources */,
-				CA8A8BCF233A955400FCA0E0 /* Canary.xcdatamodeld in Sources */,
+				CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */,
+				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,
 				CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */,
 			);
@@ -151,14 +171,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CA8A8BCA233A955400FCA0E0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA8A8BCB233A955400FCA0E0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CA8A8BD2233A955600FCA0E0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -298,7 +310,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NifemiFatoye.Canary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -316,7 +328,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.NifemiFatoye.Canary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -344,13 +356,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CA8A8BCD233A955400FCA0E0 /* Canary.xcdatamodeld */ = {
+		CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				CA8A8BCE233A955400FCA0E0 /* Canary.xcdatamodel */,
 			);
 			currentVersion = CA8A8BCE233A955400FCA0E0 /* Canary.xcdatamodel */;
-			path = Canary.xcdatamodeld;
+			path = Library.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
