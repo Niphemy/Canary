@@ -8,13 +8,12 @@
 
 import UIKit
 
-
 private let reuseIdentifier = "SearchResultCell"
 
 class SearchCollectionViewController: UICollectionViewController
 {
     let webSearchController : UISearchController = UISearchController()
-    
+ 
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -33,7 +32,6 @@ class SearchCollectionViewController: UICollectionViewController
     {
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
@@ -57,7 +55,7 @@ extension SearchCollectionViewController : UISearchBarDelegate
     {
         if let queryText = webSearchController.searchBar.text
         {
-            
+            print("does stuff with \(queryText)")
         }
     }
 }
