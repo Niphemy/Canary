@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA22E4B0233B6FFF00B2E75A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4AF233B6FFF00B2E75A /* Extensions.swift */; };
+		CA22E4B2233B71B300B2E75A /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */; };
+		CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */; };
+		CA22E4BC233B7E0500B2E75A /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4B9233B7E0400B2E75A /* Montserrat-Medium.ttf */; };
+		CA22E4BD233B7E0500B2E75A /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4BA233B7E0500B2E75A /* Montserrat-Bold.ttf */; };
+		CA22E4BE233B7E0500B2E75A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4BB233B7E0500B2E75A /* Montserrat-Light.ttf */; };
+		CA22E4C0233B814900B2E75A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4BF233B814900B2E75A /* Main.storyboard */; };
 		CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */; };
 		CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */; };
 		CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */; };
@@ -17,6 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA22E4AF233B6FFF00B2E75A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
+		CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
+		CA22E4B9233B7E0400B2E75A /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Medium.ttf"; path = "Canary/View/Montserrat-Medium.ttf"; sourceTree = SOURCE_ROOT; };
+		CA22E4BA233B7E0500B2E75A /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Canary/View/Montserrat-Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		CA22E4BB233B7E0500B2E75A /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Light.ttf"; path = "Canary/View/Montserrat-Light.ttf"; sourceTree = SOURCE_ROOT; };
+		CA22E4BF233B814900B2E75A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CA8A8BC1233A955400FCA0E0 /* Canary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +53,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA22E4B8233B7DE900B2E75A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CA22E4BA233B7E0500B2E75A /* Montserrat-Bold.ttf */,
+				CA22E4BB233B7E0500B2E75A /* Montserrat-Light.ttf */,
+				CA22E4B9233B7E0400B2E75A /* Montserrat-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		CA8A8BB8233A955400FCA0E0 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +88,7 @@
 				CA8A8BDD233A961B00FCA0E0 /* Model */,
 				CA8A8BDC233A961300FCA0E0 /* View */,
 				CA8A8BDB233A960A00FCA0E0 /* Controller */,
+				CA22E4BF233B814900B2E75A /* Main.storyboard */,
 			);
 			path = Canary;
 			sourceTree = "<group>";
@@ -72,7 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */,
+				CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */,
 				CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */,
+				CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -82,6 +109,7 @@
 			children = (
 				CA8A8BD2233A955600FCA0E0 /* LaunchScreen.storyboard */,
 				CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */,
+				CA22E4B8233B7DE900B2E75A /* Fonts */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -90,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */,
+				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,7 +181,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA22E4BE233B7E0500B2E75A /* Montserrat-Light.ttf in Resources */,
+				CA22E4BD233B7E0500B2E75A /* Montserrat-Bold.ttf in Resources */,
 				CA8A8BD4233A955600FCA0E0 /* LaunchScreen.storyboard in Resources */,
+				CA22E4C0233B814900B2E75A /* Main.storyboard in Resources */,
+				CA22E4BC233B7E0500B2E75A /* Montserrat-Medium.ttf in Resources */,
 				CA8A8BD1233A955600FCA0E0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,9 +197,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA22E4B2233B71B300B2E75A /* LibraryTableViewController.swift in Sources */,
 				CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */,
+				CA22E4B0233B6FFF00B2E75A /* Extensions.swift in Sources */,
 				CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */,
 				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,
+				CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,
 				CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */,
 			);
