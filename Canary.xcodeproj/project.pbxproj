@@ -13,6 +13,7 @@
 		CA8A8BD1233A955600FCA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */; };
 		CA8A8BD4233A955600FCA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA8A8BD2233A955600FCA0E0 /* LaunchScreen.storyboard */; };
 		CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */; };
+		CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CA8A8BD3233A955600FCA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA8A8BD5233A955600FCA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */,
+				CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */,
 				CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */,
 				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,
