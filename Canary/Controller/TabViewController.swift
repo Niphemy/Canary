@@ -25,15 +25,15 @@ class TabViewController: UITabBarController
         let libraryNavigationController = UINavigationController(rootViewController: libraryViewController)
         
         homeNavigationController.tabBarItem.title = "Home"
-        homeNavigationController.navigationItem.title = "Home"
+        homeViewController.navigationItem.title = "Home"
         homeNavigationController.tabBarItem.image = UIImage(named: "HomeIcon")
         
         searchNavigationController.tabBarItem.title = "Search"
-        searchNavigationController.navigationItem.title = "Search The Web"
+        searchViewController.navigationItem.title = "Search The Web"
         searchNavigationController.tabBarItem.image = UIImage(named: "SearchIcon")
         
         libraryNavigationController.tabBarItem.title = "Library"
-        libraryNavigationController.navigationItem.title = "Your Music"
+        libraryViewController.navigationItem.title = "Your Music"
         libraryNavigationController.tabBarItem.image = UIImage(named: "LibraryIcon")
         
         let navigationControllers : [UINavigationController] = [homeNavigationController,searchNavigationController,libraryNavigationController]
@@ -42,6 +42,7 @@ class TabViewController: UITabBarController
         {
             navigationController.navigationBar.prefersLargeTitles = true
             navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.montserratBold.withSize(35)]
+            navigationController.navigationBar.backgroundColor = UIColor.white
             navigationController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(10)], for: .normal)
         }
         
