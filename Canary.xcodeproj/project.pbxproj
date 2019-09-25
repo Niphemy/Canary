@@ -13,7 +13,6 @@
 		CA22E4BC233B7E0500B2E75A /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4B9233B7E0400B2E75A /* Montserrat-Medium.ttf */; };
 		CA22E4BD233B7E0500B2E75A /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4BA233B7E0500B2E75A /* Montserrat-Bold.ttf */; };
 		CA22E4BE233B7E0500B2E75A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4BB233B7E0500B2E75A /* Montserrat-Light.ttf */; };
-		CA22E4C0233B814900B2E75A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA22E4BF233B814900B2E75A /* Main.storyboard */; };
 		CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */; };
 		CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */; };
 		CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */; };
@@ -30,7 +29,6 @@
 		CA22E4B9233B7E0400B2E75A /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Medium.ttf"; path = "Canary/View/Montserrat-Medium.ttf"; sourceTree = SOURCE_ROOT; };
 		CA22E4BA233B7E0500B2E75A /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Canary/View/Montserrat-Bold.ttf"; sourceTree = SOURCE_ROOT; };
 		CA22E4BB233B7E0500B2E75A /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Light.ttf"; path = "Canary/View/Montserrat-Light.ttf"; sourceTree = SOURCE_ROOT; };
-		CA22E4BF233B814900B2E75A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CA8A8BC1233A955400FCA0E0 /* Canary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				CA8A8BDD233A961B00FCA0E0 /* Model */,
 				CA8A8BDC233A961300FCA0E0 /* View */,
 				CA8A8BDB233A960A00FCA0E0 /* Controller */,
-				CA22E4BF233B814900B2E75A /* Main.storyboard */,
 			);
 			path = Canary;
 			sourceTree = "<group>";
@@ -184,7 +181,6 @@
 				CA22E4BE233B7E0500B2E75A /* Montserrat-Light.ttf in Resources */,
 				CA22E4BD233B7E0500B2E75A /* Montserrat-Bold.ttf in Resources */,
 				CA8A8BD4233A955600FCA0E0 /* LaunchScreen.storyboard in Resources */,
-				CA22E4C0233B814900B2E75A /* Main.storyboard in Resources */,
 				CA22E4BC233B7E0500B2E75A /* Montserrat-Medium.ttf in Resources */,
 				CA8A8BD1233A955600FCA0E0 /* Assets.xcassets in Resources */,
 			);
