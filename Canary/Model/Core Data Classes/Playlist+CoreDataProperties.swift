@@ -16,12 +16,29 @@ extension Playlist {
         return NSFetchRequest<Playlist>(entityName: "Playlist")
     }
 
-    @NSManaged private var name: String?
+    @NSManaged private var name: String
     @NSManaged private var childSongs: NSSet?
+    private var numberOfSongs: Int
+    {
+        get
+        {
+            return self.childSongs?.count ?? 0
+        }
+    }
     
     public func setName(to name: String)
     {
         self.name = name
+    }
+    
+    public func getName() -> String
+    {
+        return name
+    }
+    
+    public func getNumberOfSongs() -> Int
+    {
+        return numberOfSongs
     }
 
 }

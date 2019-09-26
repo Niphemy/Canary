@@ -14,3 +14,17 @@ extension UIFont
     static let montserratMedium = UIFont(name: "Montserrat-Medium", size: 15)!
     static let montserratBold = UIFont(name: "Montserrat-Bold", size: 15)!
 }
+
+extension UIColor
+{
+    static let dynamicText = UIColor(named: "AdaptableTextColour")!
+}
+
+extension UIView
+{
+    func highlightBorders()
+    {
+        self.layer.borderWidth = 10
+        self.layer.borderColor = UIColor.red.cgColor
+    }
+}

@@ -14,8 +14,7 @@ private let reuseIdentifier = "PlaylistCell"
 class LibraryTableViewController: UITableViewController {
 
     let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var userPlaylists : [Playlist] = [Playlist]()
-    var generatedPlaylists : [Playlist] = [Playlist]()
+    var userPlaylists = [Playlist](), generatedPlaylists = [Playlist]()
     var allPlaylists : [[Playlist]]
     {
         get
@@ -29,8 +28,7 @@ class LibraryTableViewController: UITableViewController {
         super.viewDidLoad()
         loadPlaylists()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: nil)
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: nil)
     }
 
     // MARK: - UITableViewDataSource
@@ -48,25 +46,57 @@ class LibraryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = (indexPath == [0,0]) ? UIColor.systemBlue : UIColor.systemGray
+        let cellTextColour = (indexPath == [0,0]) ? UIColor.white : UIColor.dynamicText
+        let cellTextAttributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont.montserratMedium.withSize(17), NSAttributedString.Key.foregroundColor: cellTextColour]
         
+        cell.backgroundColor = (indexPath == [0,0]) ? view.tintColor : UIColor.systemBackground
+        cell.textLabel?.attributedText = NSAttributedString(string: "\(allPlaylists[indexPath.section][indexPath.row].getName())", attributes: cellTextAttributes)
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return !(indexPath == [0,0])
+        return !(indexPath == [0,0] || indexPath.section == 1)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == .delete
         {
-            //let cellToDeleteTitle = tableView.cellForRow(at: indexPath)?.textLabel?.text
-            //let deletePlaylistAlertController = UIAlertController(title: "Delete \"\(cellToDeleteTitle)\"?", message: "Do you want to delete this playlist containing \(0) songs?", preferredStyle: .alert)
-            //tableView.deleteRows(at: [indexPath], with: .fade)
+            let playlistToDelete = allPlaylists[indexPath.section][indexPath.row]
+            var deleteText = String()
+            
+            switch playlistToDelete.getNumberOfSongs()
+            {
+            case 0:
+                deleteText = "no songs?"
+            case 1:
+                deleteText = "one song?"
+            default:
+                deleteText = "\(playlistToDelete.getNumberOfSongs()) songs?"
+            }
+            
+            let deletePlaylistAlertController : UIAlertController = UIAlertController(title: "Delete \"\(playlistToDelete.getName())\"?", message: "Do you want to delete \(playlistToDelete.getName()) containing \(deleteText)", preferredStyle: .alert)
+            
+            let deletePlaylistAction : UIAlertAction = UIAlertAction(title: "Delete", style: .destructive)
+            { (_) in
+                self.userPlaylists.remove(at: indexPath.row)
+                self.context.delete(playlistToDelete)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                self.savePlaylists()
+            }
+            
+            deletePlaylistAlertController.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+            deletePlaylistAlertController.addAction(deletePlaylistAction)
+            
+            present(deletePlaylistAlertController, animated: true, completion: nil)
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     // MARK: - Library Data Model CRUD Methods
     
     func savePlaylists()
@@ -77,6 +107,7 @@ class LibraryTableViewController: UITableViewController {
         } catch {
             print("Error saving context:\n\(error)")
         }
+        tableView.reloadData()
     }
     
     func loadPlaylists()

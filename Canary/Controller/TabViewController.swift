@@ -41,9 +41,9 @@ class TabViewController: UITabBarController
         for navigationController in navigationControllers
         {
             navigationController.navigationBar.prefersLargeTitles = true
-            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.montserratBold.withSize(35)]
-            navigationController.navigationBar.backgroundColor = UIColor.white
-            navigationController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(10)], for: .normal)
+            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dynamicText, NSAttributedString.Key.font: UIFont.montserratBold.withSize(35)]
+            navigationController.navigationBar.backgroundColor = UIColor.systemBackground
+            navigationController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(12)], for: .normal)
         }
         
         viewControllers = navigationControllers
