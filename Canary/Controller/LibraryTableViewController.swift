@@ -11,7 +11,8 @@ import CoreData
 
 private let reuseIdentifier = "PlaylistCell"
 
-class LibraryTableViewController: UITableViewController {
+class LibraryTableViewController: UITableViewController
+{
 
     let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var userPlaylists = [Playlist](), generatedPlaylists = [Playlist]()
@@ -70,20 +71,21 @@ class LibraryTableViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int
+    {
         return allPlaylists.count
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         // #warning Incomplete implementation, return the number of rows
         return allPlaylists[section].count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        let cellTextColour = (indexPath == [0,0]) ? UIColor.white : UIColor.dynamicText
+        let cellTextColour = (indexPath == [0,0]) ? UIColor.white : UIColor.dynamicTextColor
         let cellTextAttributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont.montserratMedium.withSize(17), NSAttributedString.Key.foregroundColor: cellTextColour]
         
         cell.backgroundColor = (indexPath == [0,0]) ? view.tintColor : UIColor.systemBackground
@@ -92,7 +94,8 @@ class LibraryTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
         return !(indexPath == [0,0] || indexPath.section == 1)
     }
     
@@ -130,10 +133,19 @@ class LibraryTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        50
+    }
+    
+    // MARK: - Navigation
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
+    
     // MARK: - Library Data Model CRUD Methods
     
     func savePlaylists()

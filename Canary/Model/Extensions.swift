@@ -17,7 +17,7 @@ extension UIFont
 
 extension UIColor
 {
-    static let dynamicText = UIColor(named: "AdaptableTextColour")!
+    static let dynamicTextColor = UIColor(named: "AdaptableTextColour")!
 }
 
 extension UIView
@@ -27,4 +27,14 @@ extension UIView
         self.layer.borderWidth = 10
         self.layer.borderColor = UIColor.red.cgColor
     }
+}
+
+extension UICollectionViewLayout
+{
+    static let verticalFlow : UICollectionViewFlowLayout =
+    {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        return flowLayout
+    }()
 }

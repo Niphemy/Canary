@@ -13,11 +13,9 @@ class TabViewController: UITabBarController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        let veritcalFlowLayout = UICollectionViewFlowLayout()
-        veritcalFlowLayout.scrollDirection = .vertical
         
-        let homeViewController = HomeCollectionViewController(collectionViewLayout: veritcalFlowLayout)
-        let searchViewController = SearchCollectionViewController(collectionViewLayout: veritcalFlowLayout)
+        let homeViewController = HomeCollectionViewController(collectionViewLayout: .verticalFlow)
+        let searchViewController = SearchCollectionViewController(collectionViewLayout: .verticalFlow)
         let libraryViewController = LibraryTableViewController()
         
         let homeNavigationController = UINavigationController(rootViewController: homeViewController)
@@ -41,7 +39,7 @@ class TabViewController: UITabBarController
         for navigationController in navigationControllers
         {
             navigationController.navigationBar.prefersLargeTitles = true
-            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dynamicText, NSAttributedString.Key.font: UIFont.montserratBold.withSize(35)]
+            navigationController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.dynamicTextColor, NSAttributedString.Key.font: UIFont.montserratBold.withSize(35)]
             navigationController.navigationBar.backgroundColor = UIColor.systemBackground
             navigationController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(12)], for: .normal)
         }

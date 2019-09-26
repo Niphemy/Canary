@@ -7,13 +7,14 @@
     <entity name="Song" representedClassName="Song" syncable="YES">
         <attribute name="artists" optional="YES" attributeType="String"/>
         <attribute name="audioFilePath" attributeType="URI"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="imageFilePath" attributeType="URI"/>
         <attribute name="mediaIdentifier" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="parentPlaylist" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Playlist" inverseName="childSongs" inverseEntity="Playlist"/>
     </entity>
     <elements>
-        <element name="Song" positionX="-63" positionY="-18" width="128" height="133"/>
         <element name="Playlist" positionX="193.1171875" positionY="2.00390625" width="128" height="73"/>
+        <element name="Song" positionX="-63" positionY="-18" width="128" height="148"/>
     </elements>
 </model>

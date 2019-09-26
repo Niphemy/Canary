@@ -17,17 +17,14 @@ extension Song {
         return NSFetchRequest<Song>(entityName: "Song")
     }
 
-    @NSManaged private var name: String?
-    @NSManaged private var artists: String?
-    @NSManaged private var audioFilePath: URL?
-    @NSManaged private var imageFilePath: URL?
-    @NSManaged private var mediaIdentifier: String?
-    @NSManaged private var parentPlaylist: NSSet?
-    
-    public func setInfo()
-    {
-        
-    }
+    @NSManaged public var artists: String?
+    @NSManaged public var audioFilePath: URL?
+    @NSManaged public var imageFilePath: URL?
+    @NSManaged public var mediaIdentifier: String?
+    @NSManaged public var name: String?
+    @NSManaged public var dateAdded: Date?
+    @NSManaged public var parentPlaylist: NSSet?
+
 }
 
 // MARK: Generated accessors for parentPlaylist
