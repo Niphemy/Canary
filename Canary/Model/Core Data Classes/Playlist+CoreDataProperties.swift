@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Playlist {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Playlist> {
@@ -19,6 +18,11 @@ extension Playlist {
 
     @NSManaged private var name: String?
     @NSManaged private var childSongs: NSSet?
+    
+    public func setName(to name: String)
+    {
+        self.name = name
+    }
 
 }
 

@@ -133,8 +133,8 @@
 		CA8A8BDD233A961B00FCA0E0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CA37CDA0233D171400D96A18 /* Core Data Classes */,
 				CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */,
+				CA37CDA0233D171400D96A18 /* Core Data Classes */,
 				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 			);
 			path = Model;

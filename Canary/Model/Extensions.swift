@@ -8,11 +8,6 @@
 
 import UIKit
 
-extension UIColor
-{
-    static let mainBlue = UIColor(red: 0, green: 122, blue: 255, alpha: 1)
-}
-
 extension UIFont
 {
     static let montserratLight = UIFont(name: "Montserrat-Light", size: 15)!

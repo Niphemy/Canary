@@ -7,36 +7,49 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "PlaylistCell"
 
 class LibraryTableViewController: UITableViewController {
 
+    let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var userPlaylists : [Playlist] = [Playlist]()
+    var generatedPlaylists : [Playlist] = [Playlist]()
+    var allPlaylists : [[Playlist]]
+    {
+        get
+        {
+            return [userPlaylists,generatedPlaylists]
+        }
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        loadPlaylists()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: nil)
         
     }
 
     // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 2
+        return allPlaylists.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return allPlaylists[section].count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-
-        // Configure the cell...
-
+        cell.backgroundColor = (indexPath == [0,0]) ? UIColor.systemBlue : UIColor.systemGray
+        
         return cell
     }
     
@@ -54,30 +67,34 @@ class LibraryTableViewController: UITableViewController {
         }
     }
     
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    // MARK: - Library Data Model CRUD Methods
+    
+    func savePlaylists()
+    {
+        do
+        {
+            try context.save()
+        } catch {
+            print("Error saving context:\n\(error)")
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func loadPlaylists()
+    {
+        let playlistFetchRequest : NSFetchRequest<Playlist> = Playlist.fetchRequest()
+        do
+        {
+            userPlaylists = try context.fetch(playlistFetchRequest)
+        } catch {
+            print("Error loading context:\n\(error)")
+        }
+        
+        if userPlaylists.isEmpty
+        {
+            let allDownloadsPlaylist = Playlist(context: context)
+            allDownloadsPlaylist.setName(to: "All Downloads")
+            userPlaylists.append(allDownloadsPlaylist)
+            savePlaylists()
+        }
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
