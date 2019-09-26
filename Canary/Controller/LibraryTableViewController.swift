@@ -28,9 +28,46 @@ class LibraryTableViewController: UITableViewController {
         super.viewDidLoad()
         loadPlaylists()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: #selector(addPlaylist))
     }
-
+    
+    @objc func addPlaylist()
+    {
+        let optionalPlaylistName = "My Playlist #\(self.userPlaylists.count + 1)"
+        let addPlaylistAlertController : UIAlertController = UIAlertController(title: "Name your new playlist", message: nil, preferredStyle: .alert)
+        var addPlaylistTextFieldCopy = UITextField()
+        
+        addPlaylistAlertController.addTextField
+        { (addPlaylistTextField) in
+            addPlaylistTextField.placeholder = optionalPlaylistName
+            addPlaylistTextField.font = UIFont.montserratMedium
+            addPlaylistTextField.autocapitalizationType = .words
+            addPlaylistTextField.adjustsFontSizeToFitWidth = true
+            addPlaylistTextFieldCopy = addPlaylistTextField
+        }
+        
+        let addPlaylistAction = UIAlertAction(title: "Create", style: .default)
+        { (_) in
+            let newPlaylist = Playlist(context: self.context)
+            
+            if addPlaylistTextFieldCopy.text?.count == 0
+            {
+                newPlaylist.setName(to: optionalPlaylistName)
+            }else{
+                newPlaylist.setName(to: addPlaylistTextFieldCopy.text ?? optionalPlaylistName)
+            }
+            
+            self.userPlaylists.append(newPlaylist)
+            self.tableView.insertRows(at: [IndexPath(row: self.userPlaylists.count-1, section: 0)], with: .automatic)
+            self.savePlaylists()
+        }
+        
+        addPlaylistAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        addPlaylistAlertController.addAction(addPlaylistAction)
+        
+        present(addPlaylistAlertController,animated: true)
+    }
+    
     // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,7 +100,7 @@ class LibraryTableViewController: UITableViewController {
     {
         if editingStyle == .delete
         {
-            let playlistToDelete = allPlaylists[indexPath.section][indexPath.row]
+            let playlistToDelete = userPlaylists[indexPath.row]
             var deleteText = String()
             
             switch playlistToDelete.getNumberOfSongs()
@@ -76,7 +113,7 @@ class LibraryTableViewController: UITableViewController {
                 deleteText = "\(playlistToDelete.getNumberOfSongs()) songs?"
             }
             
-            let deletePlaylistAlertController : UIAlertController = UIAlertController(title: "Delete \"\(playlistToDelete.getName())\"?", message: "Do you want to delete \(playlistToDelete.getName()) containing \(deleteText)", preferredStyle: .alert)
+            let deletePlaylistAlertController : UIAlertController = UIAlertController(title: "Delete \"\(playlistToDelete.getName())\"?", message: "Are you sure want to delete \(playlistToDelete.getName()) containing \(deleteText)", preferredStyle: .alert)
             
             let deletePlaylistAction : UIAlertAction = UIAlertAction(title: "Delete", style: .destructive)
             { (_) in
