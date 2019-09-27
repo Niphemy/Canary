@@ -23,21 +23,21 @@ class SongCollectionViewCell: UICollectionViewCell
     {
         super.init(frame: frame)
         
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 17
-        self.layer.shadowRadius = 3
+        self.layer.shadowRadius = 5
         self.layer.shadowOpacity = 0.2
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = .init(width: 1, height: 2)
-        backgroundColor = UIColor.systemGray6
+        contentView.layer.cornerRadius = 17
+        contentView.clipsToBounds = true
+        contentView.backgroundColor = UIColor.dynamicCellColor
     }
     
     public func setDisplayData(image: UIImage, name: String, artists: String, duration: String)
     {
         setupImageView(with: image)
         setupDetailsLabel(with: name, and: artists)
-        setupDurationLabel(with: duration)
         setupDynamicButton()
+        setupDurationLabel(with: duration)
     }
     
     private func setupImageView(with image: UIImage)
@@ -55,12 +55,12 @@ class SongCollectionViewCell: UICollectionViewCell
     
     private func setupDetailsLabel(with name: String, and artists: String)
     {
-        addSubview(detailsLabel)
+        contentView.addSubview(detailsLabel)
         detailsLabel.translatesAutoresizingMaskIntoConstraints = false
         detailsLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10).isActive = true
         detailsLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         detailsLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        detailsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6).isActive = true
+        detailsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.55).isActive = true
         
         let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
         let artistAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratLight.withSize(16)]
@@ -80,17 +80,38 @@ class SongCollectionViewCell: UICollectionViewCell
         detailsLabel.numberOfLines = 2
     }
     
-    private func setupDurationLabel(with duration: String)
-    {
-        
-    }
-    
     private func setupDynamicButton()
     {
+        contentView.addSubview(dynamicButton)
+        dynamicButton.translatesAutoresizingMaskIntoConstraints = false
+        dynamicButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        dynamicButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        dynamicButton.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        dynamicButton.widthAnchor.constraint(equalTo: detailsLabel.heightAnchor).isActive = true
         
+        dynamicButton.showsTouchWhenHighlighted = true
     }
     
-    
+    private func setupDurationLabel(with duration: String)
+    {
+        let containerView = UIView()
+        
+        contentView.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.leadingAnchor.constraint(equalTo: detailsLabel.trailingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: dynamicButton.leadingAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
+        containerView.addSubview(durationLabel)
+        durationLabel.translatesAutoresizingMaskIntoConstraints = false
+        durationLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        durationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        
+        let attributedDuration = NSAttributedString(string: duration, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)])
+        
+        durationLabel.attributedText = attributedDuration
+    }
     
     
 }

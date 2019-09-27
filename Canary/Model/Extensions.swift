@@ -18,13 +18,14 @@ extension UIFont
 extension UIColor
 {
     static let dynamicTextColor = UIColor(named: "AdaptableTextColour")!
+    static let dynamicCellColor = UIColor(named: "AdaptableCellColour")!
 }
 
 extension UIView
 {
     func highlightBorders()
     {
-        self.layer.borderWidth = 10
+        self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.red.cgColor
     }
 }

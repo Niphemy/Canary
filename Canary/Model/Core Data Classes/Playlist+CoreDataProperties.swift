@@ -17,12 +17,12 @@ extension Playlist {
     }
 
     @NSManaged private var name: String
-    @NSManaged private var childSongs: NSSet?
+    @NSManaged private var childSongs: NSSet
     private var numberOfSongs: Int
     {
         get
         {
-            return self.childSongs?.count ?? 0
+            return self.childSongs.count ?? 0
         }
     }
     
@@ -39,6 +39,11 @@ extension Playlist {
     public func getNumberOfSongs() -> Int
     {
         return numberOfSongs
+    }
+    
+    public func getChildSongs() -> NSSet
+    {
+        return childSongs
     }
 
 }

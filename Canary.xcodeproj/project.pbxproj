@@ -19,6 +19,7 @@
 		CA37CD9F233D126E00D96A18 /* Song+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA37CD9B233D126E00D96A18 /* Song+CoreDataProperties.swift */; };
 		CA37CDA4233D62AD00D96A18 /* PlaylistCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA37CDA3233D62AC00D96A18 /* PlaylistCollectionViewController.swift */; };
 		CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA37CDA5233E2EA000D96A18 /* SongCollectionViewCell.swift */; };
+		CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D1233E680D002F2FDC /* SongSearchResult.swift */; };
 		CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */; };
 		CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */; };
 		CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */; };
@@ -41,6 +42,7 @@
 		CA37CD9B233D126E00D96A18 /* Song+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CA37CDA3233D62AC00D96A18 /* PlaylistCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewController.swift; sourceTree = "<group>"; };
 		CA37CDA5233E2EA000D96A18 /* SongCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCollectionViewCell.swift; sourceTree = "<group>"; };
+		CA4715D1233E680D002F2FDC /* SongSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResult.swift; sourceTree = "<group>"; };
 		CA8A8BC1233A955400FCA0E0 /* Canary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 				CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */,
 				CA37CDA0233D171400D96A18 /* Core Data Classes */,
+				CA4715D1233E680D002F2FDC /* SongSearchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */,
 				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,
 				CA37CD9D233D126E00D96A18 /* Playlist+CoreDataProperties.swift in Sources */,
+				CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */,
 				CA37CD9F233D126E00D96A18 /* Song+CoreDataProperties.swift in Sources */,
 				CA37CD9C233D126E00D96A18 /* Playlist+CoreDataClass.swift in Sources */,
 				CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */,

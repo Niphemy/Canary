@@ -29,7 +29,7 @@ class LibraryTableViewController: UITableViewController
         loadPlaylists()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: #selector(addPlaylist))
-        let backButton = UIBarButtonItem(title: "Your Music", style: .plain, target: nil, action: nil)
+        let backButton = UIBarButtonItem(title: navigationItem.title, style: .plain, target: nil, action: nil)
         backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(17)], for: .normal)
         navigationItem.backBarButtonItem = backButton
     }

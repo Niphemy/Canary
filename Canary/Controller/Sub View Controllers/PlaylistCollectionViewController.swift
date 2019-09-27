@@ -31,7 +31,6 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         self.collectionView!.register(SongCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = UIColor.systemBackground
         self.collectionView.showsVerticalScrollIndicator = false
-        
     }
 
     // MARK: UICollectionViewDataSource
