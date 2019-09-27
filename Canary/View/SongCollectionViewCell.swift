@@ -57,13 +57,13 @@ class SongCollectionViewCell: UICollectionViewCell
     {
         addSubview(detailsLabel)
         detailsLabel.translatesAutoresizingMaskIntoConstraints = false
-        detailsLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
+        detailsLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10).isActive = true
         detailsLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         detailsLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
         detailsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.6).isActive = true
         
         let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
-        let artistAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
+        let artistAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratLight.withSize(16)]
         let attributedName : NSAttributedString = NSAttributedString(string: name, attributes: nameAttributes)
         let attributedArtists : NSAttributedString = NSAttributedString(string: "\n\(artists)", attributes: artistAttributes)
         

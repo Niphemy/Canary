@@ -13,7 +13,6 @@ private let reuseIdentifier = "PlaylistCell"
 
 class LibraryTableViewController: UITableViewController
 {
-
     let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var userPlaylists = [Playlist](), generatedPlaylists = [Playlist]()
     var allPlaylists : [[Playlist]]
@@ -30,6 +29,9 @@ class LibraryTableViewController: UITableViewController
         loadPlaylists()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: #selector(addPlaylist))
+        let backButton = UIBarButtonItem(title: "Your Music", style: .plain, target: nil, action: nil)
+        backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(17)], for: .normal)
+        navigationItem.backBarButtonItem = backButton
     }
     
     @objc func addPlaylist()

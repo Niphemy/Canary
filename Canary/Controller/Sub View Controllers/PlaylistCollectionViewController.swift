@@ -28,14 +28,10 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
         self.collectionView!.register(SongCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        self.collectionView.backgroundColor = UIColor.systemBackground
+        self.collectionView.showsVerticalScrollIndicator = false
+        
     }
 
     // MARK: UICollectionViewDataSource
@@ -62,6 +58,11 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: collectionView.frame.width - 30, height: 80)
+        return CGSize(width: collectionView.frame.width - 30, height: 75)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    {
+        return 10
     }
 }
