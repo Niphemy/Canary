@@ -142,8 +142,11 @@ class LibraryTableViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedPlaylist : Playlist = allPlaylists[indexPath.section][indexPath.row]
+        let playlistViewController : PlaylistCollectionViewController = PlaylistCollectionViewController(playlist: selectedPlaylist)
+        navigationController?.pushViewController(playlistViewController, animated: true)
         
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Library Data Model CRUD Methods
