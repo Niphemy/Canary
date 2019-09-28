@@ -30,37 +30,16 @@ class SongCollectionViewCell: UICollectionViewCell
         contentView.layer.cornerRadius = 17
         contentView.clipsToBounds = true
         contentView.backgroundColor = UIColor.dynamicCellColor
+        
+        setupImageView()
+        setupDetailsLabel()
+        setupDynamicButton()
+        setupDurationLabel()
     }
     
     public func setDisplayData(image: UIImage, name: String, artists: String, duration: String)
     {
-        setupImageView(with: image)
-        setupDetailsLabel(with: name, and: artists)
-        setupDynamicButton()
-        setupDurationLabel(with: duration)
-    }
-    
-    private func setupImageView(with image: UIImage)
-    {
-        contentView.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
-        
-        imageView.contentMode = .scaleAspectFill
         imageView.image = image
-    }
-    
-    private func setupDetailsLabel(with name: String, and artists: String)
-    {
-        contentView.addSubview(detailsLabel)
-        detailsLabel.translatesAutoresizingMaskIntoConstraints = false
-        detailsLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10).isActive = true
-        detailsLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        detailsLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        detailsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.55).isActive = true
         
         let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
         let artistAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratLight.withSize(16)]
@@ -76,6 +55,34 @@ class SongCollectionViewCell: UICollectionViewCell
         }()
         
         detailsLabel.attributedText = details
+        
+        let attributedDuration = NSAttributedString(string: duration, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)])
+        
+        durationLabel.attributedText = attributedDuration
+    }
+    
+    private func setupImageView()
+    {
+        contentView.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
+        
+        imageView.contentMode = .scaleAspectFill
+        
+    }
+    
+    private func setupDetailsLabel()
+    {
+        contentView.addSubview(detailsLabel)
+        detailsLabel.translatesAutoresizingMaskIntoConstraints = false
+        detailsLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10).isActive = true
+        detailsLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        detailsLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        detailsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.54).isActive = true
+        
         detailsLabel.textAlignment = .left
         detailsLabel.numberOfLines = 2
     }
@@ -84,22 +91,24 @@ class SongCollectionViewCell: UICollectionViewCell
     {
         contentView.addSubview(dynamicButton)
         dynamicButton.translatesAutoresizingMaskIntoConstraints = false
-        dynamicButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        dynamicButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
         dynamicButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        dynamicButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5).isActive = true
-        dynamicButton.widthAnchor.constraint(equalTo: detailsLabel.heightAnchor).isActive = true
+        dynamicButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7).isActive = true
+        dynamicButton.widthAnchor.constraint(equalTo: dynamicButton.heightAnchor).isActive = true
         
+        dynamicButton.contentMode = .scaleAspectFit
         dynamicButton.showsTouchWhenHighlighted = true
+        dynamicButton.addTarget(self, action: #selector(dynamicButtonTappedAction), for: .touchUpInside)
     }
     
-    private func setupDurationLabel(with duration: String)
+    private func setupDurationLabel()
     {
         let containerView = UIView()
         
         contentView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.leadingAnchor.constraint(equalTo: detailsLabel.trailingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: dynamicButton.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: dynamicButton.leadingAnchor, constant: -5).isActive = true
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
@@ -107,11 +116,10 @@ class SongCollectionViewCell: UICollectionViewCell
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         durationLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         durationLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        
-        let attributedDuration = NSAttributedString(string: duration, attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)])
-        
-        durationLabel.attributedText = attributedDuration
     }
     
-    
+    @objc internal func dynamicButtonTappedAction()
+    {
+        
+    }
 }

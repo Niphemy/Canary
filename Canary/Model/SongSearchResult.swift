@@ -15,7 +15,7 @@ struct SongSearchResult
     private var image: UIImage? = nil
     private var name: String? = nil
     private var mediaID: String
-    private var hasLoaded: Bool
+    public var hasLoaded: Bool
     {
         get
         {
@@ -115,5 +115,25 @@ struct SongSearchResult
         }
         
         return artists.joined(separator: ", ")
+    }
+    
+    public func getArtists() -> String?
+    {
+        return artists
+    }
+    
+    public func getDuration() -> String?
+    {
+        return duration
+    }
+    
+    public func getImage() -> UIImage?
+    {
+        return image
+    }
+    
+    public func getName() -> String?
+    {
+        return name
     }
 }

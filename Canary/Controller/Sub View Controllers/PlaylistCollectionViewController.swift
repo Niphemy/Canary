@@ -48,7 +48,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SongCollectionViewCell
-        cell.setDisplayData(image: UIImage(named: "DefaultSongIcon")!, name: "A Downloaded Song", artists: "An Artist", duration: "5:00")
+        cell.setDisplayData(image: UIImage(named: "DefaultSongIcon")!, name: "A Downloaded Song", artists: "s up the whole box", duration: "5:00")
         
         return cell
     }
@@ -57,11 +57,16 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: collectionView.frame.width - 30, height: 75)
+        return CGSize.songCellSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
         return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
+    {
+        return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
 }

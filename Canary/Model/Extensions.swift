@@ -50,3 +50,8 @@ extension UICollectionViewLayout
         return flowLayout
     }()
 }
+
+extension CGSize
+{
+    static let songCellSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 30, height: 75)
+}

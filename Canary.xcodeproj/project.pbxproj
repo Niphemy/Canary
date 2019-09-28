@@ -20,6 +20,8 @@
 		CA37CDA4233D62AD00D96A18 /* PlaylistCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA37CDA3233D62AC00D96A18 /* PlaylistCollectionViewController.swift */; };
 		CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA37CDA5233E2EA000D96A18 /* SongCollectionViewCell.swift */; };
 		CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D1233E680D002F2FDC /* SongSearchResult.swift */; };
+		CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */; };
+		CA4715D623400463002F2FDC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D523400463002F2FDC /* LoadingView.swift */; };
 		CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */; };
 		CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */; };
 		CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */; };
@@ -43,6 +45,8 @@
 		CA37CDA3233D62AC00D96A18 /* PlaylistCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewController.swift; sourceTree = "<group>"; };
 		CA37CDA5233E2EA000D96A18 /* SongCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA4715D1233E680D002F2FDC /* SongSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResult.swift; sourceTree = "<group>"; };
+		CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		CA4715D523400463002F2FDC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CA8A8BC1233A955400FCA0E0 /* Canary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */,
 				CA22E4B8233B7DE900B2E75A /* Fonts */,
 				CA37CDA5233E2EA000D96A18 /* SongCollectionViewCell.swift */,
+				CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */,
+				CA4715D523400463002F2FDC /* LoadingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -149,9 +155,9 @@
 		CA8A8BDD233A961B00FCA0E0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 				CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */,
 				CA37CDA0233D171400D96A18 /* Core Data Classes */,
+				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 				CA4715D1233E680D002F2FDC /* SongSearchResult.swift */,
 			);
 			path = Model;
@@ -234,8 +240,10 @@
 				CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */,
 				CA22E4B0233B6FFF00B2E75A /* Extensions.swift in Sources */,
 				CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */,
+				CA4715D623400463002F2FDC /* LoadingView.swift in Sources */,
 				CA37CDA4233D62AD00D96A18 /* PlaylistCollectionViewController.swift in Sources */,
 				CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */,
+				CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */,
 				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,
 				CA37CD9D233D126E00D96A18 /* Playlist+CoreDataProperties.swift in Sources */,
 				CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */,

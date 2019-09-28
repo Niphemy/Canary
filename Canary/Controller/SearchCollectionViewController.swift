@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "SearchResultCell"
 
-class SearchCollectionViewController: UICollectionViewController
+class SearchCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     let webSearchController : UISearchController = UISearchController()
  
@@ -18,12 +18,12 @@ class SearchCollectionViewController: UICollectionViewController
     {
         super.viewDidLoad()
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
+        self.collectionView!.register(SongSearchResultCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.backgroundColor = UIColor.systemBackground
         webSearchController.searchBar.autocapitalizationType = .words
         webSearchController.searchBar.delegate = self 
         
-        navigationItem.searchController = webSearchController
+        self.navigationItem.searchController = webSearchController
     }
 
     // MARK: UICollectionViewDataSource
@@ -36,16 +36,33 @@ class SearchCollectionViewController: UICollectionViewController
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 10
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SongSearchResultCollectionViewCell
     
         // Configure the cell
     
         return cell
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        return CGSize.songCellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
+    {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
+    {
+        return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
 }
 
