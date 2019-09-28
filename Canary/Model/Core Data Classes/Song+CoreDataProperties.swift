@@ -18,13 +18,30 @@ extension Song {
     }
 
     @NSManaged private var artists: String?
-    @NSManaged private var audioFilePath: URL?
-    @NSManaged private var imageFilePath: URL?
-    @NSManaged private var mediaIdentifier: String?
+    @NSManaged private var mediaIdentifier: String
     @NSManaged private var name: String?
     @NSManaged private var dateAdded: Date?
     @NSManaged private var parentPlaylist: NSSet?
-
+    
+    private var audioFilePath: URL
+    {
+        get
+        {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentsDirectory = paths[0]
+            return documentsDirectory.appendingPathComponent("\(mediaIdentifier).mp3")
+        }
+    }
+    
+    private var imageFilePath: URL
+    {
+        get
+        {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentsDirectory = paths[0]
+            return documentsDirectory.appendingPathComponent("\(mediaIdentifier).png")
+        }
+    }
 }
 
 // MARK: Generated accessors for parentPlaylist

@@ -118,7 +118,7 @@ class LibraryTableViewController: UITableViewController
                 deleteText = "\(playlistToDelete.getNumberOfSongs()) songs?"
             }
             
-            let deletePlaylistAlertController : UIAlertController = UIAlertController(title: "Delete \"\(playlistToDelete.getName())\"?", message: "Are you sure want to delete \(playlistToDelete.getName()) containing \(deleteText)", preferredStyle: .alert)
+            let deletePlaylistAlertController : UIAlertController = UIAlertController(title: "Delete \"\(playlistToDelete.getName())\"?", message: "Are you sure want to delete this playlist containing \(deleteText)", preferredStyle: .alert)
             
             let deletePlaylistAction : UIAlertAction = UIAlertAction(title: "Delete", style: .destructive)
             { (_) in

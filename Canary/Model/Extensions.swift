@@ -30,6 +30,17 @@ extension UIView
     }
 }
 
+extension String
+{
+    var fullRange : NSRange
+    {
+        get
+        {
+            return NSRange(location: 0, length: self.count)
+        }
+    }
+}
+
 extension UICollectionViewLayout
 {
     static let verticalFlow : UICollectionViewFlowLayout =

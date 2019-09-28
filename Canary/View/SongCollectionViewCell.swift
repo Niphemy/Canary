@@ -84,9 +84,9 @@ class SongCollectionViewCell: UICollectionViewCell
     {
         contentView.addSubview(dynamicButton)
         dynamicButton.translatesAutoresizingMaskIntoConstraints = false
-        dynamicButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        dynamicButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
         dynamicButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        dynamicButton.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        dynamicButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5).isActive = true
         dynamicButton.widthAnchor.constraint(equalTo: detailsLabel.heightAnchor).isActive = true
         
         dynamicButton.showsTouchWhenHighlighted = true
