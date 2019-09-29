@@ -13,7 +13,8 @@ private let reuseIdentifier = "SearchResultCell"
 class SearchCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     let webSearchController : UISearchController = UISearchController()
- 
+    var searchResults : [SongSearchResult] = [SongSearchResult]()
+        
     override func viewDidLoad()
     {
         super.viewDidLoad()

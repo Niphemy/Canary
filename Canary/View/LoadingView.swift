@@ -19,7 +19,7 @@ class LoadingView: UIView
         animatedGradientLayer.locations = [0,0.5,1]
         
         let shimmerAnimation = CABasicAnimation(keyPath: "transform.translation.y")
-        shimmerAnimation.duration = 3
+        shimmerAnimation.duration = 1.5
         shimmerAnimation.fromValue = -3*frame.height
         shimmerAnimation.toValue = 2*frame.height
         shimmerAnimation.repeatCount = .infinity
@@ -27,6 +27,7 @@ class LoadingView: UIView
         animatedGradientLayer.add(shimmerAnimation, forKey: nil)
         
         layer.mask = animatedGradientLayer
+        backgroundColor = UIColor.systemGray5
     }
     
     public func stopLoading()

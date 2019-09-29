@@ -35,8 +35,6 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
         loadingImageView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
         loadingImageView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor).isActive = true
         loadingImageView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
-        
-        loadingImageView.backgroundColor = UIColor.systemGray5
     }
     
     private func setupLoadingDetailsLabel()
@@ -47,8 +45,6 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
         loadingDetailsLabel.leadingAnchor.constraint(equalTo: detailsLabel.leadingAnchor).isActive = true
         loadingDetailsLabel.trailingAnchor.constraint(equalTo: detailsLabel.trailingAnchor).isActive = true
         loadingDetailsLabel.centerYAnchor.constraint(equalTo: detailsLabel.centerYAnchor).isActive = true
-        
-        loadingDetailsLabel.backgroundColor = UIColor.systemGray5
         loadingDetailsLabel.layer.cornerRadius = 8
     }
     
@@ -60,8 +56,6 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
         loadingDynamicButton.leadingAnchor.constraint(equalTo: dynamicButton.leadingAnchor).isActive = true
         loadingDynamicButton.trailingAnchor.constraint(equalTo: dynamicButton.trailingAnchor).isActive = true
         loadingDynamicButton.centerYAnchor.constraint(equalTo: dynamicButton.centerYAnchor).isActive = true
-        
-        loadingDynamicButton.backgroundColor = UIColor.systemGray5
         loadingDynamicButton.layer.cornerRadius = 8
     }
     
