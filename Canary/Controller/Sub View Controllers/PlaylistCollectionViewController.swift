@@ -13,6 +13,7 @@ private let reuseIdentifier = "SongCell"
 class PlaylistCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     private let playlist : Playlist
+    var lastSelectedIndex : IndexPath?
     
     init(playlist: Playlist)
     {
@@ -28,11 +29,12 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.collectionView!.register(SongCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(SavedSongCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = UIColor.systemBackground
         self.collectionView.showsVerticalScrollIndicator = false
+        self.collectionView.allowsMultipleSelection = false
     }
-
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int
@@ -47,8 +49,8 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SongCollectionViewCell
-        cell.setDisplayData(image: UIImage(named: "DefaultSongIcon")!, name: "A Downloaded Song", artists: "s up the whole box", duration: "5:00")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SavedSongCollectionViewCell
+        cell.setDisplayData(image: UIImage(named: "DefaultSongIcon")!, name: "Middle", artists: "DJ Snake ft. Bipolar Sunshine", duration: "3:40")
         
         return cell
     }
@@ -67,6 +69,6 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
-        return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
 }

@@ -15,6 +15,9 @@ class SongCollectionViewCell: UICollectionViewCell
     internal let durationLabel : UILabel = UILabel()
     internal let dynamicButton : UIButton = UIButton()
     
+    internal let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
+    internal let artistAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratLight.withSize(16)]
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -41,8 +44,6 @@ class SongCollectionViewCell: UICollectionViewCell
     {
         imageView.image = image
         
-        let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
-        let artistAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratLight.withSize(16)]
         let attributedName : NSAttributedString = NSAttributedString(string: name, attributes: nameAttributes)
         let attributedArtists : NSAttributedString = NSAttributedString(string: "\n\(artists)", attributes: artistAttributes)
         
