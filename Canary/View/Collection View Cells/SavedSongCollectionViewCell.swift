@@ -35,7 +35,10 @@ class SavedSongCollectionViewCell: SongCollectionViewCell
         super.init(frame: frame)
         contentView.layer.borderWidth = 3
         contentView.layer.borderColor = UIColor.clear.cgColor
-        dynamicButton.setImage(UIImage(named: "EllipsisIcon"), for: .normal)
+        let tintedImage = UIImage(named: "EllipsisIcon")?.withTintColor(tintColor)
+        dynamicButton.imageView?.contentMode = .scaleAspectFit
+        dynamicButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        dynamicButton.setImage(tintedImage, for: .normal)
     }
     
     public func startPlayingSong()
