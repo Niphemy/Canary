@@ -68,7 +68,11 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
     {
         if searchResult.hasLoaded
         {
+            setDisplayData(image: searchResult.getImage()!, name: searchResult.getName()!, artists: searchResult.getArtists()!, duration: searchResult.getDuration()!)
             
+            loadingImageView.isHidden = true
+            loadingDetailsLabel.isHidden = true
+            loadingDynamicButton.isHidden = true
         }
     }
 }

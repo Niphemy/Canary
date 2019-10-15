@@ -29,6 +29,8 @@
 		CA8A8BD1233A955600FCA0E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */; };
 		CA8A8BD4233A955600FCA0E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA8A8BD2233A955600FCA0E0 /* LaunchScreen.storyboard */; };
 		CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */; };
+		CAA654AE2355C697005F9E3D /* YTAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA654AD2355C697005F9E3D /* YTAPI.swift */; };
+		CAA654B12355D4C2005F9E3D /* JSON Structrues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA654B02355D4C2005F9E3D /* JSON Structrues.swift */; };
 		CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		CA8A8BD3233A955600FCA0E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA8A8BD5233A955600FCA0E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		CAA654AD2355C697005F9E3D /* YTAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTAPI.swift; sourceTree = "<group>"; };
+		CAA654B02355D4C2005F9E3D /* JSON Structrues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON Structrues.swift"; sourceTree = "<group>"; };
 		CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +174,8 @@
 				CA37CDA0233D171400D96A18 /* Core Data Classes */,
 				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 				CA4715D1233E680D002F2FDC /* SongSearchResult.swift */,
+				CAA654AD2355C697005F9E3D /* YTAPI.swift */,
+				CAA654B02355D4C2005F9E3D /* JSON Structrues.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,11 +261,13 @@
 				CA4715D623400463002F2FDC /* LoadingView.swift in Sources */,
 				CA37CDA4233D62AD00D96A18 /* PlaylistCollectionViewController.swift in Sources */,
 				CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */,
+				CAA654AE2355C697005F9E3D /* YTAPI.swift in Sources */,
 				CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */,
 				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,
 				CA37CD9D233D126E00D96A18 /* Playlist+CoreDataProperties.swift in Sources */,
 				CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */,
 				CA37CD9F233D126E00D96A18 /* Song+CoreDataProperties.swift in Sources */,
+				CAA654B12355D4C2005F9E3D /* JSON Structrues.swift in Sources */,
 				CA37CD9C233D126E00D96A18 /* Playlist+CoreDataClass.swift in Sources */,
 				CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,

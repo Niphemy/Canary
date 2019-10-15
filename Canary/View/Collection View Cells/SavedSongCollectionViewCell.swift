@@ -37,7 +37,7 @@ class SavedSongCollectionViewCell: SongCollectionViewCell
         contentView.layer.borderColor = UIColor.clear.cgColor
         let tintedImage = UIImage(named: "EllipsisIcon")?.withTintColor(tintColor)
         dynamicButton.imageView?.contentMode = .scaleAspectFit
-        dynamicButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        dynamicButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5   )
         dynamicButton.setImage(tintedImage, for: .normal)
     }
     

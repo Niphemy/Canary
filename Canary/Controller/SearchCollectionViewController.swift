@@ -37,7 +37,7 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return searchResults.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
@@ -45,7 +45,9 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SongSearchResultCollectionViewCell
     
         // Configure the cell
-    
+        let tempSearchResult = searchResults[indexPath.item]
+        cell.setDisplayInfo(with: tempSearchResult)
+        
         return cell
     }
     
