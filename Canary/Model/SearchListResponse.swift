@@ -1,5 +1,5 @@
 //
-//  JSONStructrues.swift
+//  SearchListResponse.swift
 //  Canary
 //
 //  Created by Nifemi Fatoye on 15/10/2019.
@@ -14,7 +14,13 @@ struct SearchListResponse: Decodable
     
     struct searchResult: Decodable
     {
-        let id : [String : String]
+        let id : identifier
+        
+        struct identifier: Decodable
+        {
+            let videoId : String
+        }
+        
         let snippet : videoDetails
         
         struct videoDetails: Decodable
@@ -44,7 +50,6 @@ struct SearchListResponse: Decodable
                 }
             }
         }
-
     }
 }
 

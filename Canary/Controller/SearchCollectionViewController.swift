@@ -36,7 +36,6 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        // #warning Incomplete implementation, return the number of items
         return searchResults.count
     }
 
@@ -69,13 +68,48 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
     }
 }
 
-extension SearchCollectionViewController : UISearchBarDelegate
+extension SearchCollectionViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         if let queryText = webSearchController.searchBar.text
         {
-            print("does stuff with \(queryText)")
+            YTAPI.getResultsFor(query: queryText, handleSearchListResponse(_:_:_:))
+            webSearchController.isActive = false
         }
+    }
+}
+
+// MARK: - Networking
+
+extension SearchCollectionViewController
+{
+    func handleSearchListResponse(_ data: Data?, _ response: URLResponse?, _ dataError: Error?)
+    {
+        searchResults.removeAll()
+        guard dataError == nil else { fatalError(dataError!.localizedDescription) }
+        guard let data = data else { fatalError("No received data") }
+        
+        do
+        {
+            let APIResponse = try JSONDecoder().decode(SearchListResponse.self, from: data)
+            
+            for item in APIResponse.items
+            {
+                let tempResult : SongSearchResult = SongSearchResult(mediaID: item.id.videoId)
+                tempResult.setDetailsFrom(youtubeTitle: item.snippet.title)
+                searchResults.append(tempResult)
+                DispatchQueue.main.async { self.collectionView.reloadData() }
+                
+            }
+        }
+        catch
+        {
+            print(error)
+        }
+    }
+    
+    func handleVideoListResponse(<#parameters#>) -> <#return type#> {
+        <#function body#>
     }
 }

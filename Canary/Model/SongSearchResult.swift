@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SongSearchResult
+class SongSearchResult
 {
     private var artists: String? = nil
     private var duration: String? = nil
@@ -28,7 +28,7 @@ struct SongSearchResult
         self.mediaID = mediaID
     }
     
-    public mutating func setDetailsFrom(youtubeTitle: String)
+    public func setDetailsFrom(youtubeTitle: String)
     {
         var rawTitle = youtubeTitle
         replaceEncodedCharacters(in: &rawTitle)
@@ -36,9 +36,14 @@ struct SongSearchResult
         artists = parseArtists(from: rawTitle)
     }
     
-    public mutating func setDuration(to length: String)
+    public func setDuration(to length: String)
     {
         duration = length
+    }
+    
+    public func setImage(to artwork: UIImage)
+    {
+        image = artwork
     }
     
     private func replaceEncodedCharacters(in codedString: inout String)
