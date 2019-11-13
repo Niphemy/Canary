@@ -10,6 +10,8 @@ import UIKit
 
 class TabViewController: UITabBarController
 {
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -24,15 +26,15 @@ class TabViewController: UITabBarController
         
         homeNavigationController.tabBarItem.title = "Home"
         homeViewController.navigationItem.title = "Home"
-        homeNavigationController.tabBarItem.image = UIImage(named: "HomeIcon")
+        homeNavigationController.tabBarItem.image = UIImage.homeIcon
         
         searchNavigationController.tabBarItem.title = "Search"
         searchViewController.navigationItem.title = "Search The Web"
-        searchNavigationController.tabBarItem.image = UIImage(named: "SearchIcon")
+        searchNavigationController.tabBarItem.image = UIImage.searchIcon
         
         libraryNavigationController.tabBarItem.title = "Library"
         libraryViewController.navigationItem.title = "Your Music"
-        libraryNavigationController.tabBarItem.image = UIImage(named: "LibraryIcon")
+        libraryNavigationController.tabBarItem.image = UIImage.libraryIcon
         
         let navigationControllers : [UINavigationController] = [homeNavigationController,searchNavigationController,libraryNavigationController]
         
@@ -45,6 +47,8 @@ class TabViewController: UITabBarController
             navigationController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(12)], for: .normal)
         }
         
+        UIColor.globalTintColor = UIColor.orange
+        view.tintColor = UIColor.globalTintColor
         viewControllers = navigationControllers
     }
 }

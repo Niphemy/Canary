@@ -10,20 +10,20 @@
 import Foundation
 import CoreData
 
-
 extension Song {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Song> {
         return NSFetchRequest<Song>(entityName: "Song")
     }
 
-    @NSManaged private var artists: String?
-    @NSManaged private var mediaIdentifier: String
-    @NSManaged private var name: String?
-    @NSManaged private var dateAdded: Date?
-    @NSManaged private var parentPlaylist: NSSet?
+    @NSManaged var artists: String
+    @NSManaged var mediaIdentifier: String
+    @NSManaged var name: String
+    @NSManaged var dateAdded: Date
+    @NSManaged var duration: String
+    @NSManaged var parentPlaylist: NSSet?
     
-    private var audioFilePath: URL
+    private var audioFilePath: URL?
     {
         get
         {
@@ -33,7 +33,7 @@ extension Song {
         }
     }
     
-    private var imageFilePath: URL
+    private var imageFilePath: URL?
     {
         get
         {
@@ -41,6 +41,24 @@ extension Song {
             let documentsDirectory = paths[0]
             return documentsDirectory.appendingPathComponent("\(mediaIdentifier).png")
         }
+    }
+    
+    public func setDetails(id: String, artists: String, name: String, date: Date, duration: String)
+    {
+        self.mediaIdentifier = id
+        self.artists = artists
+        self.name = name
+        self.dateAdded = date
+    }
+    
+    public func getAudioFilePath() -> URL
+    {
+        return audioFilePath!
+    }
+    
+    public func getImageFilePath() -> URL
+    {
+        return imageFilePath!
     }
 }
 

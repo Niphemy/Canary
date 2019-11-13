@@ -14,11 +14,12 @@ struct VideoListResponse: Decodable
     
     struct video: Decodable
     {
+        let id : String
         let contentDetails: videoInformation
         
         struct videoInformation: Decodable
         {
-            let id : String
+            let duration : String
         }
     }
 }

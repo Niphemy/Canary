@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "SongCell"
 
 class PlaylistCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
+    let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let playlist : Playlist
-    var lastSelectedIndex : IndexPath?
+    var songs = [Song]()
     
     init(playlist: Playlist)
     {
@@ -33,6 +35,10 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         self.collectionView.backgroundColor = UIColor.systemBackground
         self.collectionView.showsVerticalScrollIndicator = false
         self.collectionView.allowsMultipleSelection = false
+        
+        loadSongs()
+        print(songs.count)
+        print(songs.forEach({ print($0.name) }))
     }
     
     // MARK: UICollectionViewDataSource
@@ -42,15 +48,17 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         return 1
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 10
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return songs.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SavedSongCollectionViewCell
-        cell.setDisplayData(image: UIImage(named: "DefaultSongIcon")!, name: "Middle", artists: "DJ Snake ft. Bipolar Sunshine", duration: "3:40")
+        let song = songs[indexPath.item]
+        
+        cell.setDisplayData(image: UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor), name: song.name, artists: song.artists, duration: "5:00")
         
         return cell
     }
@@ -70,5 +78,26 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
         return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    }
+    
+    // MARK: - Library Data Model CRUD Methods
+    
+    func loadSongs()
+    {
+        if playlist.getName() == "All Downloads"
+        {
+            let songFetchRequest : NSFetchRequest<Song> = Song.fetchRequest()
+            
+            do
+            {
+                songs = try context.fetch(songFetchRequest)
+            }
+            catch
+            {
+                print("Error loading context:\n\(error)")
+            }
+        }else{
+            print("other code")
+        }
     }
 }

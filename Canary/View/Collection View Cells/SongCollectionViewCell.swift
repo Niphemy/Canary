@@ -72,7 +72,7 @@ class SongCollectionViewCell: UICollectionViewCell
         imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
         
         imageView.contentMode = .scaleAspectFill
-        
+        imageView.clipsToBounds = true
     }
     
     private func setupDetailsLabel()

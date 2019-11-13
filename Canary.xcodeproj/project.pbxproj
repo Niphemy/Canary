@@ -23,6 +23,7 @@
 		CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D1233E680D002F2FDC /* SongSearchResult.swift */; };
 		CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */; };
 		CA4715D623400463002F2FDC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D523400463002F2FDC /* LoadingView.swift */; };
+		CA824F76236D9A1B008CFE3B /* VideoDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA824F75236D9A1B008CFE3B /* VideoDownloadResponse.swift */; };
 		CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */; };
 		CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */; };
 		CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */; };
@@ -52,6 +53,7 @@
 		CA4715D1233E680D002F2FDC /* SongSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResult.swift; sourceTree = "<group>"; };
 		CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA4715D523400463002F2FDC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CA824F75236D9A1B008CFE3B /* VideoDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadResponse.swift; sourceTree = "<group>"; };
 		CA8A8BC1233A955400FCA0E0 /* Canary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,10 +179,19 @@
 				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 				CA4715D1233E680D002F2FDC /* SongSearchResult.swift */,
 				CAA654AD2355C697005F9E3D /* YTAPI.swift */,
-				CAA654B02355D4C2005F9E3D /* SearchListResponse.swift */,
-				CAED482F235C59A8000A8190 /* VideoListResponse.swift */,
+				CAED4831235CA9C1000A8190 /* JSON Structrues */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CAED4831235CA9C1000A8190 /* JSON Structrues */ = {
+			isa = PBXGroup;
+			children = (
+				CAA654B02355D4C2005F9E3D /* SearchListResponse.swift */,
+				CAED482F235C59A8000A8190 /* VideoListResponse.swift */,
+				CA824F75236D9A1B008CFE3B /* VideoDownloadResponse.swift */,
+			);
+			path = "JSON Structrues";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +283,7 @@
 				CA37CD9F233D126E00D96A18 /* Song+CoreDataProperties.swift in Sources */,
 				CAA654B12355D4C2005F9E3D /* SearchListResponse.swift in Sources */,
 				CAED4830235C59A8000A8190 /* VideoListResponse.swift in Sources */,
+				CA824F76236D9A1B008CFE3B /* VideoDownloadResponse.swift in Sources */,
 				CA37CD9C233D126E00D96A18 /* Playlist+CoreDataClass.swift in Sources */,
 				CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,

@@ -28,7 +28,7 @@ class LibraryTableViewController: UITableViewController
         super.viewDidLoad()
         loadPlaylists()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddPlaylistIcon"), style: .plain, target: self, action: #selector(addPlaylist))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.addPlaylistIcon, style: .plain, target: self, action: #selector(addPlaylist))
         let backButton = UIBarButtonItem(title: navigationItem.title, style: .plain, target: nil, action: nil)
         backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(17)], for: .normal)
         navigationItem.backBarButtonItem = backButton
@@ -80,7 +80,6 @@ class LibraryTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        // #warning Incomplete implementation, return the number of rows
         return allPlaylists[section].count
     }
 
@@ -127,7 +126,6 @@ class LibraryTableViewController: UITableViewController
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
                 self.savePlaylists()
             }
-            
             deletePlaylistAlertController.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
             deletePlaylistAlertController.addAction(deletePlaylistAction)
             

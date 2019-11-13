@@ -30,9 +30,4 @@ class LoadingView: UIView
         layer.mask = animatedGradientLayer
         backgroundColor = UIColor.systemGray5
     }
-    
-    public func stopLoading()
-    {
-        animatedGradientLayer.repeatCount = 1
-    }
 }

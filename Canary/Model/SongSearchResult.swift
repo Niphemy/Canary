@@ -36,9 +36,9 @@ class SongSearchResult
         artists = parseArtists(from: rawTitle)
     }
     
-    public func setDuration(to length: String)
+    public func setDuration(to ISO8601String: String)
     {
-        duration = length
+        duration = formatDuration(from: ISO8601String)
     }
     
     public func setImage(to artwork: UIImage)
@@ -48,9 +48,9 @@ class SongSearchResult
     
     private func replaceEncodedCharacters(in codedString: inout String)
     {
-        let ampersandPattern = "[&amp;]"
-        let quotePattern = "[&quot;]"
-        let apostrophePattern = "[&#39;]"
+        let ampersandPattern = "&amp;"
+        let quotePattern = "&quot;"
+        let apostrophePattern = "&#39;"
         
         codedString = (codedString as NSString).replacingOccurrences(of: ampersandPattern, with: "&", options: .regularExpression, range: codedString.fullRange)
         codedString = (codedString as NSString).replacingOccurrences(of: quotePattern, with: "\"", options: .regularExpression, range: codedString.fullRange)
@@ -60,7 +60,7 @@ class SongSearchResult
     private func parseSongName(from inputTitle: String) -> String
     {
         let bracketPattern = " \\(.+\\)| \\[.+\\]"
-        let featuringPattern = " ft\\..+ | feat\\..+| feat.+| ft.+"
+        let featuringPattern = " ft\\..+| feat\\..+| feat.+| ft.+"
         let separatorPattern = ".+- |.+– |.+\\w+: "
         
         var songName = inputTitle
@@ -120,6 +120,53 @@ class SongSearchResult
         }
         
         return artists.joined(separator: ", ")
+    }
+    
+    private func formatDuration(from inputString: String) -> String
+    {
+        var inputStringCopy = inputString
+        inputStringCopy = (inputStringCopy as NSString).replacingOccurrences(of: "PT", with: "", options: .regularExpression, range: inputStringCopy.fullRange)
+        
+        let secondsRegex = try! NSRegularExpression(pattern: "\\d+S")
+        let minutesRegex = try! NSRegularExpression(pattern: "\\d+M")
+        let hoursRegex = try! NSRegularExpression(pattern: "\\d+H")
+        var durationComponents : [String] = ["0","0","0"]
+        
+        let regexArray : [NSRegularExpression] = [secondsRegex, minutesRegex, hoursRegex]
+        
+        for i in 0..<regexArray.count
+        {
+            let regexMatchRange = regexArray[i].matches(in: inputStringCopy, range: inputStringCopy.fullRange)
+            if !regexMatchRange.isEmpty
+            {
+                var firstMatch : String = (inputStringCopy as NSString).substring(with: regexMatchRange[0].range)
+                firstMatch.removeLast(1)
+                durationComponents[2-i] = firstMatch
+            }
+        }
+        
+        if durationComponents.first == "0"
+        {
+            durationComponents.removeFirst()
+        }
+        
+        for i in 0..<durationComponents.count
+        {
+            if i != 0 && durationComponents[i].count <= 1
+            {
+                repeat
+                {
+                    durationComponents[i].insert("0", at: durationComponents[i].startIndex)
+                }while durationComponents[i].count != 2
+            }
+        }
+            
+        return durationComponents.joined(separator: ":")
+    }
+    
+    public func getMediaID() -> String
+    {
+        return mediaID
     }
     
     public func getArtists() -> String?

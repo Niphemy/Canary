@@ -16,7 +16,6 @@ class SavedSongCollectionViewCell: SongCollectionViewCell
     {
         didSet
         {
-            print("\(self.hashValue) is selected status: \(isSelected)")
             if isSelected && !isHighlighted
             {
                 highlightCell()
@@ -35,9 +34,9 @@ class SavedSongCollectionViewCell: SongCollectionViewCell
         super.init(frame: frame)
         contentView.layer.borderWidth = 3
         contentView.layer.borderColor = UIColor.clear.cgColor
-        let tintedImage = UIImage(named: "EllipsisIcon")?.withTintColor(tintColor)
+        let tintedImage = UIImage.ellipsisIcon?.withTintColor(UIColor.globalTintColor).withConfiguration(UIImage.SymbolConfiguration(pointSize: 50))
         dynamicButton.imageView?.contentMode = .scaleAspectFit
-        dynamicButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5   )
+        dynamicButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         dynamicButton.setImage(tintedImage, for: .normal)
     }
     
@@ -91,20 +90,5 @@ class SavedSongCollectionViewCell: SongCollectionViewCell
         }()
         
         detailsLabel.attributedText = details
-    }
-    
-    func shrink(down: Bool)
-    {
-        UIView.animate(withDuration: 0.2)
-        {
-            if down
-            {
-                self.contentView.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
-            }
-            else
-            {
-                self.contentView.transform = .identity
-            }
-        }
     }
 }

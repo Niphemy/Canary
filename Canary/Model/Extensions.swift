@@ -19,6 +19,18 @@ extension UIColor
 {
     static let dynamicTextColor = UIColor(named: "AdaptableTextColour")!
     static let dynamicCellColor = UIColor(named: "AdaptableCellColour")!
+    static var globalTintColor = UIColor.systemBlue
+}
+
+extension UIImage
+{
+    static let homeIcon = UIImage(systemName: "music.house.fill")
+    static let searchIcon = UIImage(systemName: "magnifyingglass")
+    static let libraryIcon = UIImage(systemName: "rectangle.stack.fill")
+    static let userIcon = UIImage(systemName: "person.crop.circle")
+    static let downloadIcon = UIImage(systemName: "square.and.arrow.down.fill")
+    static let addPlaylistIcon = UIImage(systemName: "rectangle.stack.fill.badge.plus")
+    static let ellipsisIcon = UIImage(systemName: "ellipsis")
 }
 
 extension UIView
