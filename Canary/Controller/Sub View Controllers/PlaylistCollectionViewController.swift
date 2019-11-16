@@ -37,8 +37,6 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         self.collectionView.allowsMultipleSelection = false
         
         loadSongs()
-        print(songs.count)
-        print(songs.forEach({ print($0.name) }))
     }
     
     // MARK: UICollectionViewDataSource
@@ -57,8 +55,9 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SavedSongCollectionViewCell
         let song = songs[indexPath.item]
+        let songImage : UIImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor)
         
-        cell.setDisplayData(image: UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor), name: song.name, artists: song.artists, duration: "5:00")
+        cell.setDisplayData(image: songImage, name: song.name, artists: song.artists, duration: song.duration)
         
         return cell
     }

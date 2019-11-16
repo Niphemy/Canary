@@ -43,10 +43,8 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SongSearchResultCollectionViewCell
         
-        // Configure the cell
         let tempSearchResult = searchResults[indexPath.item]
         cell.setDisplayInfo(with: tempSearchResult)
-        cell.tintColor = view.tintColor
         return cell
     }
     

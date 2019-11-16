@@ -49,6 +49,7 @@ extension Song {
         self.artists = artists
         self.name = name
         self.dateAdded = date
+        self.duration = duration
     }
     
     public func getAudioFilePath() -> URL

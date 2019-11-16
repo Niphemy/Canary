@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SongSearchResultCollectionViewCell: SongCollectionViewCell, URLSessionDownloadDelegate
+class SongSearchResultCollectionViewCell: SongCollectionViewCell
 {
     private let loadingImageView = LoadingView()
     private let loadingDetailsLabel = LoadingView()
@@ -18,8 +18,15 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell, URLSessionDown
     private let downloadProgressView = UIView()
     private let sectorLayer = CAShapeLayer()
     private var mediaID = String()
+    private var observation: NSKeyValueObservation?
+
+    deinit
+    {
+        observation?.invalidate()
+    }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -82,19 +89,20 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell, URLSessionDown
         contentView.layoutIfNeeded()
     }
     
-    override func dynamicButtonTappedAction()
+    private func setupLoadingAnimations()
     {
         dynamicButton.isEnabled = false
         
         let downloadProgressViewCenter = downloadProgressView.convert(downloadProgressView.center, from: contentView)
         let radius = downloadProgressView.frame.width/2 - 2
-        let sectorPath = UIBezierPath(arcCenter: downloadProgressViewCenter, radius: radius, startAngle: -.pi/2, endAngle: .pi/6, clockwise: true)
+        let sectorPath = UIBezierPath(arcCenter: downloadProgressViewCenter, radius: radius, startAngle: 0, endAngle: .pi*2, clockwise: true)
         
         sectorLayer.path = sectorPath.cgPath
         sectorLayer.fillColor = UIColor.clear.cgColor
         sectorLayer.lineCap = .round
         sectorLayer.strokeColor = UIColor.globalTintColor.cgColor
         sectorLayer.lineWidth = 3
+        sectorLayer.strokeEnd = 1/3
         
         let spinningAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         spinningAnimation.fromValue = 0
@@ -103,14 +111,23 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell, URLSessionDown
         spinningAnimation.repeatCount = .infinity
         
         downloadProgressView.layer.addSublayer(sectorLayer)
-        downloadProgressView.layer.transform = CATransform3DMakeRotation(-CGFloat.pi / 2, 0, 0, 1)
+        downloadProgressView.layer.transform = CATransform3DMakeRotation(-CGFloat.pi/2, 0, 0, 1)
         downloadProgressView.layer.add(spinningAnimation, forKey: nil)
+    }
+    
+    override func dynamicButtonTappedAction()
+    {
+        setupLoadingAnimations()
         
-        YTAPI.getAudioDownloadLink(videoID: mediaID)
+        let components = self.detailsLabel.text!.components(separatedBy: "\n")
+        let durationString = self.durationLabel.text!
+        let songDetails : (name: String, artists: String) = (components[0], components.count > 1 ? components[1] : "")
+        let imagePngData = imageView.image?.pngData()
+        
+        YTAPI.downloadSongToServer(videoID: mediaID)
         { (data, response, dataError) in
             guard dataError == nil else { fatalError(dataError!.localizedDescription) }
             guard let data = data else { fatalError("No received data") }
-            print(response)
             
             do
             {
@@ -118,33 +135,44 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell, URLSessionDown
                 
                 if !APIResponse.error
                 {
-                    let downloadURL = APIResponse.file!
-                    let songURL = URL(string: downloadURL)!
-                    self.downloadProgressView.layer.removeAllAnimations()
-                    self.sectorLayer.strokeEnd = 0
+                    let songURL = URL(string: "https://59ef3762.ngrok.io/phptutorial/download/\(self.mediaID).mp3")!
                     
-                    URLSession.shared.downloadTask(with: songURL)
+                    DispatchQueue.main.async
+                    {
+                        self.downloadProgressView.layer.removeAllAnimations()
+                        self.sectorLayer.strokeEnd = 0
+                    }
+                    
+                    let downloadTask = URLSession.shared.downloadTask(with: songURL)
                     { (location, response, downloadError) in
                         guard let location = location, downloadError == nil else { return }
                         
-                        let newSong = Song(context: self.context)
-                        let components = self.detailsLabel.text!.components(separatedBy: "\n")
-                        let songDetails : (name: String, artists: String) = (components[0], components.count > 1 ? components[1] : "")
-                        
-                        newSong.setDetails(id: self.mediaID, artists: songDetails.artists, name: songDetails.name, date: Date(timeIntervalSinceNow: 0), duration: self.durationLabel.text!)
-                        
                         do
                         {
+                            let newSong = Song(context: self.context)
+                            newSong.setDetails(id: self.mediaID, artists: songDetails.artists, name: songDetails.name, date: Date(timeIntervalSinceNow: 0), duration: durationString)
                             try FileManager.default.moveItem(at: location, to: newSong.getAudioFilePath())
-                            print(newSong.getAudioFilePath())
+                            self.downloadSongImage(imageDestination: newSong.getImageFilePath(), imageData: imagePngData)
                             self.saveSongs()
+                            //Asynchronous task ends here.
                         }
                         catch
                         {
                             print(error.localizedDescription)
                         }
-                    }.resume()
+                    }
                     
+                    self.observation = downloadTask.progress.observe(\.fractionCompleted)
+                    { downloadProgress, _ in
+                        DispatchQueue.main.async
+                        {
+                            self.sectorLayer.strokeEnd = CGFloat(downloadProgress.fractionCompleted)
+                            if downloadProgress.fractionCompleted == 1
+                            { self.observation = nil }
+                        }
+                    }
+                    
+                    downloadTask.resume()
                 }
                 else
                 {
@@ -153,21 +181,18 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell, URLSessionDown
             }
             catch
             {
-                print(error)
+                print(error.localizedDescription)
             }
         }
-        
     }
     
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        print("finished downloading")
-    }
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
+    private func downloadSongImage(imageDestination: URL, imageData: Data?)
     {
-        let percentage = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite)
-        
-        DispatchQueue.main.async{ self.sectorLayer.strokeEnd = percentage }
+        do
+        {
+            try imageData?.write(to: imageDestination)
+        }
+        catch{return}
     }
     
     public func setDisplayInfo(with searchResult: SongSearchResult)
