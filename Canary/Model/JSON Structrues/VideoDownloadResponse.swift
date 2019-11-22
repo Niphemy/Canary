@@ -11,5 +11,4 @@ import Foundation
 struct VideoDownloadResponse: Decodable
 {
     let error : Bool
-    let file : String?
 }

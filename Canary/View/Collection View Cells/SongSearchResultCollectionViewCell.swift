@@ -14,8 +14,8 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
     private let loadingImageView = LoadingView()
     private let loadingDetailsLabel = LoadingView()
     private let loadingDynamicButton = LoadingView()
-    private let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let downloadProgressView = UIView()
+    private let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let sectorLayer = CAShapeLayer()
     private var mediaID = String()
     private var observation: NSKeyValueObservation?
@@ -146,9 +146,10 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
                     let downloadTask = URLSession.shared.downloadTask(with: songURL)
                     { (location, response, downloadError) in
                         guard let location = location, downloadError == nil else { return }
-                        
+                         
                         do
                         {
+                            
                             let newSong = Song(context: self.context)
                             newSong.setDetails(id: self.mediaID, artists: songDetails.artists, name: songDetails.name, date: Date(timeIntervalSinceNow: 0), duration: durationString)
                             try FileManager.default.moveItem(at: location, to: newSong.getAudioFilePath())

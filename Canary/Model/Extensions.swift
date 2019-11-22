@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension UIFont
 {
@@ -31,6 +32,7 @@ extension UIImage
     static let downloadIcon = UIImage(systemName: "square.and.arrow.down.fill")
     static let addPlaylistIcon = UIImage(systemName: "rectangle.stack.fill.badge.plus")
     static let ellipsisIcon = UIImage(systemName: "ellipsis")
+    static let deleteIcon = UIImage(systemName: "minus.square.fill")
 }
 
 extension UIView
@@ -61,6 +63,21 @@ extension UICollectionViewLayout
         flowLayout.scrollDirection = .vertical
         return flowLayout
     }()
+}
+
+extension NSManagedObjectContext
+{
+    static let canaryAppContext : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    static func saveCanaryAppContext()
+    {
+        do
+        {
+            try canaryAppContext.save()
+        } catch {
+            print("Error saving context:\n\(error)")
+        }
+    }
 }
 
 extension CGSize

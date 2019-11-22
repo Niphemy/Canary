@@ -14,7 +14,7 @@ class SongCollectionViewCell: UICollectionViewCell
     internal let detailsLabel : UILabel = UILabel()
     internal let durationLabel : UILabel = UILabel()
     internal let dynamicButton : UIButton = UIButton()
-    
+
     internal let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
     internal let artistAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratLight.withSize(16)]
     

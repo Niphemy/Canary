@@ -13,9 +13,9 @@ private let reuseIdentifier = "SongCell"
 
 class PlaylistCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
-    let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private let playlist : Playlist
-    var songs = [Song]()
+    public let playlist : Playlist
+    private var songs = [Song]()
+    private var playlistNavigationController : UINavigationController?
     
     init(playlist: Playlist)
     {
@@ -24,7 +24,8 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         navigationItem.title = playlist.getName()
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -37,6 +38,82 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         self.collectionView.allowsMultipleSelection = false
         
         loadSongs()
+    }
+    
+    func presentDeleteAlert(for song: Song)
+    {
+        var message = ""
+        var actionCode : () -> Void = {}
+        
+        if playlist.getName() == "All Downloads"
+        {
+            message = "Deleting songs from all downloads will delete it from your device"
+            
+            actionCode =
+            {
+                do
+                {
+                    try FileManager.default.removeItem(at: song.getAudioFilePath())
+                    try FileManager.default.removeItem(at: song.getImageFilePath())
+                    NSManagedObjectContext.canaryAppContext.delete(song)
+                    NSManagedObjectContext.saveCanaryAppContext()
+                }
+                    
+                catch{print(error.localizedDescription)}
+            }
+            
+        }
+        else
+        {
+            message = "This song will only be removed from \(playlist.getName())"
+            
+            actionCode =
+            {
+                do
+                {
+                    song.removeFromParentPlaylist(self.playlist)
+                    NSManagedObjectContext.saveCanaryAppContext()
+                }
+            }
+        }
+        
+        let deleteAlertController = UIAlertController(title: "Are you sure?", message: message, preferredStyle: .alert)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive)
+        { (_) in
+            actionCode()
+            self.songs.removeAll(where: {$0 == song})
+            self.collectionView.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        deleteAlertController.addAction(deleteAction)
+        deleteAlertController.addAction(cancelAction)
+        
+        present(deleteAlertController, animated: true, completion: nil)
+    }
+    
+    func presentAddablePlaylist(for song: Song)
+    {
+        let addPlaylistViewController = AddPlaylistTableViewController(song: song)
+        playlistNavigationController = UINavigationController(rootViewController: addPlaylistViewController)
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissPlaylistNavigationController))
+        
+        guard let playlistNavigationController = playlistNavigationController else {fatalError()}
+        
+        cancelButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium], for: .normal)
+        playlistNavigationController.modalPresentationStyle = .popover
+        playlistNavigationController.navigationBar.titleTextAttributes = navigationController?.navigationBar.titleTextAttributes
+        addPlaylistViewController.title = "Add to playlist"
+        addPlaylistViewController.navigationItem.leftBarButtonItem = cancelButton
+        
+        present(playlistNavigationController, animated: true)
+    }
+    
+    @objc func dismissPlaylistNavigationController(_ sender: Any)
+    {
+        playlistNavigationController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: UICollectionViewDataSource
@@ -58,6 +135,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         let songImage : UIImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor)
         
         cell.setDisplayData(image: songImage, name: song.name, artists: song.artists, duration: song.duration)
+        cell.setDetails(viewController: self, song: song)
         
         return cell
     }
@@ -89,14 +167,14 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
             
             do
             {
-                songs = try context.fetch(songFetchRequest)
+                songs = try NSManagedObjectContext.canaryAppContext.fetch(songFetchRequest)
             }
             catch
             {
                 print("Error loading context:\n\(error)")
             }
         }else{
-            print("other code")
+            songs = playlist.getChildSongs().allObjects as! [Song]
         }
     }
 }

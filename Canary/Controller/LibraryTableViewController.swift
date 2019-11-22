@@ -11,10 +11,10 @@ import CoreData
 
 private let reuseIdentifier = "PlaylistCell"
 
-class LibraryTableViewController: UITableViewController
+class LibraryTableViewController: UITableViewController, UITextFieldDelegate
 {
-    let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var userPlaylists = [Playlist](), generatedPlaylists = [Playlist]()
+    private var addPlaylistAction : UIAlertAction?
     var allPlaylists : [[Playlist]]
     {
         get
@@ -34,7 +34,7 @@ class LibraryTableViewController: UITableViewController
         navigationItem.backBarButtonItem = backButton
     }
     
-    @objc func addPlaylist()
+    @objc func addPlaylist(_ sender: Any)
     {
         let optionalPlaylistName = "My Playlist #\(self.userPlaylists.count + 1)"
         let addPlaylistAlertController : UIAlertController = UIAlertController(title: "Name your new playlist", message: nil, preferredStyle: .alert)
@@ -46,29 +46,52 @@ class LibraryTableViewController: UITableViewController
             addPlaylistTextField.font = UIFont.montserratMedium
             addPlaylistTextField.autocapitalizationType = .words
             addPlaylistTextField.adjustsFontSizeToFitWidth = true
+            addPlaylistTextField.delegate = self
             addPlaylistTextFieldCopy = addPlaylistTextField
         }
         
-        let addPlaylistAction = UIAlertAction(title: "Create", style: .default)
+        addPlaylistAction = UIAlertAction(title: "Create", style: .default)
         { (_) in
-            let newPlaylist = Playlist(context: self.context)
+            let newPlaylist = Playlist(context: NSManagedObjectContext.canaryAppContext)
             
             if addPlaylistTextFieldCopy.text?.count == 0
             {
                 newPlaylist.setName(to: optionalPlaylistName)
-            }else{
+            }
+            else
+            {
                 newPlaylist.setName(to: addPlaylistTextFieldCopy.text ?? optionalPlaylistName)
             }
             
             self.userPlaylists.append(newPlaylist)
             self.tableView.insertRows(at: [IndexPath(row: self.userPlaylists.count-1, section: 0)], with: .automatic)
-            self.savePlaylists()
+            NSManagedObjectContext.saveCanaryAppContext()
         }
         
         addPlaylistAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        addPlaylistAlertController.addAction(addPlaylistAction)
+        addPlaylistAlertController.addAction(addPlaylistAction!)
         
         present(addPlaylistAlertController,animated: true)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+        var playlistNames : [String] = [String]()
+        allPlaylists.forEach({$0.forEach({ playlistNames.append($0.getName()) })})
+    
+        for playlistName in playlistNames
+        {
+            if playlistName == updatedString
+            {
+                addPlaylistAction?.isEnabled = false
+                break
+            }else{
+                addPlaylistAction?.isEnabled = true
+            }
+        }
+        
+        return true
     }
     
     // MARK: - UITableViewDataSource
@@ -122,13 +145,14 @@ class LibraryTableViewController: UITableViewController
             let deletePlaylistAction : UIAlertAction = UIAlertAction(title: "Delete", style: .destructive)
             { (_) in
                 self.userPlaylists.remove(at: indexPath.row)
-                self.context.delete(playlistToDelete)
+                NSManagedObjectContext.canaryAppContext.delete(playlistToDelete)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
-                self.savePlaylists()
+                NSManagedObjectContext.saveCanaryAppContext()
+                tableView.reloadData()
             }
+            
             deletePlaylistAlertController.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
             deletePlaylistAlertController.addAction(deletePlaylistAction)
-            
             present(deletePlaylistAlertController, animated: true, completion: nil)
         }
     }
@@ -151,33 +175,22 @@ class LibraryTableViewController: UITableViewController
     
     // MARK: - Library Data Model CRUD Methods
     
-    func savePlaylists()
-    {
-        do
-        {
-            try context.save()
-        } catch {
-            print("Error saving context:\n\(error)")
-        }
-        tableView.reloadData()
-    }
-    
     func loadPlaylists()
     {
         let playlistFetchRequest : NSFetchRequest<Playlist> = Playlist.fetchRequest()
         do
         {
-            userPlaylists = try context.fetch(playlistFetchRequest)
+            userPlaylists = try NSManagedObjectContext.canaryAppContext.fetch(playlistFetchRequest)
         } catch {
             print("Error loading context:\n\(error)")
         }
         
         if userPlaylists.isEmpty
         {
-            let allDownloadsPlaylist = Playlist(context: context)
+            let allDownloadsPlaylist = Playlist(context: NSManagedObjectContext.canaryAppContext)
             allDownloadsPlaylist.setName(to: "All Downloads")
             userPlaylists.append(allDownloadsPlaylist)
-            savePlaylists()
+            NSManagedObjectContext.saveCanaryAppContext()
         }
     }
 }

@@ -47,7 +47,7 @@ class TabViewController: UITabBarController
             navigationController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium.withSize(12)], for: .normal)
         }
         
-        UIColor.globalTintColor = UIColor.orange
+        UIColor.globalTintColor = UIColor.systemBlue
         view.tintColor = UIColor.globalTintColor
         viewControllers = navigationControllers
     }
