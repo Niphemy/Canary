@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA0E6B902389CF4800C7A4C1 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0E6B8F2389CF4800C7A4C1 /* SongViewController.swift */; };
 		CA22E4B0233B6FFF00B2E75A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4AF233B6FFF00B2E75A /* Extensions.swift */; };
 		CA22E4B2233B71B300B2E75A /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */; };
 		CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA0E6B8F2389CF4800C7A4C1 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
 		CA22E4AF233B6FFF00B2E75A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
 		CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				CA37CDA3233D62AC00D96A18 /* PlaylistCollectionViewController.swift */,
 				CA79D5A223883A0A00A1C0DD /* AddPlaylistTableViewController.swift */,
+				CA0E6B8F2389CF4800C7A4C1 /* SongViewController.swift */,
 			);
 			path = "Sub View Controllers";
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				CA4715D623400463002F2FDC /* LoadingView.swift in Sources */,
 				CA37CDA4233D62AD00D96A18 /* PlaylistCollectionViewController.swift in Sources */,
 				CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */,
+				CA0E6B902389CF4800C7A4C1 /* SongViewController.swift in Sources */,
 				CAA654AE2355C697005F9E3D /* YTAPI.swift in Sources */,
 				CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */,
 				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,

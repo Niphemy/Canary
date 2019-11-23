@@ -20,6 +20,15 @@ class AddPlaylistTableViewController: UITableViewController
     {
         self.song = song
         super.init(style: .plain)
+        
+        navigationController?.modalPresentationStyle = .popover
+        title = "Add to playlist"
+        
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissPlaylistNavigationController))
+        cancelButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium], for: .normal)
+        
+        navigationItem.leftBarButtonItem = cancelButton
+        
         setPlaylistsToBeAdded()
     }
     
@@ -32,6 +41,16 @@ class AddPlaylistTableViewController: UITableViewController
     {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        navigationController?.navigationBar.titleTextAttributes = (presentingViewController?.children[2] as! UINavigationController).navigationBar.titleTextAttributes
+    }
+    
+    @objc func dismissPlaylistNavigationController(_ sender: Any)
+    {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - UITableViewDataSource
@@ -62,9 +81,10 @@ class AddPlaylistTableViewController: UITableViewController
         let addPlaylistCompletionAlert = UIAlertController(title: "\(song.name) was added to \(selectedPlaylist.getName())", message: nil, preferredStyle: .alert)
         
         dismiss(animated: true, completion: nil)
+        
         presentingViewController?.present(addPlaylistCompletionAlert, animated: true, completion:
         {
-            Timer.scheduledTimer(withTimeInterval: 0.4, repeats:false, block:
+            Timer.scheduledTimer(withTimeInterval: 0.3, repeats:false, block:
             {_ in
                 addPlaylistCompletionAlert.dismiss(animated: true, completion: nil)
             })
@@ -101,7 +121,6 @@ class AddPlaylistTableViewController: UITableViewController
             if parentPlaylist == addablePlaylist
             {
                 addablePlaylists.remove(at: i)
-                print(addablePlaylist.getName())
             }
         }
     }

@@ -15,7 +15,6 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
 {
     public let playlist : Playlist
     private var songs = [Song]()
-    private var playlistNavigationController : UINavigationController?
     
     init(playlist: Playlist)
     {
@@ -65,7 +64,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         }
         else
         {
-            message = "This song will only be removed from \(playlist.getName())"
+            message = "This song will be removed from \(playlist.getName())"
             
             actionCode =
             {
@@ -97,23 +96,9 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     func presentAddablePlaylist(for song: Song)
     {
         let addPlaylistViewController = AddPlaylistTableViewController(song: song)
-        playlistNavigationController = UINavigationController(rootViewController: addPlaylistViewController)
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissPlaylistNavigationController))
-        
-        guard let playlistNavigationController = playlistNavigationController else {fatalError()}
-        
-        cancelButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium], for: .normal)
-        playlistNavigationController.modalPresentationStyle = .popover
-        playlistNavigationController.navigationBar.titleTextAttributes = navigationController?.navigationBar.titleTextAttributes
-        addPlaylistViewController.title = "Add to playlist"
-        addPlaylistViewController.navigationItem.leftBarButtonItem = cancelButton
-        
+        let playlistNavigationController = UINavigationController(rootViewController: addPlaylistViewController)
+
         present(playlistNavigationController, animated: true)
-    }
-    
-    @objc func dismissPlaylistNavigationController(_ sender: Any)
-    {
-        playlistNavigationController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: UICollectionViewDataSource
