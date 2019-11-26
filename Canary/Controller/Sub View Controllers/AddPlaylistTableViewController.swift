@@ -21,7 +21,6 @@ class AddPlaylistTableViewController: UITableViewController
         self.song = song
         super.init(style: .plain)
         
-        navigationController?.modalPresentationStyle = .popover
         title = "Add to playlist"
         
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissPlaylistNavigationController))

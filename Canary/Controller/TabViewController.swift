@@ -10,12 +10,31 @@ import UIKit
 
 class TabViewController: UITabBarController
 {
+    var songViewController : SongViewController?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         UIColor.globalTintColor = UIColor.systemBlue
         view.tintColor = UIColor.globalTintColor
+        
+        songViewController = SongViewController(superTabViewController: self)
+        guard let songViewController = songViewController else {return}
+        
+        view.addSubview(songViewController.view)
+        addChild(songViewController)
+        
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        songViewController.view.addGestureRecognizer(gestureRecognizer)
+        
+        songViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        songViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        songViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        let songViewHeightAnchor = songViewController.view.heightAnchor.constraint(equalTo: tabBar.heightAnchor)
+        let songViewBottomAnchor = songViewController.view.bottomAnchor.constraint(equalTo: tabBar.topAnchor)
+        songViewController.setAnimatedConstraints(heightAnchor: songViewHeightAnchor, bottomAnchor: songViewBottomAnchor)
         
         let homeViewController = HomeCollectionViewController(collectionViewLayout: .verticalFlow)
         let searchViewController = SearchCollectionViewController(collectionViewLayout: .verticalFlow)
@@ -51,5 +70,8 @@ class TabViewController: UITabBarController
         viewControllers = navigationControllers
     }
     
-    
+    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer)
+    {
+        songViewController!.handlePanGesture(gestureRecognizer)
+    }
 }
