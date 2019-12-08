@@ -14,6 +14,7 @@ extension UIFont
     static let montserratLight = UIFont(name: "Montserrat-Light", size: 15)!
     static let montserratMedium = UIFont(name: "Montserrat-Medium", size: 15)!
     static let montserratBold = UIFont(name: "Montserrat-Bold", size: 15)!
+    static let montserratSemiBold = UIFont(name: "Montserrat-SemiBold", size: 15)!
 }
 
 extension UIColor
@@ -42,6 +43,8 @@ extension UIView
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.red.cgColor
     }
+    
+    static let tabBarHeight = UITabBarController().tabBar.frame.height
 }
 
 extension String

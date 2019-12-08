@@ -8,12 +8,40 @@
 
 import UIKit
 
+enum ViewMode
+{
+    case contracted
+    case expanded
+}
+
 class SongViewController: UIViewController
 {
     private let superTabViewController : TabViewController
     private var heightAnchor : NSLayoutConstraint?
     private var bottomAnchor : NSLayoutConstraint?
     private let swipeBuffer : CGFloat = 50
+    private let musicViewContainer : MusicView = MusicView()
+    private let musicMiniMenu : UIView = UIView()
+    
+    private var isActive : Bool = false
+    {
+        didSet
+        {
+            if isActive == true
+            {
+                self.heightAnchor?.constant = 0
+                UIView.animate(withDuration: 0.2)
+                {
+                    self.superTabViewController.view.layoutIfNeeded()
+                }
+            }
+            else
+            {
+                self.heightAnchor?.constant = -UIView.tabBarHeight
+            }
+        }
+    }
+    
     private var viewMode : ViewMode = .contracted
     {
         didSet
@@ -37,19 +65,13 @@ class SongViewController: UIViewController
         }
     }
     
-    var maxSafeViewHeight : CGFloat
+    private var maxSafeViewHeight : CGFloat
     {
         let statusBarHeight = view.window!.windowScene!.statusBarManager!.statusBarFrame.height
         let tabBarHeight = superTabViewController.tabBar.frame.height
         return (superTabViewController.view.frame.height - (tabBarHeight + statusBarHeight))
     }
-    
-    enum ViewMode
-    {
-        case contracted
-        case expanded
-    }
-    
+        
     required init?(coder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
@@ -59,13 +81,13 @@ class SongViewController: UIViewController
     {
         self.superTabViewController = superTabViewController
         super.init(nibName: nil, bundle: nil)
+        CanaryAudioPlayer.delegate = self
     }
     
     public func setAnimatedConstraints(heightAnchor: NSLayoutConstraint, bottomAnchor: NSLayoutConstraint)
     {
         self.heightAnchor = heightAnchor
         self.bottomAnchor = bottomAnchor
-        
         self.heightAnchor?.isActive = true
         self.bottomAnchor?.isActive = true
     }
@@ -75,9 +97,29 @@ class SongViewController: UIViewController
         super.viewDidLoad()
         view.backgroundColor = UIColor.dynamicCellColor
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.layer.cornerRadius = 15
-        view.backgroundColor = .globalTintColor
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .lightGray
+        view.layer.masksToBounds = true
     }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        view.addSubview(musicMiniMenu)
+        musicMiniMenu.translatesAutoresizingMaskIntoConstraints = false
+        musicMiniMenu.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        musicMiniMenu.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        musicMiniMenu.heightAnchor.constraint(equalToConstant: superTabViewController.tabBar.frame.height).isActive = true
+        musicMiniMenu.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        view.addSubview(musicViewContainer)
+        musicViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        musicViewContainer.topAnchor.constraint(equalTo: musicMiniMenu.bottomAnchor).isActive = true
+        musicViewContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        musicViewContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        musicViewContainer.heightAnchor.constraint(equalToConstant: maxSafeViewHeight).isActive = true
+    }
+    
+    // MARK: - Animation
     
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer)
     {
@@ -96,8 +138,17 @@ class SongViewController: UIViewController
                 newHeight = 0
             }
             
-            heightAnchor.constant = newHeight
+            if newHeight < superTabViewController.tabBar.frame.height
+            {
+                musicMiniMenu.alpha = 1 - (newHeight / superTabViewController.tabBar.frame.height)
+                musicViewContainer.alpha = 0
+            }
+            else if newHeight >= superTabViewController.tabBar.frame.height && newHeight <= 2*superTabViewController.tabBar.frame.height
+            {
+                musicViewContainer.alpha = (newHeight / superTabViewController.tabBar.frame.height) - 1
+            }
             
+            heightAnchor.constant = newHeight
             gestureRecognizer.setTranslation(CGPoint.zero, in: superTabViewController.view)
         }
         
@@ -122,10 +173,6 @@ class SongViewController: UIViewController
         }
     }
     
-    // MARK: - Navigation
-    
-    // MARK: - Animation
-    
     func fullyExpandView()
     {
         heightAnchor?.constant = maxSafeViewHeight
@@ -133,6 +180,8 @@ class SongViewController: UIViewController
         UIView.animate(withDuration: 0.2)
         {
             self.superTabViewController.view.layoutIfNeeded()
+            self.musicViewContainer.alpha = 1
+            self.musicMiniMenu.alpha = 0
         }
     }
     
@@ -143,6 +192,41 @@ class SongViewController: UIViewController
         UIView.animate(withDuration: 0.2)
         {
             self.superTabViewController.view.layoutIfNeeded()
+            self.musicMiniMenu.alpha = 1
+            self.musicViewContainer.alpha = 0
         }
     }
+}
+
+extension SongViewController: CanaryAudioPlayerDelegate
+{
+    func songWillBeginPlaying(song: Song, from playlist: Playlist)
+    {
+        let songImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor)
+        let playlistTitleLabelAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratSemiBold.withSize(16)]
+        let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : view.tintColor!, NSAttributedString.Key.font : UIFont.montserratSemiBold.withSize(19)]
+        let artistsAttribuets : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratLight.withSize(19)]
+        
+        let attributedName = NSAttributedString(string: song.name, attributes: nameAttributes)
+        let attributedArtists = NSAttributedString(string: "\n\(song.artists)", attributes: artistsAttribuets)
+        
+        let songDetails : NSMutableAttributedString =
+        {
+            let tempDetails = NSMutableAttributedString()
+            tempDetails.append(attributedName)
+            tempDetails.append(attributedArtists)
+            return tempDetails
+        }()
+        
+        if isActive == false
+        {
+            isActive = true
+        }
+        
+        musicViewContainer.playlistTitleLabel.attributedText = NSAttributedString(string: playlist.getName(), attributes: playlistTitleLabelAttributes)
+        musicViewContainer.musicImageView.image = songImage
+        musicViewContainer.musicTitleLabel.attributedText = songDetails
+    }
+    
+    
 }

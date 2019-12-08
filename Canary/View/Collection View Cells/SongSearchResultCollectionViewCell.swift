@@ -169,7 +169,9 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
                         {
                             self.sectorLayer.strokeEnd = CGFloat(downloadProgress.fractionCompleted)
                             if downloadProgress.fractionCompleted == 1
-                            { self.observation = nil }
+                            {
+                                self.observation = nil
+                            }
                         }
                     }
                     

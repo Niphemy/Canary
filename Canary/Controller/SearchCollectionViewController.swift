@@ -14,7 +14,7 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
 {
     let webSearchController : UISearchController = UISearchController()
     var searchResults : [SongSearchResult] = [SongSearchResult]()
-        
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()

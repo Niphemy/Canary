@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CA0E6B902389CF4800C7A4C1 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0E6B8F2389CF4800C7A4C1 /* SongViewController.swift */; };
+		CA213C29239AC652002290A6 /* CanaryAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA213C28239AC652002290A6 /* CanaryAudioPlayer.swift */; };
+		CA213C2B239C3618002290A6 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA213C2A239C35F4002290A6 /* Montserrat-SemiBold.ttf */; };
+		CA213C2D239CF6B5002290A6 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA213C2C239CF6B4002290A6 /* MusicView.swift */; };
+		CA213C2F239D0A04002290A6 /* MiniMenuMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA213C2E239D0A04002290A6 /* MiniMenuMusicView.swift */; };
 		CA22E4B0233B6FFF00B2E75A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4AF233B6FFF00B2E75A /* Extensions.swift */; };
 		CA22E4B2233B71B300B2E75A /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */; };
 		CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */; };
@@ -40,6 +44,10 @@
 
 /* Begin PBXFileReference section */
 		CA0E6B8F2389CF4800C7A4C1 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
+		CA213C28239AC652002290A6 /* CanaryAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanaryAudioPlayer.swift; sourceTree = "<group>"; };
+		CA213C2A239C35F4002290A6 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		CA213C2C239CF6B4002290A6 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
+		CA213C2E239D0A04002290A6 /* MiniMenuMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMenuMusicView.swift; sourceTree = "<group>"; };
 		CA22E4AF233B6FFF00B2E75A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
 		CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +94,7 @@
 		CA22E4B8233B7DE900B2E75A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				CA213C2A239C35F4002290A6 /* Montserrat-SemiBold.ttf */,
 				CA22E4BA233B7E0500B2E75A /* Montserrat-Bold.ttf */,
 				CA22E4BB233B7E0500B2E75A /* Montserrat-Light.ttf */,
 				CA22E4B9233B7E0400B2E75A /* Montserrat-Medium.ttf */,
@@ -173,6 +182,8 @@
 				CA22E4B8233B7DE900B2E75A /* Fonts */,
 				CA2D23782343C623002E7BFC /* Collection View Cells */,
 				CA4715D523400463002F2FDC /* LoadingView.swift */,
+				CA213C2C239CF6B4002290A6 /* MusicView.swift */,
+				CA213C2E239D0A04002290A6 /* MiniMenuMusicView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +197,7 @@
 				CA4715D1233E680D002F2FDC /* SongSearchResult.swift */,
 				CAA654AD2355C697005F9E3D /* YTAPI.swift */,
 				CAED4831235CA9C1000A8190 /* JSON Structrues */,
+				CA213C28239AC652002290A6 /* CanaryAudioPlayer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA213C2B239C3618002290A6 /* Montserrat-SemiBold.ttf in Resources */,
 				CA22E4BE233B7E0500B2E75A /* Montserrat-Light.ttf in Resources */,
 				CA22E4BD233B7E0500B2E75A /* Montserrat-Bold.ttf in Resources */,
 				CA8A8BD4233A955600FCA0E0 /* LaunchScreen.storyboard in Resources */,
@@ -285,15 +298,18 @@
 				CA0E6B902389CF4800C7A4C1 /* SongViewController.swift in Sources */,
 				CAA654AE2355C697005F9E3D /* YTAPI.swift in Sources */,
 				CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */,
+				CA213C29239AC652002290A6 /* CanaryAudioPlayer.swift in Sources */,
 				CA8A8BCF233A955400FCA0E0 /* Library.xcdatamodeld in Sources */,
 				CA37CD9D233D126E00D96A18 /* Playlist+CoreDataProperties.swift in Sources */,
 				CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */,
 				CA37CD9F233D126E00D96A18 /* Song+CoreDataProperties.swift in Sources */,
 				CAA654B12355D4C2005F9E3D /* SearchListResponse.swift in Sources */,
+				CA213C2F239D0A04002290A6 /* MiniMenuMusicView.swift in Sources */,
 				CAED4830235C59A8000A8190 /* VideoListResponse.swift in Sources */,
 				CA824F76236D9A1B008CFE3B /* VideoDownloadResponse.swift in Sources */,
 				CA37CD9C233D126E00D96A18 /* Playlist+CoreDataClass.swift in Sources */,
 				CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */,
+				CA213C2D239CF6B5002290A6 /* MusicView.swift in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,
 				CA37CD9E233D126E00D96A18 /* Song+CoreDataClass.swift in Sources */,
 				CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */,

@@ -120,7 +120,17 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         let songImage : UIImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor)
         
         cell.setDisplayData(image: songImage, name: song.name, artists: song.artists, duration: song.duration)
-        cell.setDetails(viewController: self, song: song)
+        cell.song = song
+        cell.delegate = self
+        
+        if CanaryAudioPlayer.currentlyPlaying == (song, playlist)
+        {
+            cell.highlightCell()
+        }
+        else
+        {
+            cell.unHighlightCell()
+        }
         
         return cell
     }
@@ -161,5 +171,40 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         }else{
             songs = playlist.getChildSongs().allObjects as! [Song]
         }
+    }
+}
+
+extension PlaylistCollectionViewController: SavedSongCollectionViewDelegate
+{
+    func songDetailsTapped(song: Song)
+    {
+        let actionSheet = UIAlertController(title: "\(song.name)\n\(song.artists)", message: nil, preferredStyle: .actionSheet)
+        
+        let addToPlaylistAction = UIAlertAction(title: "Add to playlist", style: .default)
+        { (_) in
+            self.presentAddablePlaylist(for: song)
+        }
+        
+        let removeSongAction = UIAlertAction(title: "Remove song", style: .destructive)
+        { (_) in
+            self.presentDeleteAlert(for: song)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        addToPlaylistAction.setValue(UIImage.addPlaylistIcon?.withConfiguration(UIImage.SymbolConfiguration(scale: .large)), forKey: "image")
+        removeSongAction.setValue(UIImage.deleteIcon?.withConfiguration(UIImage.SymbolConfiguration(scale: .large)).withConfiguration(UIImage.SymbolConfiguration(pointSize: 30)), forKey: "image")
+        
+        actionSheet.addAction(addToPlaylistAction)
+        actionSheet.addAction(removeSongAction)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func songCellTapped(song: Song)
+    {
+        CanaryAudioPlayer.play(song, from: playlist)
+        collectionView.reloadData()
     }
 }

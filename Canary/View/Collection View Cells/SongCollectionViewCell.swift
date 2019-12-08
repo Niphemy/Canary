@@ -39,7 +39,7 @@ class SongCollectionViewCell: UICollectionViewCell
         setupDynamicButton()
         setupDurationLabel()
     }
-    
+        
     public func setDisplayData(image: UIImage, name: String, artists: String, duration: String)
     {
         imageView.image = image
@@ -96,8 +96,6 @@ class SongCollectionViewCell: UICollectionViewCell
         dynamicButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         dynamicButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7).isActive = true
         dynamicButton.widthAnchor.constraint(equalTo: dynamicButton.heightAnchor).isActive = true
-        
-        dynamicButton.contentMode = .scaleAspectFit
         dynamicButton.showsTouchWhenHighlighted = true
         dynamicButton.addTarget(self, action: #selector(dynamicButtonTappedAction), for: .touchUpInside)
     }

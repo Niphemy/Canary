@@ -10,7 +10,7 @@ import UIKit
 
 class TabViewController: UITabBarController
 {
-    var songViewController : SongViewController?
+    private var songViewController : SongViewController?
     
     override func viewDidLoad()
     {
@@ -31,9 +31,10 @@ class TabViewController: UITabBarController
         songViewController.view.translatesAutoresizingMaskIntoConstraints = false
         songViewController.view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         songViewController.view.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+
         let songViewHeightAnchor = songViewController.view.heightAnchor.constraint(equalTo: tabBar.heightAnchor)
         let songViewBottomAnchor = songViewController.view.bottomAnchor.constraint(equalTo: tabBar.topAnchor)
+        songViewHeightAnchor.constant = -UIView.tabBarHeight
         songViewController.setAnimatedConstraints(heightAnchor: songViewHeightAnchor, bottomAnchor: songViewBottomAnchor)
         
         let homeViewController = HomeCollectionViewController(collectionViewLayout: .verticalFlow)
