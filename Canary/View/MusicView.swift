@@ -54,7 +54,6 @@ class MusicView : UIView
         musicImageView.layer.cornerRadius = musicImageView.frame.width / 5
         musicImageView.layer.masksToBounds = true
         musicImageView.contentMode = .scaleAspectFill
-        musicImageView.backgroundColor = tintColor
         
         addSubview(audioVisualiser)
         audioVisualiser.translatesAutoresizingMaskIntoConstraints = false
@@ -68,8 +67,31 @@ class MusicView : UIView
         musicTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         musicTitleLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         musicTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        musicTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIView.tabBarHeight).isActive = true
+        musicTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIView.genericTabBar.frame.height).isActive = true
         musicTitleLabel.numberOfLines = 2
         musicTitleLabel.textAlignment = .center
+    }
+    
+    public func setDisplayData(from song: Song, playlist: Playlist)
+    {
+        let songImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage.defaultSongIcon
+        let playlistTitleLabelAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratSemiBold.withSize(16)]
+        let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.globalTintColor, NSAttributedString.Key.font : UIFont.montserratSemiBold.withSize(19)]
+        let artistsAttribuets : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratLight.withSize(19)]
+        
+        let attributedName = NSAttributedString(string: song.name, attributes: nameAttributes)
+        let attributedArtists = NSAttributedString(string: "\n\(song.artists)", attributes: artistsAttribuets)
+        
+        let songDetails : NSMutableAttributedString =
+        {
+            let tempDetails = NSMutableAttributedString()
+            tempDetails.append(attributedName)
+            tempDetails.append(attributedArtists)
+            return tempDetails
+        }()
+        
+        playlistTitleLabel.attributedText = NSAttributedString(string: playlist.getName(), attributes: playlistTitleLabelAttributes)
+        musicImageView.image = songImage
+        musicTitleLabel.attributedText = songDetails
     }
 }

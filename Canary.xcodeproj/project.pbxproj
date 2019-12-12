@@ -28,6 +28,7 @@
 		CA4715D2233E680D002F2FDC /* SongSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D1233E680D002F2FDC /* SongSearchResult.swift */; };
 		CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */; };
 		CA4715D623400463002F2FDC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D523400463002F2FDC /* LoadingView.swift */; };
+		CA62848423A2C86A00AA651A /* PlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA62848323A2C86A00AA651A /* PlaylistItem.swift */; };
 		CA79D5A323883A0A00A1C0DD /* AddPlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA79D5A223883A0A00A1C0DD /* AddPlaylistTableViewController.swift */; };
 		CA824F76236D9A1B008CFE3B /* VideoDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA824F75236D9A1B008CFE3B /* VideoDownloadResponse.swift */; };
 		CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */; };
@@ -64,6 +65,7 @@
 		CA4715D1233E680D002F2FDC /* SongSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResult.swift; sourceTree = "<group>"; };
 		CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA4715D523400463002F2FDC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CA62848323A2C86A00AA651A /* PlaylistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistItem.swift; sourceTree = "<group>"; };
 		CA79D5A223883A0A00A1C0DD /* AddPlaylistTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaylistTableViewController.swift; sourceTree = "<group>"; };
 		CA824F75236D9A1B008CFE3B /* VideoDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadResponse.swift; sourceTree = "<group>"; };
 		CA8A8BC1233A955400FCA0E0 /* Canary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +200,7 @@
 				CAA654AD2355C697005F9E3D /* YTAPI.swift */,
 				CAED4831235CA9C1000A8190 /* JSON Structrues */,
 				CA213C28239AC652002290A6 /* CanaryAudioPlayer.swift */,
+				CA62848323A2C86A00AA651A /* PlaylistItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				CAED4830235C59A8000A8190 /* VideoListResponse.swift in Sources */,
 				CA824F76236D9A1B008CFE3B /* VideoDownloadResponse.swift in Sources */,
 				CA37CD9C233D126E00D96A18 /* Playlist+CoreDataClass.swift in Sources */,
+				CA62848423A2C86A00AA651A /* PlaylistItem.swift in Sources */,
 				CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */,
 				CA213C2D239CF6B5002290A6 /* MusicView.swift in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,

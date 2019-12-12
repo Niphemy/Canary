@@ -21,6 +21,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         self.playlist = playlist
         super.init(collectionViewLayout: .verticalFlow)
         navigationItem.title = playlist.getName()
+        NotificationCenter.default.addObserver(self, selector: #selector(songDidChange), name: .SongChanged, object: nil)
     }
     
     required init?(coder: NSCoder)
@@ -37,6 +38,11 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         self.collectionView.allowsMultipleSelection = false
         
         loadSongs()
+    }
+    
+    @objc func songDidChange()
+    {
+        collectionView.reloadData()
     }
     
     func presentDeleteAlert(for song: Song)
@@ -117,13 +123,13 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SavedSongCollectionViewCell
         let song = songs[indexPath.item]
-        let songImage : UIImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor)
+        let songImage : UIImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage.defaultSongIcon
         
         cell.setDisplayData(image: songImage, name: song.name, artists: song.artists, duration: song.duration)
         cell.song = song
         cell.delegate = self
         
-        if CanaryAudioPlayer.currentlyPlaying == (song, playlist)
+        if UIApplication.sharedAudioPlayer.currentlyPlaying == (song, playlist)
         {
             cell.highlightCell()
         }
@@ -204,7 +210,9 @@ extension PlaylistCollectionViewController: SavedSongCollectionViewDelegate
     
     func songCellTapped(song: Song)
     {
-        CanaryAudioPlayer.play(song, from: playlist)
+        UIApplication.sharedAudioPlayer.play(song, from: playlist, songs: songs)
         collectionView.reloadData()
     }
 }
+
+

@@ -21,7 +21,7 @@ class SongViewController: UIViewController
     private var bottomAnchor : NSLayoutConstraint?
     private let swipeBuffer : CGFloat = 50
     private let musicViewContainer : MusicView = MusicView()
-    private let musicMiniMenu : UIView = UIView()
+    private let musicMiniMenu : MiniMenuMusicView = MiniMenuMusicView()
     
     private var isActive : Bool = false
     {
@@ -37,7 +37,7 @@ class SongViewController: UIViewController
             }
             else
             {
-                self.heightAnchor?.constant = -UIView.tabBarHeight
+                self.heightAnchor?.constant = -UIView.genericTabBar.frame.height
             }
         }
     }
@@ -81,7 +81,7 @@ class SongViewController: UIViewController
     {
         self.superTabViewController = superTabViewController
         super.init(nibName: nil, bundle: nil)
-        CanaryAudioPlayer.delegate = self
+        UIApplication.sharedAudioPlayer.delegate = self
     }
     
     public func setAnimatedConstraints(heightAnchor: NSLayoutConstraint, bottomAnchor: NSLayoutConstraint)
@@ -95,11 +95,18 @@ class SongViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.dynamicCellColor
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.layer.cornerRadius = 10
-        view.backgroundColor = .lightGray
         view.layer.masksToBounds = true
+        
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        view.addSubview(blurredEffectView)
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurredEffectView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        blurredEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        blurredEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        blurredEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -182,6 +189,7 @@ class SongViewController: UIViewController
             self.superTabViewController.view.layoutIfNeeded()
             self.musicViewContainer.alpha = 1
             self.musicMiniMenu.alpha = 0
+            self.view.layer.cornerRadius = 15
         }
     }
     
@@ -194,6 +202,7 @@ class SongViewController: UIViewController
             self.superTabViewController.view.layoutIfNeeded()
             self.musicMiniMenu.alpha = 1
             self.musicViewContainer.alpha = 0
+            self.view.layer.cornerRadius = 0
         }
     }
 }
@@ -202,31 +211,12 @@ extension SongViewController: CanaryAudioPlayerDelegate
 {
     func songWillBeginPlaying(song: Song, from playlist: Playlist)
     {
-        let songImage = UIImage(contentsOfFile: song.getImageFilePath().path) ?? UIImage(named: "DefaultSongIcon")!.withTintColor(view.tintColor)
-        let playlistTitleLabelAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratSemiBold.withSize(16)]
-        let nameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : view.tintColor!, NSAttributedString.Key.font : UIFont.montserratSemiBold.withSize(19)]
-        let artistsAttribuets : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratLight.withSize(19)]
-        
-        let attributedName = NSAttributedString(string: song.name, attributes: nameAttributes)
-        let attributedArtists = NSAttributedString(string: "\n\(song.artists)", attributes: artistsAttribuets)
-        
-        let songDetails : NSMutableAttributedString =
-        {
-            let tempDetails = NSMutableAttributedString()
-            tempDetails.append(attributedName)
-            tempDetails.append(attributedArtists)
-            return tempDetails
-        }()
+        musicViewContainer.setDisplayData(from: song, playlist: playlist)
+        musicMiniMenu.setDisplayData(song: song)
         
         if isActive == false
         {
             isActive = true
         }
-        
-        musicViewContainer.playlistTitleLabel.attributedText = NSAttributedString(string: playlist.getName(), attributes: playlistTitleLabelAttributes)
-        musicViewContainer.musicImageView.image = songImage
-        musicViewContainer.musicTitleLabel.attributedText = songDetails
     }
-    
-    
 }

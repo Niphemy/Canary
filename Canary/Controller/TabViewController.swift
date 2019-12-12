@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class TabViewController: UITabBarController
 {
@@ -34,7 +35,7 @@ class TabViewController: UITabBarController
 
         let songViewHeightAnchor = songViewController.view.heightAnchor.constraint(equalTo: tabBar.heightAnchor)
         let songViewBottomAnchor = songViewController.view.bottomAnchor.constraint(equalTo: tabBar.topAnchor)
-        songViewHeightAnchor.constant = -UIView.tabBarHeight
+        songViewHeightAnchor.constant = -tabBar.frame.height
         songViewController.setAnimatedConstraints(heightAnchor: songViewHeightAnchor, bottomAnchor: songViewBottomAnchor)
         
         let homeViewController = HomeCollectionViewController(collectionViewLayout: .verticalFlow)

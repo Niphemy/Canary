@@ -93,7 +93,7 @@ extension SearchCollectionViewController
         do
         {
             let APIResponse = try JSONDecoder().decode(SearchListResponse.self, from: data)
-                    
+            
             for item in APIResponse.items
             {
                 let tempResult : SongSearchResult = SongSearchResult(mediaID: item.id.videoId)
@@ -105,7 +105,7 @@ extension SearchCollectionViewController
                 { (imageData, imageResponse, imageError) in
                     guard imageError == nil else { print(imageError!.localizedDescription); return }
                     guard let imageData = imageData else { return }
-                    tempResult.setImage(to: UIImage(data: imageData) ?? UIImage(named: "DefaultSongIcon")!)
+                    tempResult.setImage(to: UIImage(data: imageData) ?? UIImage.defaultSongIcon)
                     DispatchQueue.main.async { self.collectionView.reloadData() }
                 }
                 

@@ -9,6 +9,11 @@
 import UIKit
 import CoreData
 
+extension UIApplication
+{
+    static let sharedAudioPlayer : CanaryAudioPlayer = CanaryAudioPlayer()
+}
+
 extension UIFont
 {
     static let montserratLight = UIFont(name: "Montserrat-Light", size: 15)!
@@ -26,6 +31,7 @@ extension UIColor
 
 extension UIImage
 {
+    static let defaultSongIcon = UIImage(named: "DefaultSongIcon")!.withTintColor(UIColor.globalTintColor)
     static let homeIcon = UIImage(systemName: "music.house.fill")
     static let searchIcon = UIImage(systemName: "magnifyingglass")
     static let libraryIcon = UIImage(systemName: "rectangle.stack.fill")
@@ -44,7 +50,7 @@ extension UIView
         self.layer.borderColor = UIColor.red.cgColor
     }
     
-    static let tabBarHeight = UITabBarController().tabBar.frame.height
+    static let genericTabBar = UITabBarController().tabBar
 }
 
 extension String
@@ -86,4 +92,12 @@ extension NSManagedObjectContext
 extension CGSize
 {
     static let songCellSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 30, height: 75)
+}
+
+extension Notification.Name
+{
+    static var SongChanged: Notification.Name
+    {
+        return .init(rawValue: "AudioPlayer.SongChanged")
+    }
 }
