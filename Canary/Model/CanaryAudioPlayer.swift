@@ -14,10 +14,10 @@ protocol CanaryAudioPlayerDelegate : class
     func songWillBeginPlaying(song: Song, from playlist: Playlist)
 }
 
-class CanaryAudioPlayer
+class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
 {
-    private let player = AVPlayer()
-    private let notificationCenter: NotificationCenter
+    private let notificationCenter: NotificationCenter = NotificationCenter.default
+    private var player = AVAudioPlayer()
     var currentlyPlaying : (song : Song?, playlist : Playlist?)
     var playlistItems : [PlaylistItem] = []
     var futureItems : [PlaylistItem] = []
@@ -25,18 +25,16 @@ class CanaryAudioPlayer
     
     weak var delegate : CanaryAudioPlayerDelegate?
     
-    init()
+    override init()
     {
-        notificationCenter = NotificationCenter.default
-        do{try AVAudioSession.sharedInstance().setCategory(.playback)}catch{fatalError("Could set audioSession")}
+        super.init()
         
-        player.actionAtItemEnd = .pause
+        do{try AVAudioSession.sharedInstance().setCategory(.playback)}catch{fatalError("Could set audioSession")}
         
         MPRemoteCommandCenter.shared().changePlaybackPositionCommand.addTarget
         { (event) -> MPRemoteCommandHandlerStatus in
-            let event = event as? MPChangePlaybackPositionCommandEvent
-            let seekTime = CMTime(seconds: event!.positionTime, preferredTimescale: 10)
-            self.player.seek(to: seekTime)
+            guard let event = event as? MPChangePlaybackPositionCommandEvent else {fatalError(" could not get event")}
+            self.player.currentTime = event.positionTime
             return .success
         }
         
@@ -51,22 +49,33 @@ class CanaryAudioPlayer
             self.pause()
             return .success
         }
+        
+        MPRemoteCommandCenter.shared().nextTrackCommand.addTarget
+        { (event) -> MPRemoteCommandHandlerStatus in
+            self.nextTrack()
+            return .success
+        }
+        
+        MPRemoteCommandCenter.shared().previousTrackCommand.addTarget
+        { (event) -> MPRemoteCommandHandlerStatus in
+            self.previousTrack()
+            return .success
+        }
     }
     
     func play(_ selectedSong: Song, from playlist: Playlist, songs: [Song])
     {
-        currentIndex = 0
+        let indexOfSelectedSong = songs.firstIndex(of: selectedSong)!
         
         if currentlyPlaying.playlist == playlist && songIsInFutureQueue(for: selectedSong)
         {
-            
+            currentIndex = indexOfSelectedSong
+            futureItems = Array(playlistItems.dropFirst(currentIndex + 1))
         }
         else
         {
-            var newSongQueue = songs
-            guard let indexOfSelectedSong = songs.firstIndex(of: selectedSong) else { return }
-            newSongQueue.swapAt(0, indexOfSelectedSong)
-            playlistItems = newSongQueue.map({ PlaylistItem(song: $0) })
+            playlistItems = songs.map({ PlaylistItem(song: $0) })
+            playlistItems.swapAt(0, indexOfSelectedSong)
             futureItems = Array(playlistItems.dropFirst(1))
         }
         
@@ -81,11 +90,19 @@ class CanaryAudioPlayer
         let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
         var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(songEnded), name: .AVPlayerItemDidPlayToEndTime, object: playlistItems[currentIndex].item)
-        
         currentlyPlaying.song = playlistItems[currentIndex].song
         delegate?.songWillBeginPlaying(song: currentlyPlaying.song!, from: currentlyPlaying.playlist!)
-        player.replaceCurrentItem(with: playlistItems[currentIndex].item)
+        
+        do
+        {
+            player = try AVAudioPlayer(contentsOf: playlistItems[currentIndex].song.getAudioFilePath())
+            player.delegate = self
+        }
+        catch
+        {
+            fatalError("could not play song")
+        }
+        
         player.play()
 
         nowPlayingInfo[MPMediaItemPropertyTitle] = playlistItems[currentIndex].song.name
@@ -100,12 +117,12 @@ class CanaryAudioPlayer
         notificationCenter.post(name: .SongChanged, object: nil)
     }
     
-    @objc private func songEnded()
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool)
     {
         if currentIndex < playlistItems.endIndex - 1
         {
             currentIndex += 1
-            futureItems.remove(at: 0)
+            futureItems.removeFirst(1)
             handleAutomaticPlayback()
         }
     }
@@ -125,11 +142,6 @@ class CanaryAudioPlayer
         }
     }
     
-    // must change currently playing
-    // must call delegate
-    // must finally play
-    // update nowplaying info
-    
     public func pause()
     {
         player.pause()
@@ -142,14 +154,30 @@ class CanaryAudioPlayer
         handlePlaybackChange()
     }
     
+    public func nextTrack()
+    {
+        audioPlayerDidFinishPlaying(player, successfully: true)
+    }
+    
+    public func previousTrack()
+    {
+        if player.currentTime < 3 && currentIndex > 0
+        {
+            futureItems.insert(playlistItems[currentIndex], at: 0)
+            currentIndex -= 1
+        }
+        handleAutomaticPlayback()
+    }
+    
     private func handlePlaybackChange()
     {
         var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [String: Any]()
         
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentItem?.currentTime().seconds
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player.rate
         
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        notificationCenter.post(name: .PlaybackChanged, object: nil)
     }
 }
 

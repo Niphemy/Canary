@@ -11,13 +11,11 @@ import AVFoundation
 struct PlaylistItem
 {
     let asset : AVAsset
-    let item : AVPlayerItem
     let song : Song
     
     init(song : Song)
     {
         self.song = song
         self.asset = AVAsset(url: song.getAudioFilePath())
-        self.item = AVPlayerItem(asset: self.asset)
     }
 }

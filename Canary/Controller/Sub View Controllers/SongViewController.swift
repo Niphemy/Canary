@@ -20,7 +20,7 @@ class SongViewController: UIViewController
     private var heightAnchor : NSLayoutConstraint?
     private var bottomAnchor : NSLayoutConstraint?
     private let swipeBuffer : CGFloat = 50
-    private let musicViewContainer : MusicView = MusicView()
+    private let musicViewContainer : MenuMusicView = MenuMusicView()
     private let musicMiniMenu : MiniMenuMusicView = MiniMenuMusicView()
     
     private var isActive : Bool = false

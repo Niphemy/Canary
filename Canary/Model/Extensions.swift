@@ -100,4 +100,9 @@ extension Notification.Name
     {
         return .init(rawValue: "AudioPlayer.SongChanged")
     }
+    
+    static var PlaybackChanged: Notification.Name
+    {
+        return .init(rawValue: "AudioPlayer.PlaybackChanged")
+    }
 }

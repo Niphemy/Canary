@@ -1,5 +1,5 @@
 //
-//  MusicView.swift
+//  MenuMusicView.swift
 //  Canary
 //
 //  Created by Nifemi Fatoye on 08/12/2019.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MusicView : UIView
+class MenuMusicView : UIView
 {
     let musicImageView : UIImageView = UIImageView() // done
     let audioVisualiser : UIView = UIView () // done
