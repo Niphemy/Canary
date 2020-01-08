@@ -185,6 +185,7 @@ extension PlaylistCollectionViewController: SavedSongCollectionViewDelegate
     func songDetailsTapped(song: Song)
     {
         let actionSheet = UIAlertController(title: "\(song.name)\n\(song.artists)", message: nil, preferredStyle: .actionSheet)
+        actionSheet.view.tintColor = .globalTintColor
         
         let addToPlaylistAction = UIAlertAction(title: "Add to playlist", style: .default)
         { (_) in

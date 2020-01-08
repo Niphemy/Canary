@@ -18,11 +18,11 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
     private let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let sectorLayer = CAShapeLayer()
     private var mediaID = String()
-    private var observation: NSKeyValueObservation?
+    private var downloadProgessObserver: NSKeyValueObservation?
 
     deinit
     {
-        observation?.invalidate()
+        downloadProgessObserver?.invalidate()
     }
     
     required init?(coder: NSCoder)
@@ -163,14 +163,14 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
                         }
                     }
                     
-                    self.observation = downloadTask.progress.observe(\.fractionCompleted)
+                    self.downloadProgessObserver = downloadTask.progress.observe(\.fractionCompleted)
                     { downloadProgress, _ in
                         DispatchQueue.main.async
                         {
                             self.sectorLayer.strokeEnd = CGFloat(downloadProgress.fractionCompleted)
                             if downloadProgress.fractionCompleted == 1
                             {
-                                self.observation = nil
+                                self.downloadProgessObserver = nil
                             }
                         }
                     }

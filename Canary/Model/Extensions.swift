@@ -40,6 +40,10 @@ extension UIImage
     static let addPlaylistIcon = UIImage(systemName: "rectangle.stack.fill.badge.plus")
     static let ellipsisIcon = UIImage(systemName: "ellipsis")
     static let deleteIcon = UIImage(systemName: "minus.square.fill")
+    static let previousTrackIcon = UIImage(systemName: "backward.end.fill")
+    static let nextTrackIcon = UIImage(systemName: "forward.end.fill")
+    static let playIcon = UIImage(systemName: "play.fill")
+    static let pauseIcon = UIImage(systemName: "pause.fill")
 }
 
 extension UIView

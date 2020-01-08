@@ -17,8 +17,8 @@ protocol SavedSongCollectionViewDelegate : class
 class SavedSongCollectionViewCell: SongCollectionViewCell
 {
     private var details : (name : String, artists: String) = ("","")
-    weak var delegate : SavedSongCollectionViewDelegate?
-    var song : Song?
+    public weak var delegate : SavedSongCollectionViewDelegate?
+    public var song : Song?
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -73,7 +73,7 @@ class SavedSongCollectionViewCell: SongCollectionViewCell
     
     func highlightCell()
     {
-        contentView.layer.borderColor = tintColor.cgColor
+        contentView.layer.borderColor = UIColor.globalTintColor.cgColor
         
         let highlightedNameAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : tintColor!, NSAttributedString.Key.font : UIFont.montserratMedium.withSize(16)]
         let highlightedArtistsAttributes : [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor, NSAttributedString.Key.font : UIFont.montserratLight.withSize(16)]

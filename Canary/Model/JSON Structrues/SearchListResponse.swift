@@ -33,6 +33,7 @@ struct SearchListResponse: Decodable
                 let high : highThumbnailURL
                 let medium : mediumThumbnailURL
                 let `default` : defaultThumbnailURL
+                //default is a keyword in swift so it must be quoted in backticks to ignore the swift syntax in this case
                 
                 struct highThumbnailURL: Decodable
                 {

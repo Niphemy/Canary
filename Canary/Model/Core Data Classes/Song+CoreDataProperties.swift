@@ -23,6 +23,8 @@ extension Song {
     @NSManaged var duration: String
     @NSManaged var parentPlaylist: NSSet?
     
+    // Getters are provided for the audiofile because the path to the documents directory is not the same on startup
+    
     private var audioFilePath: URL?
     {
         get
@@ -64,6 +66,7 @@ extension Song {
 }
 
 // MARK: Generated accessors for parentPlaylist
+
 extension Song {
 
     @objc(addParentPlaylistObject:)

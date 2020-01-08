@@ -42,6 +42,7 @@
 		CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */; };
 		CAEB60B123A3EC7700EA7BDB /* MusicProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEB60B023A3EC7700EA7BDB /* MusicProgressTracker.swift */; };
 		CAED4830235C59A8000A8190 /* VideoListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED482F235C59A8000A8190 /* VideoListResponse.swift */; };
+		CAFF21E923A6E4D9008D8DA8 /* PlaybackStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFF21E823A6E4D9008D8DA8 /* PlaybackStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		CAEB60B023A3EC7700EA7BDB /* MusicProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicProgressTracker.swift; sourceTree = "<group>"; };
 		CAED482F235C59A8000A8190 /* VideoListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListResponse.swift; sourceTree = "<group>"; };
+		CAFF21E823A6E4D9008D8DA8 /* PlaybackStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				CA213C2C239CF6B4002290A6 /* MenuMusicView.swift */,
 				CA213C2E239D0A04002290A6 /* MiniMenuMusicView.swift */,
 				CAEB60B023A3EC7700EA7BDB /* MusicProgressTracker.swift */,
+				CAFF21E823A6E4D9008D8DA8 /* PlaybackStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				CA37CDA4233D62AD00D96A18 /* PlaylistCollectionViewController.swift in Sources */,
 				CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */,
 				CA0E6B902389CF4800C7A4C1 /* SongViewController.swift in Sources */,
+				CAFF21E923A6E4D9008D8DA8 /* PlaybackStackView.swift in Sources */,
 				CAA654AE2355C697005F9E3D /* YTAPI.swift in Sources */,
 				CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */,
 				CA213C29239AC652002290A6 /* CanaryAudioPlayer.swift in Sources */,

@@ -18,10 +18,18 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
 {
     private let notificationCenter: NotificationCenter = NotificationCenter.default
     private var player = AVAudioPlayer()
+    private var playlistItems : [PlaylistItem] = []
+    private var futureItems : [PlaylistItem] = []
+    private var currentIndex = 0
     var currentlyPlaying : (song : Song?, playlist : Playlist?)
-    var playlistItems : [PlaylistItem] = []
-    var futureItems : [PlaylistItem] = []
-    var currentIndex = 0
+    
+    var isPlaying : Bool
+    {
+        get
+        {
+            return player.isPlaying
+        }
+    }
     
     weak var delegate : CanaryAudioPlayerDelegate?
     
@@ -39,26 +47,32 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
         }
         
         MPRemoteCommandCenter.shared().playCommand.addTarget
-        { (event) -> MPRemoteCommandHandlerStatus in
+        { (_) -> MPRemoteCommandHandlerStatus in
             self.resume()
             return .success
         }
         
         MPRemoteCommandCenter.shared().pauseCommand.addTarget
-        { (event) -> MPRemoteCommandHandlerStatus in
+        { (_) -> MPRemoteCommandHandlerStatus in
             self.pause()
             return .success
         }
         
         MPRemoteCommandCenter.shared().nextTrackCommand.addTarget
-        { (event) -> MPRemoteCommandHandlerStatus in
+        { (_) -> MPRemoteCommandHandlerStatus in
             self.nextTrack()
             return .success
         }
         
         MPRemoteCommandCenter.shared().previousTrackCommand.addTarget
-        { (event) -> MPRemoteCommandHandlerStatus in
+        { (_) -> MPRemoteCommandHandlerStatus in
             self.previousTrack()
+            return .success
+        }
+        
+        MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget
+        { (_) -> MPRemoteCommandHandlerStatus in
+            self.togglePlayPause()
             return .success
         }
     }
@@ -100,7 +114,7 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
         }
         catch
         {
-            fatalError("could not play song")
+            fatalError("could not create player")
         }
         
         player.play()
@@ -125,6 +139,7 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
             futureItems.removeFirst(1)
             handleAutomaticPlayback()
         }
+        handlePlaybackChange()
     }
     
     private func songIsInFutureQueue(for song : Song) -> Bool
@@ -169,6 +184,34 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
         handleAutomaticPlayback()
     }
     
+    public func togglePlayPause()
+    {
+        if player.isPlaying
+        {
+            pause()
+        }
+        else
+        {
+            resume()
+        }
+    }
+    
+    public func currentTime() -> TimeInterval
+    {
+        return player.currentTime
+    }
+    
+    public func currentDuration() -> TimeInterval
+    {
+        return player.duration
+    }
+    
+    public func seekTo(time: TimeInterval)
+    {
+        player.currentTime = time
+        handlePlaybackChange()
+    }
+    
     private func handlePlaybackChange()
     {
         var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [String: Any]()
@@ -179,6 +222,7 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
         notificationCenter.post(name: .PlaybackChanged, object: nil)
     }
+
 }
 
 

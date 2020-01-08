@@ -11,18 +11,13 @@ import UIKit
 
 class MenuMusicView : UIView
 {
-    let musicImageView : UIImageView = UIImageView() // done
-    let audioVisualiser : UIView = UIView () // done
-    let playlistTitleLabel : UILabel = UILabel() // done
-    let musicInfoButton : UIButton = UIButton() // done
-    let musicTitleLabel : UILabel = UILabel() //done
-    let dynamicDurationLabel : UILabel = UILabel()
-    let musicSlider : UISlider = UISlider()
-    let staticDurationLabel : UILabel = UILabel()
-    let shuffleButton : UIButton = UIButton()
-    let backSkipButton : UIButton = UIButton()
-    let forwardSkipButton : UIButton = UIButton()
-    let pausePlayButton : UIButton = UIButton()
+    private let musicImageView : UIImageView = UIImageView()
+    private let audioVisualiser : UIView = UIView ()
+    private let playlistTitleLabel : UILabel = UILabel()
+    private let musicInfoButton : UIButton = UIButton()
+    private let musicTitleLabel : UILabel = UILabel()
+    private let progressTracker : MusicProgressTracker = MusicProgressTracker()
+    private let playbackStack : PlaybackStackView = PlaybackStackView()
     
     override func layoutSubviews()
     {
@@ -63,6 +58,13 @@ class MenuMusicView : UIView
         audioVisualiser.centerXAnchor.constraint(equalTo: musicImageView.centerXAnchor).isActive = true
         audioVisualiser.backgroundColor = tintColor
         
+        addSubview(progressTracker)
+        progressTracker.translatesAutoresizingMaskIntoConstraints = false
+        progressTracker.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        progressTracker.widthAnchor.constraint(equalTo: audioVisualiser.widthAnchor).isActive = true
+        progressTracker.topAnchor.constraint(equalTo: audioVisualiser.bottomAnchor, constant: 5).isActive = true
+        progressTracker.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
         addSubview(musicTitleLabel)
         musicTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         musicTitleLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -70,6 +72,13 @@ class MenuMusicView : UIView
         musicTitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -UIView.genericTabBar.frame.height).isActive = true
         musicTitleLabel.numberOfLines = 2
         musicTitleLabel.textAlignment = .center
+        
+        addSubview(playbackStack)
+        playbackStack.translatesAutoresizingMaskIntoConstraints = false
+        playbackStack.widthAnchor.constraint(equalTo: progressTracker.widthAnchor).isActive = true
+        playbackStack.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        playbackStack.topAnchor.constraint(equalTo: progressTracker.bottomAnchor).isActive = true
+        playbackStack.bottomAnchor.constraint(equalTo: musicTitleLabel.topAnchor).isActive = true
     }
     
     public func setDisplayData(from song: Song, playlist: Playlist)
