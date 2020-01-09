@@ -12,7 +12,7 @@ import UIKit
 class MenuMusicView : UIView
 {
     private let musicImageView : UIImageView = UIImageView()
-    private let audioVisualiser : UIView = UIView ()
+    private let audioVisualiser : UIView = UIView()
     private let playlistTitleLabel : UILabel = UILabel()
     private let musicInfoButton : UIButton = UIButton()
     private let musicTitleLabel : UILabel = UILabel()

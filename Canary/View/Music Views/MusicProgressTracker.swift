@@ -60,7 +60,7 @@ class MusicProgressTracker : UIView
         
         let currentTimeString = formatTime(time: UIApplication.sharedAudioPlayer.currentTime())
         let remainingTimeString = formatTime(time: UIApplication.sharedAudioPlayer.currentDuration() - UIApplication.sharedAudioPlayer.currentTime())
-        
+
         let timeAttributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratMedium]
         
         currentTimeLabel.attributedText = NSAttributedString(string: currentTimeString, attributes: timeAttributes)
