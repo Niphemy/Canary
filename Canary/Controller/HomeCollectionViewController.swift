@@ -8,52 +8,45 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+fileprivate let HSCreuseIdentifier = "StatisticsCell"
+fileprivate let RreuseIdentifier = "RecommendCell"
 
-class HomeCollectionViewController: UICollectionViewController
+class HomeCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout
 {
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.userIcon, style: .plain, target: self, action: nil)
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(HomeStatisticsCollectionViewCell.self, forCellWithReuseIdentifier: HSCreuseIdentifier)
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: RreuseIdentifier)
     }
 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int
     {
-        return 0
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 0
+        return 2
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        return cell
+        switch indexPath
+        {
+        case [0,0]:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HSCreuseIdentifier, for: indexPath)
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RreuseIdentifier, for: indexPath)
+            return cell
+        }
     }
 
     // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -69,5 +62,10 @@ class HomeCollectionViewController: UICollectionViewController
     
     }
     */
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        return CGSize.homeCellSize
+    }
 
 }

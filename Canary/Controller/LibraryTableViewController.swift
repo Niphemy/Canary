@@ -15,6 +15,7 @@ class LibraryTableViewController: UITableViewController, UITextFieldDelegate
 {
     var userPlaylists = [Playlist](), generatedPlaylists = [Playlist]()
     private var addPlaylistAction : UIAlertAction?
+    
     var allPlaylists : [[Playlist]]
     {
         get

@@ -29,7 +29,8 @@ struct YTAPI
     static func getDurationFor(searchResults: [SongSearchResult], _ completionHandler: @escaping (_: Data?, _: URLResponse?, _: Error?) -> Void)
     {
         var videoIDs : String = searchResults.reduce("", { $0 + "\($1.getMediaID())," })
-        videoIDs.removeLast()
+        
+        videoIDs = videoIDs.isEmpty ? videoIDs : String(videoIDs.dropLast(1))
         
         let videoDetailsParemeters : [String: String] = ["part":"contentDetails","id":videoIDs , "key":APIKey]
         let terminalURL : URL = encodeParameters(url: baseVideoAPIURL, parameters: videoDetailsParemeters)

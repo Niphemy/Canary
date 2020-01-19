@@ -17,7 +17,7 @@ class TabViewController: UITabBarController
     {
         super.viewDidLoad()
         
-        UIColor.globalTintColor = UIColor.systemTeal
+        UIColor.globalTintColor = UIColor.systemBlue
         view.tintColor = UIColor.globalTintColor
         
         songViewController = SongViewController(superTabViewController: self)

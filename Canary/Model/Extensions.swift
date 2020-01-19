@@ -96,6 +96,7 @@ extension NSManagedObjectContext
 extension CGSize
 {
     static let songCellSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 30, height: 75)
+    static let homeCellSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height*0.7)
 }
 
 extension Notification.Name
