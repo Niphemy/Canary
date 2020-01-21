@@ -19,6 +19,9 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
 
         self.collectionView!.register(HomeStatisticsCollectionViewCell.self, forCellWithReuseIdentifier: HSCreuseIdentifier)
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: RreuseIdentifier)
+        
+        self.collectionView.backgroundColor = UIColor.systemBackground
+        self.collectionView.showsVerticalScrollIndicator = false
     }
 
     // MARK: UICollectionViewDataSource
@@ -41,31 +44,20 @@ class HomeCollectionViewController: UICollectionViewController, UICollectionView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HSCreuseIdentifier, for: indexPath)
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RreuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HSCreuseIdentifier, for: indexPath)
             return cell
         }
     }
 
-    // MARK: UICollectionViewDelegate
+    // MARK: UICollectionViewDelegateFlowLayout
 
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
+    {
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         return CGSize.homeCellSize
     }
-
 }

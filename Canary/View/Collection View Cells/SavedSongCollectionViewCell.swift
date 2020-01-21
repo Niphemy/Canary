@@ -94,7 +94,7 @@ class SavedSongCollectionViewCell: SongCollectionViewCell
     
     override func dynamicButtonTappedAction()
     {
-        guard let song = self.song else { fatalError("You must set a the before returning SavedSongCollectionViewCells") }
+        guard let song = self.song else { fatalError("You must set a song before returning SavedSongCollectionViewCells") }
         delegate?.songDetailsTapped(song: song)
     }
 }

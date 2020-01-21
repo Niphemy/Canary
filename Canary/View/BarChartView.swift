@@ -8,33 +8,45 @@
 
 import UIKit
 
+/*
 class BarChartView: UIView
 {
-    //MARK: - Variable Initialisation
+    //MARK: - Variables
     
+    let barsStackView : UIStackView = UIStackView()
     private let chartData : DataSet
-    private let numberOfBars : Int
+    
+    private var numberOfBars : Int
+    {
+        get
+        {
+            return chartData.count
+        }
+    }
+    
+    private var barWidth : CGFloat
+    {
+        get
+        {
+            return (bounds.width - CGFloat((numberOfBars+1)*spacing))/CGFloat(numberOfBars)
+        }
+    }
+    
     private let chartColour : UIColor
     private let stepLineCount = 2
-    private let parentView : UIView
+    private let spacing = 10
     
     //MARK: - Initialisers
     
-    init(chartData : DataSet,chartColour : UIColor = UIColor.white, parentView : UIView)
+    init(chartData : DataSet, chartColour : UIColor = UIColor.white)
     {
-        let frame = parentView.convert(parentView.frame, from: parentView.superview)
-        
         self.chartData = chartData
-        self.numberOfBars = chartData.count
         self.chartColour = chartColour
-        self.parentView = parentView
         
-        super.init(frame: frame)
+        super.init(frame: CGRect())
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.addGestureRecognizer(singleTap)
-    
-        parentView.addSubview(self)
     }
     
     required init?(coder: NSCoder) {
@@ -43,12 +55,35 @@ class BarChartView: UIView
     
     //MARK: - Draw Chart Functions
     
+    override func layoutSubviews()
+    {
+        setupAxes()
+        
+        //let max = getStepSize(data: chartData.values,steps: stepLineCount) * stepLineCount
+        let barView = UIView()
+        addSubview(barView)
+        barView.translatesAutoresizingMaskIntoConstraints = false
+        barView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
+        barView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1).isActive = true
+        barView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        barView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        
+        /*
+        for i in 0..<chartData.count
+        {
+            let bar = CAShapeLayer()
+            let proportionalHeight : CGFloat = CGFloat(chartData.values[i])/CGFloat(max) * bounds.height
+            
+            bar.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+        }
+        */
+    }
+    
     func displayChart()
     {
         clearView()
         setupAxes()
         
-        let barsStackView : UIStackView = UIStackView()
         addSubview(barsStackView)
         
         barsStackView.distribution = .fillEqually
@@ -60,11 +95,11 @@ class BarChartView: UIView
         barsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1).isActive = true
         barsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
         
+        let max = getStepSize(data: chartData.values,steps: stepLineCount) * stepLineCount
+        
         for i in 0..<chartData.count
         {
             let bar = UIView()
-            let max = getStepSize(data: chartData.values,steps: stepLineCount) * stepLineCount
-            
             let proportionalHeight : CGFloat = CGFloat(chartData.values[i])/CGFloat(max) * bounds.height
             
             bar.translatesAutoresizingMaskIntoConstraints = false
@@ -195,7 +230,7 @@ class BarChartView: UIView
         title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
     }
     
-    func getStepSize(data : [Int], steps : Int) -> Int
+    private func getStepSize(data : [Int], steps : Int) -> Int
     {
         guard let max = data.max() else { fatalError() }
         
@@ -234,3 +269,4 @@ class BarChartView: UIView
         playChartAnimation()
     }
 }
+*/

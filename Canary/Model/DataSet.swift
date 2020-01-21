@@ -8,28 +8,16 @@
 
 import UIKit
 
-struct DataSet
+struct DataPoint
 {
-    var values : [Int]
-    var colours : [UIColor]
-    var count : Int
+    let value : Int
+    let colour : UIColor
+    let title : String
     
-    init()
+    init(value : Int, colour : UIColor, title : String)
     {
-        self.values = [Int]()
-        self.colours = [UIColor]()
-        self.count = Int()
-    }
-    
-    init(_ data: [(value: Int,colour: UIColor)])
-    {
-        self.init()
-        
-        for set in data
-        {
-            values.append(set.value)
-            colours.append(set.colour)
-        }
-        self.count = data.count
+        self.value = value
+        self.colour = colour
+        self.title = title
     }
 }

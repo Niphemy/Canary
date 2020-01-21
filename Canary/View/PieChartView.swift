@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+/*
 class PieChartView : UIView
 {
     //MARK: - Variable Initialisation
@@ -114,5 +114,6 @@ class PieChartView : UIView
     }
 
 }
+*/
 
 

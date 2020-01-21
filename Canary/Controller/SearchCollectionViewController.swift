@@ -25,6 +25,7 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
         webSearchController.searchBar.delegate = self 
         
         self.navigationItem.searchController = webSearchController
+        self.collectionView.showsVerticalScrollIndicator = false
     }
 
     // MARK: UICollectionViewDataSource
@@ -55,14 +56,9 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
         return CGSize.songCellSize
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
-    {
-        return 10
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
-        return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
 }
 
