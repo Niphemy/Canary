@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Playlist" representedClassName="Playlist" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="childSongs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="parentPlaylist" inverseEntity="Song"/>
@@ -10,10 +10,11 @@
         <attribute name="duration" optional="YES" attributeType="String"/>
         <attribute name="mediaIdentifier" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="playtime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="parentPlaylist" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Playlist" inverseName="childSongs" inverseEntity="Playlist"/>
     </entity>
     <elements>
         <element name="Playlist" positionX="193.1171875" positionY="2.00390625" width="128" height="73"/>
-        <element name="Song" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Song" positionX="-63" positionY="-18" width="128" height="148"/>
     </elements>
 </model>

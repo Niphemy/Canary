@@ -18,6 +18,7 @@ class MenuMusicView : UIView
     private let musicTitleLabel : UILabel = UILabel()
     private let progressTracker : MusicProgressTracker = MusicProgressTracker()
     private let playbackStack : PlaybackStackView = PlaybackStackView()
+    private var song : Song? = nil
     
     override func layoutSubviews()
     {
@@ -102,5 +103,13 @@ class MenuMusicView : UIView
         playlistTitleLabel.attributedText = NSAttributedString(string: playlist.getName(), attributes: playlistTitleLabelAttributes)
         musicImageView.image = songImage
         musicTitleLabel.attributedText = songDetails
+        self.song = song
+        
+        musicInfoButton.addTarget(self, action: #selector(musicInfoButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    @objc func musicInfoButtonTapped(_ sender : Any)
+    {
+        
     }
 }

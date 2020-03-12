@@ -9,6 +9,13 @@
 import UIKit
 import CoreData
 
+protocol SongSearchResultCollectionViewCellDelegate : class
+{
+    func songDownloadDidError()
+    
+    func songDownloadDidSucceed()
+}
+
 class SongSearchResultCollectionViewCell: SongCollectionViewCell
 {
     private let loadingImageView = LoadingView()
@@ -16,9 +23,10 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
     private let loadingDynamicButton = LoadingView()
     private let downloadProgressView = UIView()
     private let context : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private let sectorLayer = CAShapeLayer()
+    private var sectorLayer = CAShapeLayer()
     private var mediaID = String()
     private var downloadProgessObserver: NSKeyValueObservation?
+    public var delegate: SongSearchResultCollectionViewCellDelegate?
 
     deinit
     {
@@ -126,8 +134,8 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
         
         YTAPI.downloadSongToServer(videoID: mediaID)
         { (data, response, dataError) in
-            guard dataError == nil else { fatalError(dataError!.localizedDescription) }
-            guard let data = data else { fatalError("No received data") }
+            guard dataError == nil else { return }
+            guard let data = data else { return }
             
             do
             {
@@ -135,7 +143,7 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
                 
                 if !APIResponse.error
                 {
-                    let songURL = URL(string: "https://59ef3762.ngrok.io/phptutorial/download/\(self.mediaID).mp3")!
+                    let songURL = URL(string: "https://\(UIApplication.phpAddress).ngrok.io/phptutorial/download/\(self.mediaID).mp3")!
                     
                     DispatchQueue.main.async
                     {
@@ -145,21 +153,21 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
                     
                     let downloadTask = URLSession.shared.downloadTask(with: songURL)
                     { (location, response, downloadError) in
-                        guard let location = location, downloadError == nil else { return }
+                        guard let location = location, downloadError == nil else { self.delegate?.songDownloadDidError(); return }
                          
                         do
                         {
-                            
                             let newSong = Song(context: self.context)
-                            newSong.setDetails(id: self.mediaID, artists: songDetails.artists, name: songDetails.name, date: Date(timeIntervalSinceNow: 0), duration: durationString)
+                            newSong.setDetails(id: self.mediaID, artists: songDetails.artists, name: songDetails.name, date: Date(), duration: durationString)
                             try FileManager.default.moveItem(at: location, to: newSong.getAudioFilePath())
                             self.downloadSongImage(imageDestination: newSong.getImageFilePath(), imageData: imagePngData)
                             self.saveSongs()
-                            //Asynchronous task ends here.
+                            
+                            self.delegate?.songDownloadDidSucceed()
                         }
                         catch
                         {
-                            print(error.localizedDescription)
+                            self.delegate?.songDownloadDidError()
                         }
                     }
                     
@@ -179,12 +187,12 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
                 }
                 else
                 {
-                    print("no video found")
+                    self.delegate?.songDownloadDidError()
                 }
             }
             catch
             {
-                print(error.localizedDescription)
+                self.delegate?.songDownloadDidError()
             }
         }
     }
@@ -217,6 +225,12 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
             loadingDynamicButton.isHidden = false
             dynamicButton.isHidden = true
         }
+    }
+
+    public func reloadCell()
+    {
+        dynamicButton.isEnabled = true
+        downloadProgressView.layer.sublayers?.forEach({ $0.removeFromSuperlayer() })
     }
     
     func saveSongs()

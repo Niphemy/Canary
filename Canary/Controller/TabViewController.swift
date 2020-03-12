@@ -12,6 +12,7 @@ import MediaPlayer
 class TabViewController: UITabBarController
 {
     private var songViewController : SongViewController?
+    private let userDefaults = UserDefaults.standard
     
     override func viewDidLoad()
     {
@@ -21,6 +22,9 @@ class TabViewController: UITabBarController
         view.tintColor = UIColor.globalTintColor
         
         songViewController = SongViewController(superTabViewController: self)
+        
+        PlaytimeManager.setupPlaytimeCounter()
+        
         guard let songViewController = songViewController else {return}
         
         view.addSubview(songViewController.view)
@@ -38,8 +42,8 @@ class TabViewController: UITabBarController
         songViewHeightAnchor.constant = -tabBar.frame.height
         songViewController.setAnimatedConstraints(heightAnchor: songViewHeightAnchor, bottomAnchor: songViewBottomAnchor)
         
-        let homeViewController = HomeCollectionViewController(collectionViewLayout: .verticalFlow)
-        let searchViewController = SearchCollectionViewController(collectionViewLayout: .verticalFlow)
+        let homeViewController = HomeCollectionViewController(collectionViewLayout: .homeFlowLayout)
+        let searchViewController = SearchCollectionViewController(collectionViewLayout: .songFlowLayout)
         let libraryViewController = LibraryTableViewController()
         
         let homeNavigationController = UINavigationController(rootViewController: homeViewController)

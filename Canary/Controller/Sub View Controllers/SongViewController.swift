@@ -82,6 +82,7 @@ class SongViewController: UIViewController
         self.superTabViewController = superTabViewController
         super.init(nibName: nil, bundle: nil)
         UIApplication.sharedAudioPlayer.delegate = self
+        musicMiniMenu.delegate = self
     }
     
     public func setAnimatedConstraints(heightAnchor: NSLayoutConstraint, bottomAnchor: NSLayoutConstraint)
@@ -218,5 +219,13 @@ extension SongViewController: CanaryAudioPlayerDelegate
         {
             isActive = true
         }
+    }
+}
+
+extension SongViewController: MiniMenuMusicViewDelegate
+{
+    func viewTapped()
+    {
+        fullyExpandView()
     }
 }

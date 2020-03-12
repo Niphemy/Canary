@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol MiniMenuMusicViewDelegate
+{
+    func viewTapped()
+}
+
 class MiniMenuMusicView: UIView
 {
     private let musicTitleLabel : UILabel = UILabel()
@@ -16,6 +21,7 @@ class MiniMenuMusicView: UIView
     private let playPauseButton : PlaybackButton = PlaybackButton(type: .playPause, pointSizeForImage: 20)
     private var progressUpdater = CADisplayLink()
     private var playPauseButtonSectorLayer = CAShapeLayer()
+    public var delegate : MiniMenuMusicViewDelegate?
     
     init()
     {
@@ -23,6 +29,10 @@ class MiniMenuMusicView: UIView
         
         progressUpdater = CADisplayLink(target: self, selector: #selector(updateProgress))
         progressUpdater.add(to: .main, forMode: .default)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedAction))
+        
+        addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -99,5 +109,11 @@ class MiniMenuMusicView: UIView
         let fractionSongDone = UIApplication.sharedAudioPlayer.currentTime()/UIApplication.sharedAudioPlayer.currentDuration()
         
         playPauseButtonSectorLayer.strokeEnd = CGFloat(fractionSongDone)
+        
+    }
+    
+    @objc private func tappedAction()
+    {
+        delegate?.viewTapped()
     }
 }

@@ -12,6 +12,29 @@ import CoreData
 extension UIApplication
 {
     static let sharedAudioPlayer : CanaryAudioPlayer = CanaryAudioPlayer()
+    static let phpAddress : String = "6cfb2b7d"
+    
+    static var weekdayTimings : [String : Int]
+    {
+        set
+        {
+            UserDefaults.standard.set(newValue, forKey: "weekdayTimings")
+        }
+        get
+        {
+            if let weekdayTimes = UserDefaults.standard.dictionary(forKey: "weekdayTimings") as? [String : Int]
+            {
+                return weekdayTimes
+            }
+            else
+            {
+                let weekdayTimes : [String : Int] = ["mon":0, "tue":0, "wed":0, "thu":0, "fri":0, "sat":0, "sun":0]
+                UserDefaults.standard.set(weekdayTimes, forKey: "weekdayTimings")
+                
+                return UserDefaults.standard.dictionary(forKey: "weekdayTimings") as? [String : Int] ?? weekdayTimes
+            }
+        }
+    }
 }
 
 extension UIFont
@@ -45,6 +68,7 @@ extension UIImage
     static let nextTrackIcon = UIImage(systemName: "forward.end.fill")
     static let playIcon = UIImage(systemName: "play.fill")
     static let pauseIcon = UIImage(systemName: "pause.fill")
+    static let shuffleIcon = UIImage(systemName: "shuffle")
 }
 
 extension UIView
@@ -71,10 +95,19 @@ extension String
 
 extension UICollectionViewLayout
 {
-    static let verticalFlow : UICollectionViewFlowLayout =
+    static let homeFlowLayout : UICollectionViewFlowLayout =
     {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
+        flowLayout.itemSize = .homeCellSize
+        return flowLayout
+    }()
+    
+    static let songFlowLayout : UICollectionViewFlowLayout =
+    {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        flowLayout.itemSize = .songCellSize
         return flowLayout
     }()
 }

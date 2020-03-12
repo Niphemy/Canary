@@ -19,9 +19,11 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
     init(playlist: Playlist)
     {
         self.playlist = playlist
-        super.init(collectionViewLayout: .verticalFlow)
+        super.init(collectionViewLayout: .songFlowLayout)
         navigationItem.title = playlist.getName()
         NotificationCenter.default.addObserver(self, selector: #selector(songDidChange), name: .SongChanged, object: nil)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.shuffleIcon, style: .plain, target: self, action: #selector(shufflePlaylist))
     }
     
     required init?(coder: NSCoder)
@@ -38,6 +40,12 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         self.collectionView.allowsMultipleSelection = false
         
         loadSongs()
+    }
+    
+    @objc func shufflePlaylist()
+    {
+        songs = songs.shuffled()
+        songCellTapped(song: songs[0])
     }
     
     @objc func songDidChange()

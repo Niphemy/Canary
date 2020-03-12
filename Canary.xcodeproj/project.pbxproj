@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA0A977423D6FF8C008B985B /* BarChartView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A977323D6FF8C008B985B /* BarChartView2.swift */; };
+		CA0A977423D6FF8C008B985B /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0A977323D6FF8C008B985B /* BarChartView.swift */; };
 		CA0E6B902389CF4800C7A4C1 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0E6B8F2389CF4800C7A4C1 /* SongViewController.swift */; };
 		CA213C29239AC652002290A6 /* CanaryAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA213C28239AC652002290A6 /* CanaryAudioPlayer.swift */; };
 		CA213C2B239C3618002290A6 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA213C2A239C35F4002290A6 /* Montserrat-SemiBold.ttf */; };
@@ -30,9 +30,8 @@
 		CA4715D4233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */; };
 		CA4715D623400463002F2FDC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4715D523400463002F2FDC /* LoadingView.swift */; };
 		CA479F3223D4A74900540CA3 /* HomeStatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA479F3123D4A74900540CA3 /* HomeStatisticsCollectionViewCell.swift */; };
-		CA479F3423D4BE5700540CA3 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA479F3323D4BE5600540CA3 /* BarChartView.swift */; };
 		CA479F3623D4BEA600540CA3 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA479F3523D4BEA600540CA3 /* PieChartView.swift */; };
-		CA479F3823D4BEBD00540CA3 /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA479F3723D4BEBD00540CA3 /* DataSet.swift */; };
+		CA479F3823D4BEBD00540CA3 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA479F3723D4BEBD00540CA3 /* DataPoint.swift */; };
 		CA479F3A23D4D7D500540CA3 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA479F3923D4D7D500540CA3 /* Montserrat-Regular.ttf */; };
 		CA62848423A2C86A00AA651A /* PlaylistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA62848323A2C86A00AA651A /* PlaylistItem.swift */; };
 		CA6EC6ED23C7BF0D00D660A6 /* PlaybackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6EC6EC23C7BF0D00D660A6 /* PlaybackButton.swift */; };
@@ -46,14 +45,15 @@
 		CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */; };
 		CAA654AE2355C697005F9E3D /* YTAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA654AD2355C697005F9E3D /* YTAPI.swift */; };
 		CAA654B12355D4C2005F9E3D /* SearchListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA654B02355D4C2005F9E3D /* SearchListResponse.swift */; };
-		CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */; };
+		CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController .swift */; };
+		CACAB65723EED421002F09CA /* PlaytimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACAB65623EED421002F09CA /* PlaytimeManager.swift */; };
 		CAEB60B123A3EC7700EA7BDB /* MusicProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEB60B023A3EC7700EA7BDB /* MusicProgressTracker.swift */; };
 		CAED4830235C59A8000A8190 /* VideoListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED482F235C59A8000A8190 /* VideoListResponse.swift */; };
 		CAFF21E923A6E4D9008D8DA8 /* PlaybackStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFF21E823A6E4D9008D8DA8 /* PlaybackStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CA0A977323D6FF8C008B985B /* BarChartView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView2.swift; sourceTree = "<group>"; };
+		CA0A977323D6FF8C008B985B /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		CA0E6B8F2389CF4800C7A4C1 /* SongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
 		CA213C28239AC652002290A6 /* CanaryAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanaryAudioPlayer.swift; sourceTree = "<group>"; };
 		CA213C2A239C35F4002290A6 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -76,9 +76,8 @@
 		CA4715D3233FE82B002F2FDC /* SongSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA4715D523400463002F2FDC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CA479F3123D4A74900540CA3 /* HomeStatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
-		CA479F3323D4BE5600540CA3 /* BarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		CA479F3523D4BEA600540CA3 /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
-		CA479F3723D4BEBD00540CA3 /* DataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
+		CA479F3723D4BEBD00540CA3 /* DataPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		CA479F3923D4D7D500540CA3 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		CA62848323A2C86A00AA651A /* PlaylistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistItem.swift; sourceTree = "<group>"; };
 		CA6EC6EC23C7BF0D00D660A6 /* PlaybackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackButton.swift; sourceTree = "<group>"; };
@@ -94,7 +93,8 @@
 		CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		CAA654AD2355C697005F9E3D /* YTAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTAPI.swift; sourceTree = "<group>"; };
 		CAA654B02355D4C2005F9E3D /* SearchListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListResponse.swift; sourceTree = "<group>"; };
-		CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
+		CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchCollectionViewController .swift"; sourceTree = "<group>"; };
+		CACAB65623EED421002F09CA /* PlaytimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaytimeManager.swift; sourceTree = "<group>"; };
 		CAEB60B023A3EC7700EA7BDB /* MusicProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicProgressTracker.swift; sourceTree = "<group>"; };
 		CAED482F235C59A8000A8190 /* VideoListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListResponse.swift; sourceTree = "<group>"; };
 		CAFF21E823A6E4D9008D8DA8 /* PlaybackStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackStackView.swift; sourceTree = "<group>"; };
@@ -184,6 +184,7 @@
 		CA8A8BC3233A955400FCA0E0 /* Canary */ = {
 			isa = PBXGroup;
 			children = (
+				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 				CA8A8BC4233A955400FCA0E0 /* AppDelegate.swift */,
 				CA8A8BC6233A955400FCA0E0 /* SceneDelegate.swift */,
 				CA8A8BD5233A955600FCA0E0 /* Info.plist */,
@@ -199,7 +200,7 @@
 			children = (
 				CA8A8BDE233A96C200FCA0E0 /* TabViewController.swift */,
 				CA22E4B3233B740900B2E75A /* HomeCollectionViewController.swift */,
-				CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController.swift */,
+				CAA9AB81233AAA43003ED6B3 /* SearchCollectionViewController .swift */,
 				CA22E4B1233B71B300B2E75A /* LibraryTableViewController.swift */,
 				CA37CDA1233D617E00D96A18 /* Sub View Controllers */,
 			);
@@ -213,11 +214,10 @@
 				CA8A8BD0233A955600FCA0E0 /* Assets.xcassets */,
 				CA22E4B8233B7DE900B2E75A /* Fonts */,
 				CA2D23782343C623002E7BFC /* Collection View Cells */,
-				CA4715D523400463002F2FDC /* LoadingView.swift */,
-				CA479F3323D4BE5600540CA3 /* BarChartView.swift */,
-				CA0A977323D6FF8C008B985B /* BarChartView2.swift */,
-				CA479F3523D4BEA600540CA3 /* PieChartView.swift */,
 				CA6EC6E723C7BD4B00D660A6 /* Music Views */,
+				CA4715D523400463002F2FDC /* LoadingView.swift */,
+				CA0A977323D6FF8C008B985B /* BarChartView.swift */,
+				CA479F3523D4BEA600540CA3 /* PieChartView.swift */,
 				CAFF21E823A6E4D9008D8DA8 /* PlaybackStackView.swift */,
 				CA6EC6EC23C7BF0D00D660A6 /* PlaybackButton.swift */,
 			);
@@ -229,13 +229,13 @@
 			children = (
 				CA8A8BCD233A955400FCA0E0 /* Library.xcdatamodeld */,
 				CA37CDA0233D171400D96A18 /* Core Data Classes */,
-				CA22E4AF233B6FFF00B2E75A /* Extensions.swift */,
 				CA4715D1233E680D002F2FDC /* SongSearchResult.swift */,
 				CAA654AD2355C697005F9E3D /* YTAPI.swift */,
 				CAED4831235CA9C1000A8190 /* JSON Structrues */,
 				CA213C28239AC652002290A6 /* CanaryAudioPlayer.swift */,
 				CA62848323A2C86A00AA651A /* PlaylistItem.swift */,
-				CA479F3723D4BEBD00540CA3 /* DataSet.swift */,
+				CA479F3723D4BEBD00540CA3 /* DataPoint.swift */,
+				CACAB65623EED421002F09CA /* PlaytimeManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,12 +326,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA22E4B2233B71B300B2E75A /* LibraryTableViewController.swift in Sources */,
-				CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController.swift in Sources */,
+				CAA9AB82233AAA43003ED6B3 /* SearchCollectionViewController .swift in Sources */,
 				CA22E4B0233B6FFF00B2E75A /* Extensions.swift in Sources */,
 				CA2D237A2343C667002E7BFC /* SavedSongCollectionViewCell.swift in Sources */,
 				CA79D5A323883A0A00A1C0DD /* AddPlaylistTableViewController.swift in Sources */,
 				CA8A8BDF233A96C200FCA0E0 /* TabViewController.swift in Sources */,
-				CA0A977423D6FF8C008B985B /* BarChartView2.swift in Sources */,
+				CA0A977423D6FF8C008B985B /* BarChartView.swift in Sources */,
 				CA4715D623400463002F2FDC /* LoadingView.swift in Sources */,
 				CA37CDA4233D62AD00D96A18 /* PlaylistCollectionViewController.swift in Sources */,
 				CA37CDA6233E2EA000D96A18 /* SongCollectionViewCell.swift in Sources */,
@@ -352,7 +352,8 @@
 				CA62848423A2C86A00AA651A /* PlaylistItem.swift in Sources */,
 				CA6EC6ED23C7BF0D00D660A6 /* PlaybackButton.swift in Sources */,
 				CA22E4B4233B740900B2E75A /* HomeCollectionViewController.swift in Sources */,
-				CA479F3823D4BEBD00540CA3 /* DataSet.swift in Sources */,
+				CA479F3823D4BEBD00540CA3 /* DataPoint.swift in Sources */,
+				CACAB65723EED421002F09CA /* PlaytimeManager.swift in Sources */,
 				CA213C2D239CF6B5002290A6 /* MenuMusicView.swift in Sources */,
 				CA8A8BC5233A955400FCA0E0 /* AppDelegate.swift in Sources */,
 				CA479F3223D4A74900540CA3 /* HomeStatisticsCollectionViewCell.swift in Sources */,
@@ -360,7 +361,6 @@
 				CA479F3623D4BEA600540CA3 /* PieChartView.swift in Sources */,
 				CA37CD9E233D126E00D96A18 /* Song+CoreDataClass.swift in Sources */,
 				CA8A8BC7233A955400FCA0E0 /* SceneDelegate.swift in Sources */,
-				CA479F3423D4BE5700540CA3 /* BarChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

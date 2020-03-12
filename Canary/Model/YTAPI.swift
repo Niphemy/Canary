@@ -12,7 +12,7 @@ struct YTAPI
 {
     private static let baseSearchAPIURL : URL = URL(string: "https://www.googleapis.com/youtube/v3/search")!
     private static let baseVideoAPIURL : URL = URL(string: "https://www.googleapis.com/youtube/v3/videos")!
-    private static let baseVideoDownloadURL = URL(string: "https://59ef3762.ngrok.io/phptutorial/convert.php/?youtubelink=https://www.youtube.com/watch?v=")!
+    private static let baseVideoDownloadURL = URL(string: "https://\(UIApplication.phpAddress).ngrok.io/phptutorial/convert.php/?youtubelink=https://www.youtube.com/watch?v=")!
     private static let APIKey : String = "AIzaSyD1RJzDF3fhadZzih0Lv0ZKGrLsDTINDFw"
     
     static func getResultsFor(query input: String, _ completionHandler: @escaping (_: Data?, _: URLResponse?, _: Error?) -> Void)
@@ -51,7 +51,7 @@ struct YTAPI
         let APIRequestURL = URL(string: baseVideoDownloadURL.absoluteString + videoID)!
         URLSession.shared.dataTask(with: APIRequestURL, completionHandler: completionHandler).resume()
     }
-    
+
     private static func encodeParameters(url input: URL, parameters : [String : String]) -> URL
     {
         let queryItems = parameters.map{ URLQueryItem(name: $0.key, value: $0.value ) }

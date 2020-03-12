@@ -37,8 +37,40 @@ class LibraryTableViewController: UITableViewController, UITextFieldDelegate
     
     @objc func addPlaylist(_ sender: Any)
     {
-        let optionalPlaylistName = "My Playlist #\(self.userPlaylists.count + 1)"
+        let playlistNames : [String] =
+        {
+            var tempPlaylistNames : [String] = [String]()
+            allPlaylists.forEach({$0.forEach({ tempPlaylistNames.append($0.getName()) })})
+            return tempPlaylistNames
+        }()
+        
+        var playlistCount = self.userPlaylists.count + 1
+        var optionalPlaylistName = "My Playlist #\(playlistCount)"
+        var nameClash = true
+        
+        while nameClash
+        {
+            for playlistName in playlistNames
+            {
+                if optionalPlaylistName == playlistName
+                {
+                    playlistCount += 1
+                    nameClash = true
+                    break
+                }
+                else
+                {
+                    nameClash = false
+                }
+                
+                optionalPlaylistName = "My Playlist #\(playlistCount)"
+            }
+        }
+        
+        optionalPlaylistName = "My Playlist #\(playlistCount)"
+        
         let addPlaylistAlertController : UIAlertController = UIAlertController(title: "Name your new playlist", message: nil, preferredStyle: .alert)
+        
         var addPlaylistTextFieldCopy = UITextField()
         
         addPlaylistAlertController.addTextField

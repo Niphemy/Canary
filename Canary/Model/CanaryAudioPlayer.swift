@@ -19,7 +19,14 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
     private let notificationCenter: NotificationCenter = NotificationCenter.default
     private var player = AVAudioPlayer()
     private var playlistItems : [PlaylistItem] = []
-    private var futureItems : [PlaylistItem] = []
+    private var futureItems : [PlaylistItem]
+    {
+        get
+        {
+            return Array(playlistItems.dropFirst(currentIndex + 1))
+        }
+    }
+    
     private var currentIndex = 0
     var currentlyPlaying : (song : Song?, playlist : Playlist?)
     
@@ -81,19 +88,15 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
     {
         let indexOfSelectedSong = songs.firstIndex(of: selectedSong)!
         
+        playlistItems = songs.map({ PlaylistItem(song: $0) })
+        currentIndex = indexOfSelectedSong
+        currentlyPlaying.playlist = playlist
+        
         if currentlyPlaying.playlist == playlist && songIsInFutureQueue(for: selectedSong)
         {
-            currentIndex = indexOfSelectedSong
-            futureItems = Array(playlistItems.dropFirst(currentIndex + 1))
-        }
-        else
-        {
-            playlistItems = songs.map({ PlaylistItem(song: $0) })
-            playlistItems.swapAt(0, indexOfSelectedSong)
-            futureItems = Array(playlistItems.dropFirst(1))
+            currentIndex = playlistItems.firstIndex(where: { selectedSong == $0.song })!
         }
         
-        currentlyPlaying.playlist = playlist
         handleAutomaticPlayback()
     }
     
@@ -136,7 +139,6 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
         if currentIndex < playlistItems.endIndex - 1
         {
             currentIndex += 1
-            futureItems.removeFirst(1)
             handleAutomaticPlayback()
         }
         handlePlaybackChange()
@@ -178,9 +180,9 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
     {
         if player.currentTime < 3 && currentIndex > 0
         {
-            futureItems.insert(playlistItems[currentIndex], at: 0)
             currentIndex -= 1
         }
+        
         handleAutomaticPlayback()
     }
     

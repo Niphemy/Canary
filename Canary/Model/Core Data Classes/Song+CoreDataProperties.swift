@@ -17,6 +17,7 @@ extension Song {
     }
 
     @NSManaged var artists: String
+    @NSManaged var playtime: Int16
     @NSManaged var mediaIdentifier: String
     @NSManaged var name: String
     @NSManaged var dateAdded: Date
@@ -52,6 +53,17 @@ extension Song {
         self.name = name
         self.dateAdded = date
         self.duration = duration
+        self.playtime = 0
+    }
+    
+    public func incrementPlaytime()
+    {
+        self.playtime += 1
+    }
+    
+    public func resetPlaytime()
+    {
+        self.playtime = 0
     }
     
     public func getAudioFilePath() -> URL

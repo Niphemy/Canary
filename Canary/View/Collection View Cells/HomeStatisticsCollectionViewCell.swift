@@ -12,6 +12,39 @@ import UIKit
 class HomeStatisticsCollectionViewCell : UICollectionViewCell
 {
     private let averageTimeLabel = UILabel()
+    private var dailyAverageString : String
+    {
+        get
+        {
+            var weeklyValues = UIApplication.weekdayTimings.values.map({ $0 })
+            
+            var endCase = true
+            
+            while endCase
+            {
+                for i in 0..<weeklyValues.count
+                {
+                    if weeklyValues[i] == 0
+                    {
+                        weeklyValues.remove(at: i)
+                        break
+                    }
+                    
+                    if i == weeklyValues.count - 1
+                    {
+                        endCase = false
+                    }
+                }
+            }
+            
+            let weeklyAverage = weeklyValues.reduce(0, +)/weeklyValues.count
+            
+            let fractionalPart = (Float(weeklyAverage)/3600).truncatingRemainder(dividingBy: 1)
+            
+            return "\(weeklyAverage/3600)h \(Int(fractionalPart*60))m"
+        }
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -62,7 +95,7 @@ class HomeStatisticsCollectionViewCell : UICollectionViewCell
             let dailyAverageAttribrutes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.montserratLight.withSize(16),NSAttributedString.Key.foregroundColor : UIColor.systemGray]
             let actualTimeAttributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.montserratMedium.withSize(20),NSAttributedString.Key.foregroundColor : UIColor.dynamicTextColor]
             let dailyAverageText = NSAttributedString(string: "Daily Average", attributes: dailyAverageAttribrutes)
-            let actualTimeText = NSAttributedString(string: "\n7h 23m", attributes: actualTimeAttributes)
+            let actualTimeText = NSAttributedString(string: "\n\(dailyAverageString)", attributes: actualTimeAttributes)
             tempTimeText.append(dailyAverageText)
             tempTimeText.append(actualTimeText)
             return tempTimeText
@@ -73,8 +106,18 @@ class HomeStatisticsCollectionViewCell : UICollectionViewCell
     
     private func setupBarChart()
     {
-        let info = DataSet([(3, .green), (1, .blue), (8, .cyan), (6, .red)])
-        let barChart = BarChartView2(chartData: info, barSpacing: 10, stepLineCount: 3, chartColour: .dynamicTextColor)
+        let weeklyData = UIApplication.weekdayTimings
+        
+        let mon = DataPoint(value: Float(weeklyData["mon"]!), colour: .globalTintColor, title: "M")
+        let tue = DataPoint(value: Float(weeklyData["tue"]!), colour: .globalTintColor, title: "T")
+        let wed = DataPoint(value: Float(weeklyData["wed"]!), colour: .globalTintColor, title: "W")
+        let thu = DataPoint(value: Float(weeklyData["thu"]!), colour: .globalTintColor, title: "T")
+        let fri = DataPoint(value: Float(weeklyData["fri"]!), colour: .globalTintColor, title: "F")
+        let sat = DataPoint(value: Float(weeklyData["sat"]!), colour: .globalTintColor, title: "S")
+        let sun = DataPoint(value: Float(weeklyData["sun"]!), colour: .globalTintColor, title: "S")
+        let tempData = [mon, tue, wed, thu, fri, sat, sun]
+        let barChart = BarChartView(chartData: tempData, barSpacing: 10, stepLineCount: 2, chartColour: .dynamicTextColor)
+            
         contentView.addSubview(barChart)
         barChart.translatesAutoresizingMaskIntoConstraints = false
         barChart.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true

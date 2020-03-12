@@ -60,14 +60,20 @@ class SongSearchResult
     private func parseSongName(from inputTitle: String) -> String
     {
         let bracketPattern = " \\(.+\\)| \\[.+\\]"
-        let featuringPattern = " ft\\..+| feat\\..+| feat.+| ft.+"
         let separatorPattern = ".+- |.+– |.+\\w+: "
+        let featuringRegex = try! NSRegularExpression(pattern: " ft\\..+| feat\\..+| feat.+| ft.+", options: .caseInsensitive)
         
         var songName = inputTitle
         
         songName = (songName as NSString).replacingOccurrences(of: separatorPattern, with: "", options: .regularExpression, range: songName.fullRange)
         songName = (songName as NSString).replacingOccurrences(of: bracketPattern, with: "", options: .regularExpression, range: songName.fullRange)
-        songName = (songName as NSString).replacingOccurrences(of: featuringPattern, with: "", options: .regularExpression, range: songName.fullRange)
+        
+        let featuringMatchRanges = featuringRegex.matches(in: songName, range: songName.fullRange)
+        if !(featuringMatchRanges.isEmpty)
+        {
+            let firstMatch : String = (songName as NSString).substring(with: featuringMatchRanges[0].range)
+            songName = (songName as NSString).replacingOccurrences(of: firstMatch, with: "", range: songName.fullRange)
+        }
         
         return songName
     }

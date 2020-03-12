@@ -18,7 +18,7 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Register cell classes
+        
         self.collectionView!.register(SongSearchResultCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = UIColor.systemBackground
         webSearchController.searchBar.autocapitalizationType = .words
@@ -26,6 +26,7 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
         
         self.navigationItem.searchController = webSearchController
         self.collectionView.showsVerticalScrollIndicator = false
+        
     }
 
     // MARK: UICollectionViewDataSource
@@ -44,17 +45,15 @@ class SearchCollectionViewController: UICollectionViewController, UICollectionVi
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SongSearchResultCollectionViewCell
         
+        cell.delegate = self
+        cell.reloadCell()
+        
         let tempSearchResult = searchResults[indexPath.item]
         cell.setDisplayInfo(with: tempSearchResult)
         return cell
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        return CGSize.songCellSize
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
@@ -134,6 +133,45 @@ extension SearchCollectionViewController
         catch
         {
             print(error)
+        }
+    }
+}
+
+extension SearchCollectionViewController: SongSearchResultCollectionViewCellDelegate
+{
+    func songDownloadDidError()
+    {
+        DispatchQueue.main.async
+        {
+            let videoDownloadErrorAlert = UIAlertController(title: "Song failed to download", message: nil, preferredStyle: .alert)
+            
+            self.present(videoDownloadErrorAlert, animated: true, completion:
+            {
+                Timer.scheduledTimer(withTimeInterval: 0.3, repeats:false, block:
+                {_ in
+                    videoDownloadErrorAlert.dismiss(animated: true, completion: nil)
+                })
+            })
+            
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func songDownloadDidSucceed()
+    {
+        DispatchQueue.main.async
+        {
+            let videoDownloadSuccessAlert = UIAlertController(title: "Song was added to All Downloads", message: nil, preferredStyle: .alert)
+            
+            self.present(videoDownloadSuccessAlert, animated: true, completion:
+            {
+                Timer.scheduledTimer(withTimeInterval: 0.3, repeats:false, block:
+                {_ in
+                    videoDownloadSuccessAlert.dismiss(animated: true, completion: nil)
+                })
+            })
+            
+            self.collectionView.reloadData()
         }
     }
 }
