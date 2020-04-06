@@ -143,7 +143,7 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
                 
                 if !APIResponse.error
                 {
-                    let songURL = URL(string: "https://\(UIApplication.phpAddress).ngrok.io/phptutorial/download/\(self.mediaID).mp3")!
+                    let songURL = URL(string: "https://\(Canary.phpAddress).ngrok.io/phptutorial/download/\(self.mediaID).mp3")!
                     
                     DispatchQueue.main.async
                     {
@@ -224,6 +224,11 @@ class SongSearchResultCollectionViewCell: SongCollectionViewCell
             loadingDetailsLabel.isHidden = false
             loadingDynamicButton.isHidden = false
             dynamicButton.isHidden = true
+        }
+        
+        if (durationLabel.text?.count ?? 0) > 4
+        {
+            dynamicButton.isEnabled = false
         }
     }
 

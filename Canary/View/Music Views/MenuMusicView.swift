@@ -53,11 +53,11 @@ class MenuMusicView : UIView
         
         addSubview(audioVisualiser)
         audioVisualiser.translatesAutoresizingMaskIntoConstraints = false
-        audioVisualiser.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.13).isActive = true
+        audioVisualiser.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.07).isActive = true
         audioVisualiser.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
         audioVisualiser.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: 20).isActive = true
         audioVisualiser.centerXAnchor.constraint(equalTo: musicImageView.centerXAnchor).isActive = true
-        audioVisualiser.backgroundColor = tintColor
+        audioVisualiser.backgroundColor = UIColor.clear
         
         addSubview(progressTracker)
         progressTracker.translatesAutoresizingMaskIntoConstraints = false

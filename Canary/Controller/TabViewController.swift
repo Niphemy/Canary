@@ -23,7 +23,7 @@ class TabViewController: UITabBarController
         
         songViewController = SongViewController(superTabViewController: self)
         
-        PlaytimeManager.setupPlaytimeCounter()
+        PlaytimeManager.setupStartupProcesses()
         
         guard let songViewController = songViewController else {return}
         

@@ -9,10 +9,10 @@
 import UIKit
 import CoreData
 
-extension UIApplication
+struct Canary
 {
     static let sharedAudioPlayer : CanaryAudioPlayer = CanaryAudioPlayer()
-    static let phpAddress : String = "6cfb2b7d"
+    static let phpAddress : String = "29613deb"
     
     static var weekdayTimings : [String : Int]
     {
@@ -33,6 +33,18 @@ extension UIApplication
                 
                 return UserDefaults.standard.dictionary(forKey: "weekdayTimings") as? [String : Int] ?? weekdayTimes
             }
+        }
+    }
+    
+    static let appContext : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    static func saveAppContext()
+    {
+        do
+        {
+            try appContext.save()
+        } catch {
+            print("Error saving context:\n\(error)")
         }
     }
 }
@@ -59,7 +71,6 @@ extension UIImage
     static let homeIcon = UIImage(systemName: "music.house.fill")
     static let searchIcon = UIImage(systemName: "magnifyingglass")
     static let libraryIcon = UIImage(systemName: "rectangle.stack.fill")
-    static let userIcon = UIImage(systemName: "person.crop.circle")
     static let downloadIcon = UIImage(systemName: "square.and.arrow.down.fill")
     static let addPlaylistIcon = UIImage(systemName: "rectangle.stack.fill.badge.plus")
     static let ellipsisIcon = UIImage(systemName: "ellipsis")
@@ -73,12 +84,6 @@ extension UIImage
 
 extension UIView
 {
-    func highlightBorders()
-    {
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.red.cgColor
-    }
-    
     static let genericTabBar = UITabBarController().tabBar
 }
 
@@ -110,21 +115,6 @@ extension UICollectionViewLayout
         flowLayout.itemSize = .songCellSize
         return flowLayout
     }()
-}
-
-extension NSManagedObjectContext
-{
-    static let canaryAppContext : NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    static func saveCanaryAppContext()
-    {
-        do
-        {
-            try canaryAppContext.save()
-        } catch {
-            print("Error saving context:\n\(error)")
-        }
-    }
 }
 
 extension CGSize

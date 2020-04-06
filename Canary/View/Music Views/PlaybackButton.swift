@@ -45,14 +45,14 @@ class PlaybackButton: UIButton
     
     @objc private func playPauseButtonTapped()
     {
-        UIApplication.sharedAudioPlayer.togglePlayPause()
+        Canary.sharedAudioPlayer.togglePlayPause()
         toggleButtonImage()
         returnToOriginalSize()
     }
     
     @objc private func toggleButtonImage()
     {
-        if UIApplication.sharedAudioPlayer.isPlaying
+        if Canary.sharedAudioPlayer.isPlaying
         {
             setImage(UIImage.pauseIcon?.withConfiguration(UIImage.SymbolConfiguration(pointSize: imagePointSize)), for: .normal)
         }
@@ -64,13 +64,13 @@ class PlaybackButton: UIButton
     
     @objc private func previousTrackButtonTapped()
     {
-        UIApplication.sharedAudioPlayer.previousTrack()
+        Canary.sharedAudioPlayer.previousTrack()
         returnToOriginalSize()
     }
     
     @objc private func nextTrackButtonTapped()
     {
-        UIApplication.sharedAudioPlayer.nextTrack()
+        Canary.sharedAudioPlayer.nextTrack()
         returnToOriginalSize()
     }
     

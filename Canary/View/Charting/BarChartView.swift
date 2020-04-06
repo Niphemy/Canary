@@ -31,23 +31,11 @@ class BarChartView: UIView
         get
         {
             var values = chartData.map({ $0.value })
-            var endCase = true
-            
-            while endCase
+            values.removeAll(where: {$0 == 0})
+
+            if values.isEmpty
             {
-                for i in 0..<values.count
-                {
-                    if values[i] == 0
-                    {
-                        values.remove(at: i)
-                        break
-                    }
-                    
-                    if i == values.count - 1
-                    {
-                        endCase = false
-                    }
-                }
+                return 0
             }
             
             return values.reduce(0, +)/Float(values.count)
@@ -81,13 +69,13 @@ class BarChartView: UIView
     init(chartData : [DataPoint], barSpacing : CGFloat, stepLineCount : Int, chartColour : UIColor = .white)
     {
         var convertedChartData = [DataPoint]()
-
+        
         for dataPoint in chartData
         {
             let newPoint = DataPoint(value: dataPoint.value/60, colour: dataPoint.colour, title: dataPoint.title)
             convertedChartData.append(newPoint)
         }
-
+        
         self.chartData = convertedChartData
         self.spacing = barSpacing
         self.stepLineCount = stepLineCount
@@ -95,6 +83,16 @@ class BarChartView: UIView
         
         super.init(frame: CGRect())
         layer.addSublayer(barContainer)
+    }
+    
+    init()
+    {
+        self.chartData = [DataPoint]()
+        self.spacing = 10
+        self.stepLineCount = 2
+        self.chartColour = UIColor.red
+        
+        super.init(frame: CGRect())
     }
     
     required init?(coder: NSCoder)
@@ -173,7 +171,7 @@ class BarChartView: UIView
             barLabel.attributedText = NSAttributedString(string: chartData[i].title, attributes: barLabelAttributes)
             
             let barSize = CGSize(width: barWidth, height: CGFloat(chartData[i].value/Float(stepLineCount*stepSize))*(barContainer.bounds.height - graphInsets.bottom))
-            let barOrigin = CGPoint(x: CGFloat(i+1)*spacing + CGFloat(i)*barWidth, y: barContainer.frame.height - (graphInsets.bottom+barSize.height))
+            let barOrigin = CGPoint(x: spacing + (spacing + barWidth)*CGFloat(i), y: barContainer.frame.height - (graphInsets.bottom+barSize.height))
             let barFrame = CGRect(origin: barOrigin, size: barSize)
             
             let barPath = UIBezierPath(roundedRect: barFrame, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: 10, height: 10))
@@ -220,6 +218,7 @@ class BarChartView: UIView
             setupAxes()
             drawDataPoints()
         }
+        
     }
 }
 

@@ -13,14 +13,14 @@ private let reuseIdentifier = "PlaylistCell"
 
 class LibraryTableViewController: UITableViewController, UITextFieldDelegate
 {
-    var userPlaylists = [Playlist](), generatedPlaylists = [Playlist]()
+    var userPlaylists = [Playlist]()
     private var addPlaylistAction : UIAlertAction?
     
     var allPlaylists : [[Playlist]]
     {
         get
         {
-            return [userPlaylists,generatedPlaylists]
+            return [userPlaylists]
         }
     }
     
@@ -85,7 +85,7 @@ class LibraryTableViewController: UITableViewController, UITextFieldDelegate
         
         addPlaylistAction = UIAlertAction(title: "Create", style: .default)
         { (_) in
-            let newPlaylist = Playlist(context: NSManagedObjectContext.canaryAppContext)
+            let newPlaylist = Playlist(context: Canary.appContext)
             
             if addPlaylistTextFieldCopy.text?.count == 0
             {
@@ -98,7 +98,7 @@ class LibraryTableViewController: UITableViewController, UITextFieldDelegate
             
             self.userPlaylists.append(newPlaylist)
             self.tableView.insertRows(at: [IndexPath(row: self.userPlaylists.count-1, section: 0)], with: .automatic)
-            NSManagedObjectContext.saveCanaryAppContext()
+            Canary.saveAppContext()
         }
         
         addPlaylistAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -178,9 +178,9 @@ class LibraryTableViewController: UITableViewController, UITextFieldDelegate
             let deletePlaylistAction : UIAlertAction = UIAlertAction(title: "Delete", style: .destructive)
             { (_) in
                 self.userPlaylists.remove(at: indexPath.row)
-                NSManagedObjectContext.canaryAppContext.delete(playlistToDelete)
+                Canary.appContext.delete(playlistToDelete)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
-                NSManagedObjectContext.saveCanaryAppContext()
+                Canary.saveAppContext()
                 tableView.reloadData()
             }
             
@@ -210,20 +210,24 @@ class LibraryTableViewController: UITableViewController, UITextFieldDelegate
     
     func loadPlaylists()
     {
+        
         let playlistFetchRequest : NSFetchRequest<Playlist> = Playlist.fetchRequest()
+        
         do
         {
-            userPlaylists = try NSManagedObjectContext.canaryAppContext.fetch(playlistFetchRequest)
-        } catch {
+            userPlaylists = try Canary.appContext.fetch(playlistFetchRequest)
+        }
+        catch
+        {
             print("Error loading context:\n\(error)")
         }
         
         if userPlaylists.isEmpty
         {
-            let allDownloadsPlaylist = Playlist(context: NSManagedObjectContext.canaryAppContext)
+            let allDownloadsPlaylist = Playlist(context: Canary.appContext)
             allDownloadsPlaylist.setName(to: "All Downloads")
             userPlaylists.append(allDownloadsPlaylist)
-            NSManagedObjectContext.saveCanaryAppContext()
+            Canary.saveAppContext()
         }
     }
 }

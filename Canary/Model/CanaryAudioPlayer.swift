@@ -17,7 +17,7 @@ protocol CanaryAudioPlayerDelegate : class
 class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
 {
     private let notificationCenter: NotificationCenter = NotificationCenter.default
-    private var player = AVAudioPlayer()
+    private var player : AVAudioPlayer
     private var playlistItems : [PlaylistItem] = []
     private var futureItems : [PlaylistItem]
     {
@@ -42,6 +42,7 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
     
     override init()
     {
+        self.player = AVAudioPlayer()
         super.init()
         
         do{try AVAudioSession.sharedInstance().setCategory(.playback)}catch{fatalError("Could set audioSession")}
@@ -90,12 +91,13 @@ class CanaryAudioPlayer : NSObject, AVAudioPlayerDelegate
         
         playlistItems = songs.map({ PlaylistItem(song: $0) })
         currentIndex = indexOfSelectedSong
-        currentlyPlaying.playlist = playlist
         
-        if currentlyPlaying.playlist == playlist && songIsInFutureQueue(for: selectedSong)
+        if songIsInFutureQueue(for: selectedSong) && currentlyPlaying.playlist == playlist
         {
             currentIndex = playlistItems.firstIndex(where: { selectedSong == $0.song })!
         }
+        
+        currentlyPlaying.playlist = playlist
         
         handleAutomaticPlayback()
     }

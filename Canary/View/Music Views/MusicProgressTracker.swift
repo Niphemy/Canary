@@ -56,10 +56,10 @@ class MusicProgressTracker : UIView
     
     @objc private func updateView()
     {
-        slider.value = Float(UIApplication.sharedAudioPlayer.currentTime() / UIApplication.sharedAudioPlayer.currentDuration())
+        slider.value = Float(Canary.sharedAudioPlayer.currentTime() / Canary.sharedAudioPlayer.currentDuration())
         
-        let currentTimeString = formatTime(time: UIApplication.sharedAudioPlayer.currentTime())
-        let remainingTimeString = formatTime(time: UIApplication.sharedAudioPlayer.currentDuration() - UIApplication.sharedAudioPlayer.currentTime())
+        let currentTimeString = formatTime(time: Canary.sharedAudioPlayer.currentTime())
+        let remainingTimeString = formatTime(time: Canary.sharedAudioPlayer.currentDuration() - Canary.sharedAudioPlayer.currentTime())
 
         let timeAttributes : [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor : UIColor.systemGray, NSAttributedString.Key.font : UIFont.montserratMedium]
         
@@ -70,16 +70,16 @@ class MusicProgressTracker : UIView
     @objc private func sliderDidEndEditing()
     {
         viewUpdater.isPaused = false
-        let selectedTime = Double(slider.value)*UIApplication.sharedAudioPlayer.currentDuration()
-        UIApplication.sharedAudioPlayer.seekTo(time: selectedTime)
+        let selectedTime = Double(slider.value)*Canary.sharedAudioPlayer.currentDuration()
+        Canary.sharedAudioPlayer.seekTo(time: selectedTime)
     }
     
     @objc private func sliderValueChanged()
     {
         viewUpdater.isPaused = true
         
-        let sliderCurrentTimeValue = Double(slider.value)*UIApplication.sharedAudioPlayer.currentDuration()
-        let sliderRemainingTimeValue = UIApplication.sharedAudioPlayer.currentDuration() - sliderCurrentTimeValue
+        let sliderCurrentTimeValue = Double(slider.value)*Canary.sharedAudioPlayer.currentDuration()
+        let sliderRemainingTimeValue = Canary.sharedAudioPlayer.currentDuration() - sliderCurrentTimeValue
         
         let sliderCurrentTimeString = formatTime(time: sliderCurrentTimeValue)
         let sliderRemainingTimeString = formatTime(time: sliderRemainingTimeValue)

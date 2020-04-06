@@ -73,7 +73,7 @@ class AddPlaylistTableViewController: UITableViewController
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedPlaylist = addablePlaylists[indexPath.row]
         song.addToParentPlaylist(selectedPlaylist)
-        NSManagedObjectContext.saveCanaryAppContext()
+        Canary.saveAppContext()
         
         let addPlaylistCompletionAlert = UIAlertController(title: "\(song.name) was added to \(selectedPlaylist.getName())", message: nil, preferredStyle: .alert)
         
@@ -100,7 +100,7 @@ class AddPlaylistTableViewController: UITableViewController
         let playlistFetchRequest : NSFetchRequest<Playlist> = Playlist.fetchRequest()
         do
         {
-            addablePlaylists = try NSManagedObjectContext.canaryAppContext.fetch(playlistFetchRequest)
+            addablePlaylists = try Canary.appContext.fetch(playlistFetchRequest)
         } catch {
             print("Error loading context:\n\(error)")
         }

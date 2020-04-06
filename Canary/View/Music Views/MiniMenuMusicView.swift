@@ -106,7 +106,7 @@ class MiniMenuMusicView: UIView
     
     @objc private func updateProgress()
     {
-        let fractionSongDone = UIApplication.sharedAudioPlayer.currentTime()/UIApplication.sharedAudioPlayer.currentDuration()
+        let fractionSongDone = Canary.sharedAudioPlayer.currentTime()/Canary.sharedAudioPlayer.currentDuration()
         
         playPauseButtonSectorLayer.strokeEnd = CGFloat(fractionSongDone)
         

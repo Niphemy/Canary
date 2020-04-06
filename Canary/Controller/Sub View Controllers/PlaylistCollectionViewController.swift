@@ -24,6 +24,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         NotificationCenter.default.addObserver(self, selector: #selector(songDidChange), name: .SongChanged, object: nil)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.shuffleIcon, style: .plain, target: self, action: #selector(shufflePlaylist))
+        
     }
     
     required init?(coder: NSCoder)
@@ -68,8 +69,8 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
                 {
                     try FileManager.default.removeItem(at: song.getAudioFilePath())
                     try FileManager.default.removeItem(at: song.getImageFilePath())
-                    NSManagedObjectContext.canaryAppContext.delete(song)
-                    NSManagedObjectContext.saveCanaryAppContext()
+                    Canary.appContext.delete(song)
+                    Canary.saveAppContext()
                 }
                     
                 catch{print(error.localizedDescription)}
@@ -85,7 +86,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
                 do
                 {
                     song.removeFromParentPlaylist(self.playlist)
-                    NSManagedObjectContext.saveCanaryAppContext()
+                    Canary.saveAppContext()
                 }
             }
         }
@@ -137,7 +138,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
         cell.song = song
         cell.delegate = self
         
-        if UIApplication.sharedAudioPlayer.currentlyPlaying == (song, playlist)
+        if Canary.sharedAudioPlayer.currentlyPlaying == (song, playlist)
         {
             cell.highlightCell()
         }
@@ -176,7 +177,7 @@ class PlaylistCollectionViewController: UICollectionViewController, UICollection
             
             do
             {
-                songs = try NSManagedObjectContext.canaryAppContext.fetch(songFetchRequest)
+                songs = try Canary.appContext.fetch(songFetchRequest)
             }
             catch
             {
@@ -219,7 +220,7 @@ extension PlaylistCollectionViewController: SavedSongCollectionViewDelegate
     
     func songCellTapped(song: Song)
     {
-        UIApplication.sharedAudioPlayer.play(song, from: playlist, songs: songs)
+        Canary.sharedAudioPlayer.play(song, from: playlist, songs: songs)
         collectionView.reloadData()
     }
 }

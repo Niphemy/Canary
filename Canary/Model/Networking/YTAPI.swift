@@ -12,7 +12,7 @@ struct YTAPI
 {
     private static let baseSearchAPIURL : URL = URL(string: "https://www.googleapis.com/youtube/v3/search")!
     private static let baseVideoAPIURL : URL = URL(string: "https://www.googleapis.com/youtube/v3/videos")!
-    private static let baseVideoDownloadURL = URL(string: "https://\(UIApplication.phpAddress).ngrok.io/phptutorial/convert.php/?youtubelink=https://www.youtube.com/watch?v=")!
+    private static let baseVideoDownloadURL = URL(string: "https://\(Canary.phpAddress).ngrok.io/phptutorial/convert.php/?youtubelink=https://www.youtube.com/watch?v=")!
     private static let APIKey : String = "AIzaSyD1RJzDF3fhadZzih0Lv0ZKGrLsDTINDFw"
     
     static func getResultsFor(query input: String, _ completionHandler: @escaping (_: Data?, _: URLResponse?, _: Error?) -> Void)

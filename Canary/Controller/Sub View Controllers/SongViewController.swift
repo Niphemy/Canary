@@ -27,7 +27,7 @@ class SongViewController: UIViewController
     {
         didSet
         {
-            if isActive == true
+            if isActive
             {
                 self.heightAnchor?.constant = 0
                 UIView.animate(withDuration: 0.2)
@@ -81,7 +81,7 @@ class SongViewController: UIViewController
     {
         self.superTabViewController = superTabViewController
         super.init(nibName: nil, bundle: nil)
-        UIApplication.sharedAudioPlayer.delegate = self
+        Canary.sharedAudioPlayer.delegate = self
         musicMiniMenu.delegate = self
     }
     
@@ -179,6 +179,7 @@ class SongViewController: UIViewController
                 fullyExpandView()
             }
         }
+        
     }
     
     func fullyExpandView()
